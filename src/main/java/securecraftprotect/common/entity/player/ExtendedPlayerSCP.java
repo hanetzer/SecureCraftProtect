@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class ExtendedPlayerSCP implements IExtendedEntityProperties {
-    private final static String EXT_PROP_NAME = "ExtendedPlayerSCP";
+    public final static String EXT_PROP_NAME = "ExtendedPlayerSCP";
     private final EntityPlayer player;
     private boolean seen0096, heard0513;
     private int time, blink, blinkSpeed;
