@@ -10,16 +10,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import securecraftprotect.init.SCPItems;
+import securecraftprotect.common.entity.ai.SCPFilterAttack;
 
 import java.util.Iterator;
 import java.util.List;
 
 public abstract class SCPEntity extends EntityCreature {
+    private static final IEntitySelector field_82219_bJ = new SCPFilterAttack();
     /**
      * How much damage this mob's attacks deal
      */
     protected int attackStrength = 0;
-    private static final IEntitySelector field_82219_bJ = new SCPFilterAttack();
 
     public SCPEntity(World world) {
         super(world);
@@ -139,5 +140,15 @@ public abstract class SCPEntity extends EntityCreature {
         } else {
             return super.interact(player);
         }
+    }
+
+    public enum SCPEnumCreatureAttribute {
+        SCP,
+        MTF,
+        SCIENTIST,
+        CLASSD,
+        UNIDENTIFIED,
+        SCPObject,
+        SCP0682
     }
 }
