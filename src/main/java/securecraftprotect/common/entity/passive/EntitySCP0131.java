@@ -27,7 +27,7 @@ public class EntitySCP0131 extends EntityTameable {
         tasks.addTask(7, new EntityAIAttackOnCollide(this, EntitySCP0173.class, 1.6D, false));
         tasks.addTask(8, new EntityAIWander(this, 0.23F));
         tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 10F));
-        tasks.addTask(10, new EntityAIWatchClosest(this, SCPEntityClassDGuy.class, 10F));
+        tasks.addTask(10, new EntityAIWatchClosest(this, EntityClassDMale.class, 10F));
         tasks.addTask(11, new EntityAIWatchClosest(this, EntitySCP0173.class, 10F));
         targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
