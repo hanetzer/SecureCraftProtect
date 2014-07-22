@@ -1,0 +1,16 @@
+[
+{
+  "modid": "scp",
+  "name": "SecureCraftProtect",
+  "description": "Secure Contain Protect themed mod",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authors": ["Authored by Phuck_Yu_Too, continued by ntzrmtthihu777"],
+  "credits": "",
+  "logoFile": "logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]
