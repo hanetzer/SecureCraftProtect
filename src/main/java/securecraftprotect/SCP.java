@@ -6,6 +6,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import securecraftprotect.common.CommonProxy;
 import securecraftprotect.common.handlers.SCPEventHandler;
+import securecraftprotect.core.SCPEntity;
 import securecraftprotect.core.SCPItem;
 
 //import cpw.mods.fml.common.network.NetworkRegistry;
@@ -25,6 +26,7 @@ public class SCP {
         //NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
         SCPEventHandler.init();
         SCPItem.init();
+        SCPEntity.init();
     }
 
     @Mod.EventHandler
