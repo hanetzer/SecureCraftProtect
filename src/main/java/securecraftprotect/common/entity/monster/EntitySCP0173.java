@@ -3,14 +3,14 @@ package securecraftprotect.common.entity.monster;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import securecraftprotect.common.entity.passive.EntitySCP0131;
+import securecraftprotect.common.entity.player.ExtendedPlayerSCP;
 
 import java.util.Iterator;
 import java.util.List;
@@ -49,9 +49,9 @@ public class EntitySCP0173 extends SCPEntity {
         this.playSound("mob.0173.step", 0.15F, 1.0F);
     }
 
-    public float getSpeedModifier() {
-        return super.getSpeedModifier() * 3F;
-    }
+//    public float getSpeedModifier() {
+//        return super.getSpeedModifier() * 3F;
+//    }
 
     public boolean canBePushed() {
         return false;
@@ -108,7 +108,7 @@ public class EntitySCP0173 extends SCPEntity {
         }
     }
 
-    public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
+    public void onCollideWithPlayer(EntityPlayer player) {
     }
 
     public boolean attackEntityFrom(DamageSource source, int par2) {
@@ -116,8 +116,7 @@ public class EntitySCP0173 extends SCPEntity {
     }
 
     public void onLivingUpdate() {
-        moveSpeed = 80F;
-        getNavigator().setSpeed(moveSpeed);
+        getNavigator().setSpeed(80.0D);
         isJumping = false;
         super.onLivingUpdate();
     }
@@ -152,7 +151,7 @@ public class EntitySCP0173 extends SCPEntity {
             if ((entityToAttack instanceof EntityPlayer) && (canSCPBeSeen((EntityPlayer) entityToAttack) || timeLocked)) {
                 SCPDirectLook((EntityPlayer) entityToAttack);
                 moveStrafing = moveForward = 0.0F;
-                moveSpeed = 0.0F;
+                getNavigator().setSpeed(0.0D);
             } else {
                 faceEntity(entityToAttack, 100F, 100F);
             }
@@ -162,186 +161,125 @@ public class EntitySCP0173 extends SCPEntity {
     }
 
     public boolean canSCPBeSeen(EntityPlayer player) {
-        List<?> var5 = this.worldObj.getEntitiesWithinAABB(SCPEntity131.class, this.boundingBox.expand((double) 4F, 2.0D, (double) 4F));
-        Iterator<?> var2 = var5.iterator();
-        while (var2.hasNext()) return true;
+        List<?> var5 = this.worldObj.getEntitiesWithinAABB(EntitySCP0131.class, this.boundingBox.expand((double) 4F, 2.0D, (double) 4F));
+        Iterator<?> iterator = var5.iterator();
+        ExtendedPlayerSCP props = (ExtendedPlayerSCP) player.getExtendedProperties(ExtendedPlayerSCP.EXT_PROP_NAME);
+        while (iterator.hasNext()) return true;
 
         if (worldObj.getFullBlockLightValue(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ)) < 1) {
             return false;
         }
-        if (mc.thePlayer != null && mc.thePlayer.getBlink() >= 0 && mc.thePlayer.getBlink() <= 10) {
+        if (mc.thePlayer != null && props.getBlink() >= 0 && props.getBlink() <= 10) {
             return false;
         }
-        if (player.canEntityBeSeen(this) || LineOfSightCheck(player)) {
+        if (player.canEntityBeSeen(this) || lineOfSightCheck(player)) {
             return isInFieldOfVision(this, player, 100F, 100F);  //70 65
         } else {
             return false;
         }
     }
 
-    private boolean LineOfSightCheck(EntityLiving entity) {
-        return rayTraceBlocks(Vec3.createVectorHelper(posX, posY + (double) getEyeHeight(), posZ), Vec3.createVectorHelper(entity.posX, entity.posY + (double) entity.getEyeHeight(), entity.posZ)) == null || rayTraceBlocks(Vec3.createVectorHelper(posX, posY + (double) height, posZ), Vec3.createVectorHelper(entity.posX, entity.posY + (double) entity.getEyeHeight(), entity.posZ)) == null || rayTraceBlocks(Vec3.createVectorHelper(posX, posY + (double) height * 0.10000000000000001D, posZ), Vec3.createVectorHelper(entity.posX, entity.posY + (double) entity.getEyeHeight(), entity.posZ)) == null || rayTraceBlocks(Vec3.createVectorHelper(posX + 0.69999999999999996D, posY + (double) getEyeHeight(), posZ), Vec3.createVectorHelper(entity.posX, entity.posY + (double) entity.getEyeHeight(), entity.posZ)) == null || rayTraceBlocks(Vec3.createVectorHelper(posX - 0.69999999999999996D, posY + (double) getEyeHeight(), posZ), Vec3.createVectorHelper(entity.posX, entity.posY + (double) entity.getEyeHeight(), entity.posZ)) == null || rayTraceBlocks(Vec3.createVectorHelper(posX, posY + (double) getEyeHeight(), posZ + 0.69999999999999996D), Vec3.createVectorHelper(entity.posX, entity.posY + (double) entity.getEyeHeight(), entity.posZ)) == null || rayTraceBlocks(Vec3.createVectorHelper(posX, posY + (double) getEyeHeight(), posZ - 0.69999999999999996D), Vec3.createVectorHelper(entity.posX, entity.posY + (double) entity.getEyeHeight(), entity.posZ)) == null || rayTraceBlocks(Vec3.createVectorHelper(posX, posY + (double) height * 1.2D, posZ - 0.69999999999999996D), Vec3.createVectorHelper(entity.posX, entity.posY + (double) entity.getEyeHeight(), entity.posZ)) == null || rayTraceBlocks(Vec3.createVectorHelper(posX, posY + (double) height * 1.2D + 1.0D, posZ), Vec3.createVectorHelper(entity.posX, entity.posY + (double) entity.getEyeHeight(), entity.posZ)) == null;
-    }
-
-    private MovingObjectPosition rayTraceBlocks(Vec3 Vec3, Vec3 Vec31) {
-        boolean flag = false;
-        boolean flag1 = false;
-
-        if (Double.isNaN(Vec3.xCoord) || Double.isNaN(Vec3.yCoord) || Double.isNaN(Vec3.zCoord)) {
-            return null;
+    private boolean lineOfSightCheck(EntityPlayer player) {
+        if (worldObj.rayTraceBlocks(
+                Vec3.createVectorHelper(
+                        posX,
+                        posY + (double) getEyeHeight(),
+                        posZ),
+                Vec3.createVectorHelper(
+                        player.posX,
+                        player.posY + (double) player.getEyeHeight(),
+                        player.posZ)) == null) {
+            return true;
         }
-
-        if (Double.isNaN(Vec31.xCoord) || Double.isNaN(Vec31.yCoord) || Double.isNaN(Vec31.zCoord)) {
-            return null;
+        if (worldObj.rayTraceBlocks(
+                Vec3.createVectorHelper(
+                        posX,
+                        posY + (double) height,
+                        posZ),
+                Vec3.createVectorHelper(
+                        player.posX,
+                        player.posY + (double) player.getEyeHeight(),
+                        player.posZ)) == null) {
+            return true;
         }
-
-        int i = MathHelper.floor_double(Vec31.xCoord);
-        int j = MathHelper.floor_double(Vec31.yCoord);
-        int k = MathHelper.floor_double(Vec31.zCoord);
-        int l = MathHelper.floor_double(Vec3.xCoord);
-        int i1 = MathHelper.floor_double(Vec3.yCoord);
-        int j1 = MathHelper.floor_double(Vec3.zCoord);
-        int k1 = worldObj.getBlockId(l, i1, j1);
-        int l1 = worldObj.getBlockMetadata(l, i1, j1);
-        Block block = Block.blocksList[k1];
-
-        if ((!flag1 || block == null || block.getCollisionBoundingBoxFromPool(worldObj, l, i1, j1) != null) && k1 > 0 && block.canCollideCheck(l1, flag)) {
-            MovingObjectPosition movingobjectposition = block.collisionRayTrace(worldObj, l, i1, j1, Vec3, Vec31);
-
-            if (movingobjectposition != null) {
-                return movingobjectposition;
-            }
+        if (worldObj.rayTraceBlocks(
+                Vec3.createVectorHelper(
+                        posX,
+                        posY + (double) height * 0.1D,
+                        posZ),
+                Vec3.createVectorHelper(
+                        player.posX,
+                        player.posY + (double) player.getEyeHeight(),
+                        player.posZ)) == null) {
+            return true;
         }
-
-        for (int i2 = 200; i2-- >= 0; ) {
-            if (Double.isNaN(Vec3.xCoord) || Double.isNaN(Vec3.yCoord) || Double.isNaN(Vec3.zCoord)) {
-                return null;
-            }
-
-            if (l == i && i1 == j && j1 == k) {
-                return null;
-            }
-
-            boolean flag2 = true;
-            boolean flag3 = true;
-            boolean flag4 = true;
-            double d = 999D;
-            double d1 = 999D;
-            double d2 = 999D;
-
-            if (i > l) {
-                d = (double) l + 1.0D;
-            } else if (i < l) {
-                d = (double) l + 0.0D;
-            } else {
-                flag2 = false;
-            }
-
-            if (j > i1) {
-                d1 = (double) i1 + 1.0D;
-            } else if (j < i1) {
-                d1 = (double) i1 + 0.0D;
-            } else {
-                flag3 = false;
-            }
-
-            if (k > j1) {
-                d2 = (double) j1 + 1.0D;
-            } else if (k < j1) {
-                d2 = (double) j1 + 0.0D;
-            } else {
-                flag4 = false;
-            }
-
-            double d3 = 999D;
-            double d4 = 999D;
-            double d5 = 999D;
-            double d6 = Vec31.xCoord - Vec3.xCoord;
-            double d7 = Vec31.yCoord - Vec3.yCoord;
-            double d8 = Vec31.zCoord - Vec3.zCoord;
-
-            if (flag2) {
-                d3 = (d - Vec3.xCoord) / d6;
-            }
-
-            if (flag3) {
-                d4 = (d1 - Vec3.yCoord) / d7;
-            }
-
-            if (flag4) {
-                d5 = (d2 - Vec3.zCoord) / d8;
-            }
-
-            byte byte0 = 0;
-
-            if (d3 < d4 && d3 < d5) {
-                if (i > l) {
-                    byte0 = 4;
-                } else {
-                    byte0 = 5;
-                }
-
-                Vec3.xCoord = d;
-                Vec3.yCoord += d7 * d3;
-                Vec3.zCoord += d8 * d3;
-            } else if (d4 < d5) {
-                if (j > i1) {
-                    byte0 = 0;
-                } else {
-                    byte0 = 1;
-                }
-
-                Vec3.xCoord += d6 * d4;
-                Vec3.yCoord = d1;
-                Vec3.zCoord += d8 * d4;
-            } else {
-                if (k > j1) {
-                    byte0 = 2;
-                } else {
-                    byte0 = 3;
-                }
-
-                Vec3.xCoord += d6 * d5;
-                Vec3.yCoord += d7 * d5;
-                Vec3.zCoord = d2;
-            }
-
-            Vec3 Vec32 = net.minecraft.util.Vec3.createVectorHelper(Vec3.xCoord, Vec3.yCoord, Vec3.zCoord);
-            l = (int) (Vec32.xCoord = MathHelper.floor_double(Vec3.xCoord));
-
-            if (byte0 == 5) {
-                l--;
-                Vec32.xCoord++;
-            }
-
-            i1 = (int) (Vec32.yCoord = MathHelper.floor_double(Vec3.yCoord));
-
-            if (byte0 == 1) {
-                i1--;
-                Vec32.yCoord++;
-            }
-
-            j1 = (int) (Vec32.zCoord = MathHelper.floor_double(Vec3.zCoord));
-
-            if (byte0 == 3) {
-                j1--;
-                Vec32.zCoord++;
-            }
-
-            int j2 = worldObj.getBlockId(l, i1, j1);
-            int k2 = worldObj.getBlockMetadata(l, i1, j1);
-            Block block1 = Block.blocksList[j2];
-
-            if ((!flag1 || block1 == null || block1.getCollisionBoundingBoxFromPool(worldObj, l, i1, j1) != null) && j2 > 0 && block1.canCollideCheck(k2, flag) && !isBlockTransparent(j2)) {
-                MovingObjectPosition movingobjectposition1 = block1.collisionRayTrace(worldObj, l, i1, j1, Vec3, Vec31);
-
-                if (movingobjectposition1 != null) {
-                    return movingobjectposition1;
-                }
-            }
+        if (worldObj.rayTraceBlocks(
+                Vec3.createVectorHelper(
+                        posX + 0.7D,
+                        posY + (double) getEyeHeight(),
+                        posZ),
+                Vec3.createVectorHelper(
+                        player.posX,
+                        player.posY + (double) player.getEyeHeight(),
+                        player.posZ)) == null) {
+            return true;
         }
-
-        return null;
+        if (worldObj.rayTraceBlocks(
+                Vec3.createVectorHelper(
+                        posX - 0.7D,
+                        posY + (double) getEyeHeight(),
+                        posZ),
+                Vec3.createVectorHelper(
+                        player.posX,
+                        player.posY + (double) player.getEyeHeight(),
+                        player.posZ)) == null) {
+            return true;
+        }
+        if (worldObj.rayTraceBlocks(
+                Vec3.createVectorHelper(
+                        posX,
+                        posY + (double) getEyeHeight(),
+                        posZ + 0.7D),
+                Vec3.createVectorHelper(
+                        player.posX,
+                        player.posY + (double) player.getEyeHeight(),
+                        player.posZ)) == null) {
+            return true;
+        }
+        if (worldObj.rayTraceBlocks(
+                Vec3.createVectorHelper(
+                        posX,
+                        posY + (double) getEyeHeight(),
+                        posZ - 0.7D),
+                Vec3.createVectorHelper(
+                        player.posX,
+                        player.posY + (double) player.getEyeHeight(),
+                        player.posZ)) == null) {
+            return true;
+        }
+        if (worldObj.rayTraceBlocks(
+                Vec3.createVectorHelper(
+                        posX,
+                        posY + (double) height * 1.2D,
+                        posZ - 0.7D),
+                Vec3.createVectorHelper(
+                        player.posX,
+                        player.posY + (double) player.getEyeHeight(),
+                        player.posZ)) == null) {
+            return true;
+        }
+        if (worldObj.rayTraceBlocks(
+                Vec3.createVectorHelper(
+                        posX,
+                        posY + (double) height * 1.2D + 1.0D,
+                        posZ),
+                Vec3.createVectorHelper(
+                        player.posX,
+                        player.posY + (double) player.getEyeHeight(),
+                        player.posZ)) == null) {
+            return true;
+        }
+        return false;
     }
 
     private boolean isBlockTransparent(int i) {
@@ -354,33 +292,33 @@ public class EntitySCP0173 extends SCPEntity {
         return true;
     }
 
-    private boolean SCPDirectLook(EntityPlayer entityplayer) {
-        if (worldObj.getFullBlockLightValue(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ)) < 1) {
+    private boolean SCPDirectLook(EntityPlayer player) {
+        if (worldObj.getFullBlockLightValue(
+                MathHelper.floor_double(posX),
+                MathHelper.floor_double(posY),
+                MathHelper.floor_double(posZ)) < 1) {
             return false;
         }
 
-        Vec3 Vec3 = entityplayer.getLook(1.0F).normalize();
-        Vec3 Vec31 = net.minecraft.util.Vec3.createVectorHelper(posX - entityplayer.posX, ((boundingBox.minY + (double) height) - entityplayer.posY) + (double) entityplayer.getEyeHeight(), posZ - entityplayer.posZ);
-        double d = Vec31.lengthVector();
-        Vec31 = Vec31.normalize();
-        double d1 = Vec3.dotProduct(Vec31);
+        Vec3 vec3a = player.getLook(1.0F).normalize();
+        Vec3 vec3b = Vec3.createVectorHelper(
+                posX - player.posX,
+                ((boundingBox.minY + (double) height) - player.posY) + (double) player.getEyeHeight(),
+                posZ - player.posZ);
+        double d = vec3b.lengthVector();
+        vec3b = vec3b.normalize();
+        double d1 = vec3a.dotProduct(vec3b);
 
-        if (d1 > 1.0D - 0.025000000000000001D / d) {
-
-
-            return entityplayer.canEntityBeSeen(this);
-        } else {
-            return false;
-        }
+        return d1 > 1.0D - 0.025D / d && player.canEntityBeSeen(this);
     }
 
-    public boolean SCPSeeSCP(EntitySCP0173 scp0173) {
-        if (worldObj.getFullBlockLightValue(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ)) < 1) {
-            return false;
-        } else {
-            return isInFieldOfVision(scp0173, this, 40F, 65F);
-        }
-    }
+//    public boolean SCPSeeSCP(EntitySCP0173 scp0173) {
+//        if (worldObj.getFullBlockLightValue(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ)) < 1) {
+//            return false;
+//        } else {
+//            return isInFieldOfVision(scp0173, this, 40F, 65F);
+//        }
+//    }
 
     public double getDistance(int i, int j, int k, int l, int i1, int j1) {
         int k1 = l - i;
@@ -397,37 +335,35 @@ public class EntitySCP0173 extends SCPEntity {
             return (double) MathHelper.sqrt_double(d * d + d2 * d2 + d4 * d4);
         }
 
-        EntityPlayer entityplayer = worldObj.getClosestPlayerToEntity(this, 64D);
+        EntityPlayer player = worldObj.getClosestVulnerablePlayerToEntity(this, 64D);
 
-        if (entityplayer != null) {
-            double d1 = entityplayer.posX - posX;
-            double d3 = entityplayer.posY - posY;
-            double d5 = entityplayer.posZ - posZ;
+        if (player != null) {
+            double d1 = player.posX - posX;
+            double d3 = player.posY - posY;
+            double d5 = player.posZ - posZ;
             return (double) MathHelper.sqrt_double(d1 * d1 + d3 * d3 + d5 * d5);
         } else {
             return 40000D;
         }
     }
 
-    private boolean isInFieldOfVision(EntitySCP0173 scp173, EntityLiving entityliving, float f, float f1) {
-        float f2 = entityliving.rotationYaw;
-        float f3 = entityliving.rotationPitch;
-        entityliving.faceEntity(this, 360F, 360F);
-        float f4 = entityliving.rotationYaw;
-        float f5 = entityliving.rotationPitch;
-        entityliving.rotationYaw = f2;
-        entityliving.rotationPitch = f3;
+    private boolean isInFieldOfVision(EntitySCP0173 scp173, EntityPlayer player, float f, float f1) {
+        float f2 = player.rotationYaw;
+        float f3 = player.rotationPitch;
+        //player.faceEntity(this, 360F, 360F);
+        float f4 = player.rotationYaw;
+        float f5 = player.rotationPitch;
+        player.rotationYaw = f2;
+        player.rotationPitch = f3;
         f2 = f4;
         f3 = f5;
-        float f6 = f;
-        float f7 = f1;
-        float f8 = entityliving.rotationYaw - f6;
-        float f9 = entityliving.rotationYaw + f6;
-        float f10 = entityliving.rotationPitch - f7;
-        float f11 = entityliving.rotationPitch + f7;
+        float f8 = player.rotationYaw - f;
+        float f9 = player.rotationYaw + f;
+        float f10 = player.rotationPitch - f1;
+        float f11 = player.rotationPitch + f1;
         boolean flag = getFlag(f8, f9, f2, 0.0F, 360F);
         boolean flag1 = getFlag(f10, f11, f3, -180F, 180F);
-        return flag && flag1 && (entityliving.canEntityBeSeen(scp173) || LineOfSightCheck(entityliving));
+        return flag && flag1 && (player.canEntityBeSeen(scp173) || lineOfSightCheck(player));
     }
 
     public boolean getFlag(float f, float f1, float f2, float f3, float f4) {

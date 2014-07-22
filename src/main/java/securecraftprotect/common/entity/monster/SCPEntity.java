@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import securecraftprotect.common.entity.SCPEnumCreatureAttribute;
 import securecraftprotect.init.SCPItems;
 import securecraftprotect.common.entity.ai.SCPFilterAttack;
 
@@ -102,9 +103,9 @@ public abstract class SCPEntity extends EntityCreature {
         }
     }
 
-    public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
+    public void onCollideWithPlayer(EntityPlayer player) {
         if (this.getSCPAttribute() != SCPEnumCreatureAttribute.SCPObject)
-            par1EntityPlayer.attackEntityFrom(DamageSource.causeMobDamage(this), attackStrength);
+            player.attackEntityFrom(DamageSource.causeMobDamage(this), attackStrength);
     }
 
     public boolean attackEntityAsMob(Entity entity) {
@@ -140,15 +141,5 @@ public abstract class SCPEntity extends EntityCreature {
         } else {
             return super.interact(player);
         }
-    }
-
-    public enum SCPEnumCreatureAttribute {
-        SCP,
-        MTF,
-        SCIENTIST,
-        CLASSD,
-        UNIDENTIFIED,
-        SCPObject,
-        SCP0682
     }
 }
