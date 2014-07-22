@@ -44,11 +44,11 @@ public class ExtendedPlayerSCP implements IExtendedEntityProperties {
     @Override
     public void loadNBTData(NBTTagCompound compound) {
         NBTTagCompound props = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
-        this.time       = props.getInteger("Time");
-        this.blink      = props.getInteger("Blink");
+        this.time = props.getInteger("Time");
+        this.blink = props.getInteger("Blink");
         this.blinkSpeed = props.getInteger("BlinkSpeed");
-        this.seen0096   = props.getBoolean("Seen0096");
-        this.heard0513  = props.getBoolean("Heard0513");
+        this.seen0096 = props.getBoolean("Seen0096");
+        this.heard0513 = props.getBoolean("Heard0513");
     }
 
     @Override
@@ -63,6 +63,7 @@ public class ExtendedPlayerSCP implements IExtendedEntityProperties {
     public void setBlink(int i) {
         this.blinkSpeed = i;
     }
+
     public void decreaseBlink(int i) {
         this.blink = this.blink - i;
     }
@@ -79,7 +80,7 @@ public class ExtendedPlayerSCP implements IExtendedEntityProperties {
         return this.heard0513;
     }
 
-    public  void hear0513(boolean bool) {
+    public void hear0513(boolean bool) {
         this.heard0513 = bool;
     }
 
