@@ -7,6 +7,7 @@ import net.minecraft.item.ItemSword;
 
 public class ItemSCPKnife extends ItemSword {
     public int textureID;
+
     public ItemSCPKnife(ToolMaterial material, int textureID) {
         super(material);
         this.textureID = textureID;

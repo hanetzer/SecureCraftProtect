@@ -11,9 +11,9 @@ public class SCPBlinkHandler {
         if (event.entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.entity;
             ExtendedPlayerSCP props = ExtendedPlayerSCP.get(player);
-            if(player.isEntityAlive()) {
+            if (player.isEntityAlive()) {
                 props.decreaseBlink(props.getBlinkSpeed());
-                if(props.getBlink() <= 0) {
+                if (props.getBlink() <= 0) {
                     props.setBlink(300);
                 }
             }

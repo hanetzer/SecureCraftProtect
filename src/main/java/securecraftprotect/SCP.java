@@ -4,12 +4,13 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-//import cpw.mods.fml.common.network.NetworkRegistry;
 import securecraftprotect.common.CommonProxy;
 import securecraftprotect.common.handlers.SCPEventHandler;
 import securecraftprotect.core.SCPItem;
 
-@Mod(modid="scp", name = "SecureCraftProtect", version = "@VERSION@")
+//import cpw.mods.fml.common.network.NetworkRegistry;
+
+@Mod(modid = "scp", name = "SecureCraftProtect", version = "@VERSION@")
 public class SCP {
     @Mod.Instance("scp")
     public static SCP instance;

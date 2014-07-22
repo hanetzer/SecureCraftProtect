@@ -10,7 +10,7 @@ public class SCPEntityConstructingHandler {
     public void onEntityConstructing(EntityEvent.EntityConstructing event) {
         if (event.entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.entity;
-            if(ExtendedPlayerSCP.get(player) == null) {
+            if (ExtendedPlayerSCP.get(player) == null) {
                 ExtendedPlayerSCP.register(player);
             }
         }
