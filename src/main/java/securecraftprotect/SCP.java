@@ -14,10 +14,12 @@ import securecraftprotect.core.SCPItem;
 @Mod(modid = "scp", name = "SecureCraftProtect", version = "@VERSION@")
 public class SCP {
     @Mod.Instance("scp")
-    public static SCP instance;
-
+    private static SCP instance;
+    public static SCP instance() {
+        return instance;
+    }
     @SidedProxy(
-            clientSide = "securecraftprotect.common.ClientProxy",
+            clientSide = "securecraftprotect.client.ClientProxy",
             serverSide = "securecraftprotect.common.CommonProxy")
     public static CommonProxy proxy;
 
