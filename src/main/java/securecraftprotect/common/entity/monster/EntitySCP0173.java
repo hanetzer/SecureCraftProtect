@@ -4,6 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -15,7 +17,7 @@ import securecraftprotect.common.entity.player.ExtendedPlayerSCP;
 import java.util.Iterator;
 import java.util.List;
 
-public class EntitySCP0173 extends SCPEntity {
+public class EntitySCP0173 extends EntityMob implements IMob {
     public Minecraft mc = Minecraft.getMinecraft();
     private int slowPeriod;
     private int timeTillNextTeleport;
@@ -31,7 +33,6 @@ public class EntitySCP0173 extends SCPEntity {
 
     public EntitySCP0173(World world) {
         super(world);
-        //texture = "/SCPCraft/textures/mobs/173.png";
         stepHeight = 4.0F;
         setSize(0.6F, 1.6F);
         isImmuneToFire = true;
@@ -41,12 +42,12 @@ public class EntitySCP0173 extends SCPEntity {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(9001.0D);
-        getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(200.0D);
+        getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(20.0D);
 
     }
 
     protected void func_145780_a(int par1, int par2, int par3, Block block) {
-        this.playSound("mob.0173.step", 0.15F, 1.0F);
+        this.playSound("scp:mob.0173.step", 0.15F, 1.0F);
     }
 
 //    public float getSpeedModifier() {
@@ -161,15 +162,18 @@ public class EntitySCP0173 extends SCPEntity {
     }
 
     public boolean canSCPBeSeen(EntityPlayer player) {
-        List<?> var5 = this.worldObj.getEntitiesWithinAABB(EntitySCP0131.class, this.boundingBox.expand((double) 4F, 2.0D, (double) 4F));
-        Iterator<?> iterator = var5.iterator();
+        //List<?> var5 = this.worldObj.getEntitiesWithinAABB(EntitySCP0131.class, this.boundingBox.expand((double) 4F, 2.0D, (double) 4F));
+        //Iterator<?> iterator = var5.iterator();
         ExtendedPlayerSCP props = (ExtendedPlayerSCP) player.getExtendedProperties(ExtendedPlayerSCP.EXT_PROP_NAME);
-        while (iterator.hasNext()) return true;
+        //while (iterator.hasNext()) return true;
 
-        if (worldObj.getFullBlockLightValue(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ)) < 1) {
+        if (worldObj.getFullBlockLightValue(
+                MathHelper.floor_double(posX),
+                MathHelper.floor_double(posY),
+                MathHelper.floor_double(posZ)) < 1) {
             return false;
         }
-        if (mc.thePlayer != null && props.getBlink() >= 0 && props.getBlink() <= 10) {
+        if (props.getBlink() >= 0 && props.getBlink() <= 10) {
             return false;
         }
         if (player.canEntityBeSeen(this) || lineOfSightCheck(player)) {
@@ -399,7 +403,7 @@ public class EntitySCP0173 extends SCPEntity {
     }
 
     protected String getLivingSound() {
-        return "mob.0173.say";
+        return "scp:mob.0173.say";
     }
 
     public boolean canBeCollidedWith() {

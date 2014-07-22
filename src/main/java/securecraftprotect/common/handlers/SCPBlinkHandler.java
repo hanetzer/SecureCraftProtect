@@ -14,6 +14,7 @@ public class SCPBlinkHandler {
             if (player.isEntityAlive()) {
                 props.decreaseBlink(props.getBlinkSpeed());
                 if (props.getBlink() <= 0) {
+                    System.out.println("Blink");
                     props.setBlink(300);
                 }
             }

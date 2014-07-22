@@ -18,6 +18,6 @@ public class SCPEntity {
         } else {
             EntityRegistry.registerGlobalEntityID(klazz, name, ID);
         }
-        EntityRegistry.registerModEntity(klazz, name, ID, SCP.instance, 80, 3, true);
+        EntityRegistry.registerModEntity(klazz, name, ID+300, SCP.instance(), 80, 3, true);
     }
 }

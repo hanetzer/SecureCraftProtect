@@ -61,7 +61,7 @@ public class ExtendedPlayerSCP implements IExtendedEntityProperties {
     }
 
     public void setBlink(int i) {
-        this.blinkSpeed = i;
+        this.blink = i;
     }
 
     public void decreaseBlink(int i) {

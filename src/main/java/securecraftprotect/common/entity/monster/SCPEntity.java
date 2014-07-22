@@ -18,16 +18,11 @@ import java.util.List;
 
 public abstract class SCPEntity extends EntityCreature {
     private static final IEntitySelector field_82219_bJ = new SCPFilterAttack();
-    /**
-     * How much damage this mob's attacks deal
-     */
-    protected int attackStrength = 0;
 
     public SCPEntity(World world) {
         super(world);
         this.experienceValue = 5;
         this.renderDistanceWeight = 10.0D;
-        attackStrength = 6;
         targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, false, false, field_82219_bJ));
     }
 
@@ -105,12 +100,12 @@ public abstract class SCPEntity extends EntityCreature {
 
     public void onCollideWithPlayer(EntityPlayer player) {
         if (this.getSCPAttribute() != SCPEnumCreatureAttribute.SCPObject)
-            player.attackEntityFrom(DamageSource.causeMobDamage(this), attackStrength);
+            player.attackEntityFrom(DamageSource.causeMobDamage(this), 1);
     }
 
     public boolean attackEntityAsMob(Entity entity) {
-        int var2 = this.attackStrength;
-        return entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
+        //int var2 = this.attackStrength;
+        return entity.attackEntityFrom(DamageSource.causeMobDamage(this), 1);
     }
 
     /**
