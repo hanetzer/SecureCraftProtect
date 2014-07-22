@@ -39,7 +39,13 @@ public class ExtendedAnimalSCP implements IExtendedEntityProperties{
     }
 
     @Override
-    public void init(Entity entity, World world) {
+    public void init(Entity entity, World world) {}
 
+    public boolean isAggro() {
+        return this.aggro;
+    }
+
+    public void setAggro(boolean bool) {
+        this.aggro = bool;
     }
 }
