@@ -1,0 +1,16 @@
+{
+    "mob.0173.say": {
+        "category": "hostile",
+        "sounds": [
+            "mob/0173/say"
+        ]
+    },
+    "mob.0173.step": {
+        "category": "hostile",
+        "sounds": [
+            "mob/0173/step1",
+            "mob/0173/step2",
+            "mob/0173/step3"
+        ]
+    }
+}
