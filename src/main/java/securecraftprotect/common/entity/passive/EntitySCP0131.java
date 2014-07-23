@@ -15,6 +15,10 @@ import securecraftprotect.common.entity.SCPEnumCreatureAttribute;
 import securecraftprotect.common.entity.monster.EntitySCP0173;
 
 public class EntitySCP0131 extends EntityTameable {
+    public Entity ridingEntity;
+    public int foodNum;
+    public int tamedNum;
+
     public EntitySCP0131(World world) {
         super(world);
         setSize(0.9F, 1.3F);
@@ -46,21 +50,7 @@ public class EntitySCP0131 extends EntityTameable {
     public void onUpdate() {
         super.onUpdate();
 
-        System.out.println(tamedNum + " | " + foodNum);
-    }
-
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-
-    protected boolean canDespawn()
-    {
-        return false;
-    }
-
-    protected void fall(float f)
-    {
+        //System.out.println(tamedNum + " | " + foodNum);
     }
 
 //    public int getMaxHealth()
@@ -68,68 +58,54 @@ public class EntitySCP0131 extends EntityTameable {
 //        return 20;
 //    }
 
-    public String getTexture()
-    {
-        if(!isTamed())
-        {
-
-            return "/SCPCraft/textures/mobs/131A.png";
-        }
-        else
-        {
-            return "/SCPCraft/textures/mobs/131B.png";
-        }
+    public boolean isAIEnabled() {
+        return true;
     }
 
-    public Entity ridingEntity;
-    public int foodNum;
-    public int tamedNum;
-    public void writeEntityToNBT(NBTTagCompound nbt)
-    {
+    protected boolean canDespawn() {
+        return false;
+    }
+
+    protected void fall(float f) {
+    }
+
+    public void writeEntityToNBT(NBTTagCompound nbt) {
         super.writeEntityToNBT(nbt);
         nbt.setInteger("foodnum", foodNum);
         nbt.setInteger("tamednum", tamedNum);
     }
 
-    public double getMountedYOffset()
-    {
-        return (double)this.height - 0.82D;
+    public double getMountedYOffset() {
+        return (double) this.height - 0.82D;
     }
 
-    public void readEntityFromNBT(NBTTagCompound nbt)
-    {
-        super.readEntityFromNBT(nbt);
-        tamedNum = nbt.getInteger("tamednum");
-        foodNum = nbt.getInteger("foodnum");
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        tamedNum = compound.getInteger("tamednum");
+        foodNum = compound.getInteger("foodnum");
     }
 
-    public boolean interact(EntityPlayer player)
-    {
+    public boolean interact(EntityPlayer player) {
         ItemStack itemstack = player.inventory.getCurrentItem();
 
-        if(tamedNum == 0)
-        {
+        if (tamedNum == 0) {
             tamedNum = rand.nextInt(3) + 1;
         }
 
-        if (!isTamed())
-        {
+        if (!isTamed()) {
             //Taming
-            if (itemstack != null && itemstack.getItem() == Items.gold_ingot && player.getDistanceSqToEntity(this) < 9D)
-            {
+            if (itemstack != null && itemstack.getItem() == Items.gold_ingot && player.getDistanceSqToEntity(this) < 9D) {
                 itemstack.stackSize--;
                 foodNum++;
-                if (itemstack.stackSize <= 0)
-                {
+                if (itemstack.stackSize <= 0) {
                     player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
                 }
 
-                if (!worldObj.isRemote && foodNum >= tamedNum)
-                {
+                if (!worldObj.isRemote && foodNum >= tamedNum) {
                     setTamed(true);
                     //setOwner(player.username);
                     aiSit.setSitting(true);
-                    worldObj.setEntityState(this, (byte)7);
+                    worldObj.setEntityState(this, (byte) 7);
                     worldObj.getClosestPlayerToEntity(player, 16.0D).addChatMessage(new ChatComponentText("You have an EyePod now!"));
                 }
             }
@@ -140,18 +116,15 @@ public class EntitySCP0131 extends EntityTameable {
         return super.interact(player);
     }
 
-    public EntityAnimal spawnBabyAnimal(EntityAnimal animal)
-    {
+    public EntityAnimal spawnBabyAnimal(EntityAnimal animal) {
         return new EntitySCP0131(worldObj);
     }
 
-    public boolean isWheat(ItemStack stack)
-    {
+    public boolean isWheat(ItemStack stack) {
         return stack.getItem() == Items.gold_ingot;
     }
 
-    public EntityAgeable createChild(EntityAgeable var1)
-    {
+    public EntityAgeable createChild(EntityAgeable var1) {
         return new EntitySCP0131(worldObj);
     }
 }
