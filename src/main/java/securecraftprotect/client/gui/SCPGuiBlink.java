@@ -12,7 +12,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import static org.lwjgl.opengl.GL11.*;
-import securecraftprotect.common.entity.player.ExtendedPlayerSCP;
 
 public class SCPGuiBlink extends Gui {
     private static final ResourceLocation icons = new ResourceLocation("scp:textures/guis/icons.png");
@@ -28,10 +27,9 @@ public class SCPGuiBlink extends Gui {
         }
         int width = event.resolution.getScaledWidth();
         int height = event.resolution.getScaledHeight();
-        ExtendedPlayerSCP props = ExtendedPlayerSCP.get(mc.thePlayer);
 
         int k2 = height - 20;
-        int blink = props.getBlink();
+        int blink = mc.thePlayer.getDataWatcher().getWatchableObjectInt(20);
         int i4 = width /2 +91;
         int var26 = MathHelper.ceiling_double_int((double)(blink + 2) * 10.0D / 300.0D);
         glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -50,8 +48,8 @@ public class SCPGuiBlink extends Gui {
     public void onRenderPumpkin(RenderGameOverlayEvent event) {
         double width = event.resolution.getScaledWidth();
         double height = event.resolution.getScaledHeight();
-        ExtendedPlayerSCP props = ExtendedPlayerSCP.get(mc.thePlayer);
-        if (props.getBlink() >= 0 && props.getBlink() <= 10) {
+        int blink = mc.thePlayer.getDataWatcher().getWatchableObjectInt(20);
+        if (blink >= 0 && blink <= 10) {
             renderBlink(width, height);
         }
     }
@@ -98,4 +96,3 @@ public class SCPGuiBlink extends Gui {
         glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     }
 }
-

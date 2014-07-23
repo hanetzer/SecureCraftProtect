@@ -8,14 +8,16 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class ExtendedPlayerSCP implements IExtendedEntityProperties {
     public final static String EXT_PROP_NAME = "ExtendedPlayerSCP";
+    public static final int BLINK_DATA = 20;
     private final EntityPlayer player;
     private boolean seen0096, heard0513;
-    private int time, blink, blinkSpeed;
+    private int time, blinkSpeed, maxBlink;
 
     public ExtendedPlayerSCP(EntityPlayer player) {
         this.player = player;
         this.time = 0;
-        this.blink = 300;
+        this.maxBlink = 300;
+        this.player.getDataWatcher().addObject(BLINK_DATA, this.maxBlink);
         this.blinkSpeed = 2;
         this.seen0096 = false;
         this.heard0513 = false;
@@ -34,7 +36,7 @@ public class ExtendedPlayerSCP implements IExtendedEntityProperties {
     public void saveNBTData(NBTTagCompound compound) {
         NBTTagCompound props = new NBTTagCompound();
         props.setInteger("Time", this.time);
-        props.setInteger("Blink", this.blink);
+        props.setInteger("Blink", this.player.getDataWatcher().getWatchableObjectInt(BLINK_DATA));
         props.setInteger("BlinkSpeed", this.blinkSpeed);
         props.setBoolean("Seen0096", this.seen0096);
         props.setBoolean("Heard0513", this.heard0513);
@@ -45,7 +47,7 @@ public class ExtendedPlayerSCP implements IExtendedEntityProperties {
     public void loadNBTData(NBTTagCompound compound) {
         NBTTagCompound props = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
         this.time = props.getInteger("Time");
-        this.blink = props.getInteger("Blink");
+        this.player.getDataWatcher().updateObject(BLINK_DATA, props.getInteger("Blink"));
         this.blinkSpeed = props.getInteger("BlinkSpeed");
         this.seen0096 = props.getBoolean("Seen0096");
         this.heard0513 = props.getBoolean("Heard0513");
@@ -57,15 +59,15 @@ public class ExtendedPlayerSCP implements IExtendedEntityProperties {
     }
 
     public int getBlink() {
-        return this.blink;
+        return this.player.getDataWatcher().getWatchableObjectInt(BLINK_DATA);
     }
 
     public void setBlink(int i) {
-        this.blink = i;
+        this.player.getDataWatcher().updateObject(BLINK_DATA, i);
     }
 
     public void decreaseBlink(int i) {
-        this.blink = this.blink - i;
+        this.player.getDataWatcher().updateObject(BLINK_DATA, -i);
     }
 
     public int getBlinkSpeed() {

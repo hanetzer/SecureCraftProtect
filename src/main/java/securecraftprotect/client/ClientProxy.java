@@ -11,6 +11,7 @@ import securecraftprotect.client.renderer.entity.RenderSCP0173;
 import securecraftprotect.common.CommonProxy;
 import securecraftprotect.common.entity.monster.EntitySCP0173;
 import securecraftprotect.common.handlers.SCPBlinkHandler;
+import securecraftprotect.common.handlers.SCPInputHandler;
 
 public class ClientProxy extends CommonProxy {
 
@@ -18,10 +19,8 @@ public class ClientProxy extends CommonProxy {
     public void init() {
         super.init();
         render();
-        //FMLCommonHandler.instance().bus().register(new SCPBlinkRenderHandler());
-        //MinecraftForge.EVENT_BUS.register(new SCPBlinkRenderHandler());
-        //FMLCommonHandler.instance().bus().register(new SCPBlinkHandler());
         MinecraftForge.EVENT_BUS.register(new SCPGuiBlink());
+        FMLCommonHandler.instance().bus().register(new SCPInputHandler());
     }
 
 
