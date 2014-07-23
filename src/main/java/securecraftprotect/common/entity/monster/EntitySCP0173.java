@@ -11,12 +11,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import securecraftprotect.common.entity.passive.EntitySCP0131;
 import securecraftprotect.common.entity.player.ExtendedPlayerSCP;
 import securecraftprotect.util.Globals;
-
-import java.util.Iterator;
-import java.util.List;
 
 public class EntitySCP0173 extends EntityMob implements IMob {
     public Minecraft mc = Minecraft.getMinecraft();
@@ -92,9 +88,13 @@ public class EntitySCP0173 extends EntityMob implements IMob {
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
      */
     protected void attackEntity(Entity entity, float f) {
-        if (entityToAttack != null && (entityToAttack instanceof EntityPlayer) && !canSCPBeSeen((EntityPlayer) entityToAttack)) {
-            if (rand.nextInt(20) != 0) {
-                super.attackEntity(entity, f);
+        if (entityToAttack != null) {
+            if ((entityToAttack instanceof EntityPlayer)) {
+                if (!canSCPBeSeen((EntityPlayer) entityToAttack)) {
+                    if (rand.nextInt(20) != 0) {
+                        super.attackEntity(entity, f);
+                    }
+                }
             }
         }
     }
