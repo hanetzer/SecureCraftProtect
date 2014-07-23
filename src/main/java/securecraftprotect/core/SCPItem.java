@@ -16,7 +16,7 @@ public class SCPItem {
     }
 
     private static void initMaterials() {
-        toolMaterial1023 = EnumHelper.addToolMaterial("1023", 0, -1, 0.0F, 9998.0F, 0);
+        toolMaterial1023 = EnumHelper.addToolMaterial("1023", 0, -1, 0.0F, 9996.0F, 0);
         armorMaterialClassD = EnumHelper.addArmorMaterial("CLASSD", 29, new int[] {2, 7, 5, 3}, 9);
     }
 
@@ -29,7 +29,7 @@ public class SCPItem {
     }
 
     public static Item registerItem(Item item) {
-        GameRegistry.registerItem(item, item.getUnlocalizedName().replace("item.scp:", ""));
+        GameRegistry.registerItem(item, item.getUnlocalizedName().replace("item.scp:", ""), "scp");
         return item;
     }
 }
