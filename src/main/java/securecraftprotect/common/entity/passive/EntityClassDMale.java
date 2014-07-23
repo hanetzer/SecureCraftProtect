@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import securecraftprotect.common.entity.monster.EntitySCP0173;
 import securecraftprotect.common.entity.monster.SCPEntity;
 
-public class EntityClassDMale extends EntityClassD {
+public class EntityClassDMale extends securecraftprotect.common.entity.passive.EntityClassD {
     public boolean isVerminGod;
 
     public EntityClassDMale(World world) {

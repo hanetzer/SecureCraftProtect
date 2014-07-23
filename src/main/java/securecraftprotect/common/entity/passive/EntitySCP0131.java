@@ -2,6 +2,7 @@ package securecraftprotect.common.entity.passive;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityTameable;
@@ -30,7 +31,7 @@ public class EntitySCP0131 extends EntityTameable {
         tasks.addTask(7, new EntityAIAttackOnCollide(this, EntitySCP0173.class, 1.0D, false));
         tasks.addTask(8, new EntityAIWander(this, 1.0D));
         tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 10F));
-        tasks.addTask(10, new EntityAIWatchClosest(this, EntityClassDMale.class, 10F));
+        tasks.addTask(10, new EntityAIWatchClosest(this, securecraftprotect.common.entity.passive.EntityClassDMale.class, 10F));
         tasks.addTask(11, new EntityAIWatchClosest(this, EntitySCP0173.class, 10F));
         targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
@@ -39,6 +40,11 @@ public class EntitySCP0131 extends EntityTameable {
         setTamed(false);
     }
 
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
+        getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23D);
+    }
     public SCPEnumCreatureAttribute getSCPAttribute() {
         return SCPEnumCreatureAttribute.SCP;
     }
@@ -49,14 +55,7 @@ public class EntitySCP0131 extends EntityTameable {
 
     public void onUpdate() {
         super.onUpdate();
-
-        //System.out.println(tamedNum + " | " + foodNum);
     }
-
-//    public int getMaxHealth()
-//    {
-//        return 20;
-//    }
 
     public boolean isAIEnabled() {
         return true;
@@ -69,10 +68,10 @@ public class EntitySCP0131 extends EntityTameable {
     protected void fall(float f) {
     }
 
-    public void writeEntityToNBT(NBTTagCompound nbt) {
-        super.writeEntityToNBT(nbt);
-        nbt.setInteger("foodnum", foodNum);
-        nbt.setInteger("tamednum", tamedNum);
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        super.writeEntityToNBT(compound);
+        compound.setInteger("foodnum", foodNum);
+        compound.setInteger("tamednum", tamedNum);
     }
 
     public double getMountedYOffset() {
@@ -118,8 +117,12 @@ public class EntitySCP0131 extends EntityTameable {
         return new EntitySCP0131(worldObj);
     }
 
-    public boolean isWheat(ItemStack stack) {
-        return stack.getItem() == Items.gold_ingot;
+    public boolean isBreedingItem(ItemStack stack) {
+        if (stack != null) {
+            return stack.getItem() == Items.gold_ingot;
+        } else {
+            return false;
+        }
     }
 
     public EntityAgeable createChild(EntityAgeable var1) {

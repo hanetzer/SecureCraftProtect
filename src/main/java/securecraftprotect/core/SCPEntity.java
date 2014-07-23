@@ -12,6 +12,8 @@ public class SCPEntity {
                 EntityRegistry.findGlobalUniqueEntityId(), 0xFEF2BF, 0x2BC600);
         registerSCP(EntitySCP0131.class, "scp:0131",
                 EntityRegistry.findGlobalUniqueEntityId(), 0xFF0000, 0xFFFF00);
+        registerSCP(securecraftprotect.common.entity.passive.EntityClassDMale.class, "scp:classd_male",
+                EntityRegistry.findGlobalUniqueEntityId(), 0xFF6600, 0x000000);
     }
 
     public static void registerSCP(Class<? extends Entity> klazz, String name,
