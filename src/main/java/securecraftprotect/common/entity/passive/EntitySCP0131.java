@@ -22,14 +22,13 @@ public class EntitySCP0131 extends EntityTameable {
     public EntitySCP0131(World world) {
         super(world);
         setSize(0.9F, 1.3F);
-        //texture = "/SCPCraft/textures/mobs/131A.png";
         getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAITempt(this, 0.25F, Items.gold_ingot, false));
         tasks.addTask(2, aiSit);
-        tasks.addTask(5, new EntityAIFollowOwner(this, 1.6D, 10F, 2.0F));
-        tasks.addTask(6, new EntityAIMate(this, 0.23F));
-        tasks.addTask(7, new EntityAIAttackOnCollide(this, EntitySCP0173.class, 1.6D, false));
-        tasks.addTask(8, new EntityAIWander(this, 0.23F));
+        tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 10F, 2.0F));
+        tasks.addTask(6, new EntityAIMate(this, 1.0D));
+        tasks.addTask(7, new EntityAIAttackOnCollide(this, EntitySCP0173.class, 1.0D, false));
+        tasks.addTask(8, new EntityAIWander(this, 1.0D));
         tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 10F));
         tasks.addTask(10, new EntityAIWatchClosest(this, EntityClassDMale.class, 10F));
         tasks.addTask(11, new EntityAIWatchClosest(this, EntitySCP0173.class, 10F));
@@ -37,6 +36,7 @@ public class EntitySCP0131 extends EntityTameable {
         targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
         targetTasks.addTask(4, new EntityAINearestAttackableTarget(this, EntitySCP0173.class, 0, true));
+        setTamed(false);
     }
 
     public SCPEnumCreatureAttribute getSCPAttribute() {
@@ -86,7 +86,7 @@ public class EntitySCP0131 extends EntityTameable {
     }
 
     public boolean interact(EntityPlayer player) {
-        ItemStack itemstack = player.inventory.getCurrentItem();
+        ItemStack stack = player.inventory.getCurrentItem();
 
         if (tamedNum == 0) {
             tamedNum = rand.nextInt(3) + 1;
@@ -94,25 +94,23 @@ public class EntitySCP0131 extends EntityTameable {
 
         if (!isTamed()) {
             //Taming
-            if (itemstack != null && itemstack.getItem() == Items.gold_ingot && player.getDistanceSqToEntity(this) < 9D) {
-                itemstack.stackSize--;
+            if (stack != null && stack.getItem() == Items.gold_ingot && player.getDistanceSqToEntity(this) < 9D) {
+                stack.stackSize--;
                 foodNum++;
-                if (itemstack.stackSize <= 0) {
+                if (stack.stackSize <= 0) {
                     player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
                 }
 
                 if (!worldObj.isRemote && foodNum >= tamedNum) {
                     setTamed(true);
-                    //setOwner(player.username);
+                    this.func_152115_b(player.getUniqueID().toString());
                     aiSit.setSitting(true);
                     worldObj.setEntityState(this, (byte) 7);
                     worldObj.getClosestPlayerToEntity(player, 16.0D).addChatMessage(new ChatComponentText("You have an EyePod now!"));
                 }
             }
-
             return true;
         }
-
         return super.interact(player);
     }
 
