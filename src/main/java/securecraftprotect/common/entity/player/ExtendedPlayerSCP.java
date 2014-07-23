@@ -5,19 +5,19 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
+import securecraftprotect.util.Globals;
 
 public class ExtendedPlayerSCP implements IExtendedEntityProperties {
     public final static String EXT_PROP_NAME = "ExtendedPlayerSCP";
-    public static final int BLINK_DATA = 20;
     private final EntityPlayer player;
     private boolean seen0096, heard0513;
-    private int time, blinkSpeed, maxBlink;
+    private int time, blinkSpeed;
 
     public ExtendedPlayerSCP(EntityPlayer player) {
         this.player = player;
         this.time = 0;
-        this.maxBlink = 300;
-        this.player.getDataWatcher().addObject(BLINK_DATA, this.maxBlink);
+        this.player.getDataWatcher().addObject(Globals.BLINKING, 1);
+        this.player.getDataWatcher().addObject(Globals.BLINK, Globals.MAX_BLINK);
         this.blinkSpeed = 2;
         this.seen0096 = false;
         this.heard0513 = false;
@@ -36,7 +36,10 @@ public class ExtendedPlayerSCP implements IExtendedEntityProperties {
     public void saveNBTData(NBTTagCompound compound) {
         NBTTagCompound props = new NBTTagCompound();
         props.setInteger("Time", this.time);
-        props.setInteger("Blink", this.player.getDataWatcher().getWatchableObjectInt(BLINK_DATA));
+        props.setInteger("Blink",
+                this.player.getDataWatcher().getWatchableObjectInt(Globals.BLINK));
+        props.setInteger("Blinking",
+                this.player.getDataWatcher().getWatchableObjectInt(Globals.BLINKING));
         props.setInteger("BlinkSpeed", this.blinkSpeed);
         props.setBoolean("Seen0096", this.seen0096);
         props.setBoolean("Heard0513", this.heard0513);
@@ -47,7 +50,10 @@ public class ExtendedPlayerSCP implements IExtendedEntityProperties {
     public void loadNBTData(NBTTagCompound compound) {
         NBTTagCompound props = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
         this.time = props.getInteger("Time");
-        this.player.getDataWatcher().updateObject(BLINK_DATA, props.getInteger("Blink"));
+        this.player.getDataWatcher().updateObject(Globals.BLINK,
+                props.getInteger("Blink"));
+        this.player.getDataWatcher().updateObject(Globals.BLINKING,
+                props.getInteger("Blinking"));
         this.blinkSpeed = props.getInteger("BlinkSpeed");
         this.seen0096 = props.getBoolean("Seen0096");
         this.heard0513 = props.getBoolean("Heard0513");
@@ -56,18 +62,6 @@ public class ExtendedPlayerSCP implements IExtendedEntityProperties {
     @Override
     public void init(Entity entity, World world) {
 
-    }
-
-    public int getBlink() {
-        return this.player.getDataWatcher().getWatchableObjectInt(BLINK_DATA);
-    }
-
-    public void setBlink(int i) {
-        this.player.getDataWatcher().updateObject(BLINK_DATA, i);
-    }
-
-    public void decreaseBlink(int i) {
-        this.player.getDataWatcher().updateObject(BLINK_DATA, -i);
     }
 
     public int getBlinkSpeed() {

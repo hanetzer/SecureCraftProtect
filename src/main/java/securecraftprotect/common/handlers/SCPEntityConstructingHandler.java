@@ -7,6 +7,7 @@ import net.minecraftforge.event.entity.EntityEvent;
 import securecraftprotect.common.entity.passive.ExtendedAnimalSCP;
 import securecraftprotect.common.entity.player.ExtendedPlayerSCP;
 
+@SuppressWarnings("unused")
 public class SCPEntityConstructingHandler {
     @SubscribeEvent
     public void onEntityConstructing(EntityEvent.EntityConstructing event) {

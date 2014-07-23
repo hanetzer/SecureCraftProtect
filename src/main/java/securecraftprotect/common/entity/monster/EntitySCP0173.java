@@ -13,6 +13,7 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import securecraftprotect.common.entity.passive.EntitySCP0131;
 import securecraftprotect.common.entity.player.ExtendedPlayerSCP;
+import securecraftprotect.util.Globals;
 
 import java.util.Iterator;
 import java.util.List;
@@ -173,8 +174,10 @@ public class EntitySCP0173 extends EntityMob implements IMob {
                 MathHelper.floor_double(posZ)) < 1) {
             return false;
         }
-        if (props.getBlink() >= 0 && props.getBlink() <= 10) {
-            return false;
+        if (player.getDataWatcher().getWatchableObjectInt(Globals.BLINK) >= 0) {
+            if (player.getDataWatcher().getWatchableObjectInt(Globals.BLINK) <= 10) {
+                return false;
+            }
         }
         if (player.canEntityBeSeen(this) || lineOfSightCheck(player)) {
             return isInFieldOfVision(this, player, 100F, 100F);  //70 65

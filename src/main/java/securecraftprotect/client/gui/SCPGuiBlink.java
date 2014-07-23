@@ -11,8 +11,11 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import securecraftprotect.util.Globals;
+
 import static org.lwjgl.opengl.GL11.*;
 
+@SuppressWarnings("unused")
 public class SCPGuiBlink extends Gui {
     private static final ResourceLocation icons = new ResourceLocation("scp:textures/guis/icons.png");
     private static Minecraft mc = Minecraft.getMinecraft();
@@ -29,9 +32,9 @@ public class SCPGuiBlink extends Gui {
         int height = event.resolution.getScaledHeight();
 
         int k2 = height - 20;
-        int blink = mc.thePlayer.getDataWatcher().getWatchableObjectInt(20);
+        int blink = mc.thePlayer.getDataWatcher().getWatchableObjectInt(Globals.BLINK);
         int i4 = width /2 +91;
-        int var26 = MathHelper.ceiling_double_int((double)(blink + 2) * 10.0D / 300.0D);
+        int var26 = MathHelper.ceiling_double_int((double)(blink + 2) * 10.0D / Globals.MAX_BLINK);
         glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         glDisable(GL_LIGHTING);
         mc.getTextureManager().bindTexture(icons);
@@ -48,7 +51,7 @@ public class SCPGuiBlink extends Gui {
     public void onRenderPumpkin(RenderGameOverlayEvent event) {
         double width = event.resolution.getScaledWidth();
         double height = event.resolution.getScaledHeight();
-        int blink = mc.thePlayer.getDataWatcher().getWatchableObjectInt(20);
+        int blink = mc.thePlayer.getDataWatcher().getWatchableObjectInt(Globals.BLINK);
         if (blink >= 0 && blink <= 10) {
             renderBlink(width, height);
         }
