@@ -7,6 +7,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import securecraftprotect.common.CommonProxy;
+import securecraftprotect.common.creativetab.SCPItemTab;
 import securecraftprotect.common.creativetab.SCPTab;
 import securecraftprotect.common.creativetab.SCPTileTab;
 import securecraftprotect.common.handlers.SCPEventHandler;
@@ -26,13 +27,14 @@ public class SCP {
             clientSide = "securecraftprotect.client.ClientProxy",
             serverSide = "securecraftprotect.common.CommonProxy")
     public static CommonProxy proxy;
-    public static CreativeTabs scpTab, scpTile;
+    public static CreativeTabs scpTab, scpTile, scpItem;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
         scpTab  = new SCPTab(CreativeTabs.getNextID(), "scpTab");
         scpTile = new SCPTileTab(CreativeTabs.getNextID(), "scpTile");
+        scpItem = new SCPItemTab(CreativeTabs.getNextID(), "scpItem");
         SCPEventHandler.init();
         SCPItem.init();
         SCPTile.init();

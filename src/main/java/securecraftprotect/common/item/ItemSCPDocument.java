@@ -34,6 +34,11 @@ public class ItemSCPDocument extends Item {
         return itemIcon[documentInfo.level];
     }
 
+    public String getUnlocalizedName(ItemStack stack) {
+        String scp = documentList.get(stack.getItemDamage()).name.replace("scp:", "");
+        return super.getUnlocalizedName() + "." + scp;
+    }
+
     public void registerIcons(IIconRegister iconRegister) {
         itemIcon[0] = iconRegister.registerIcon("scp:document_safe");
         itemIcon[1] = iconRegister.registerIcon("scp:document_euclid");

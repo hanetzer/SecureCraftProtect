@@ -13,5 +13,6 @@ public class SCPItems {
     public static Item classDBoots;
     public static Item document;
     public static Item pearl;
+    public static Item circuit;
 
 }

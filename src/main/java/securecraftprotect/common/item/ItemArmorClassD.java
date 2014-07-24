@@ -4,12 +4,14 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import securecraftprotect.SCP;
 
 public class ItemArmorClassD extends ItemArmor {
     public int armorType;
     public ItemArmorClassD(ArmorMaterial material, int type, int slot) {
         super(material, type, slot);
         armorType = slot;
+        setCreativeTab(SCP.scpItem);
     }
 
     @Override
