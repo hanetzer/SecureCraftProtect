@@ -5,7 +5,11 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import securecraftprotect.client.gui.GuiDocument;
 import securecraftprotect.common.handlers.SCPBlinkHandler;
+import securecraftprotect.common.inventory.ContainerDocument;
+
+import java.awt.*;
 
 public class CommonProxy implements IGuiHandler{
     public void init() {
@@ -13,13 +17,25 @@ public class CommonProxy implements IGuiHandler{
     }
 
     @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        return null;
+    public Object getServerGuiElement(int ID, EntityPlayer player,
+                                      World world, int x, int y, int z) {
+        switch (ID) {
+            case 0:
+                return new ContainerDocument(player.inventory, world, x, y, z);
+            default:
+                return null;
+        }
     }
 
     @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        return null;
+    public Object getClientGuiElement(int ID, EntityPlayer player,
+                                      World world, int x, int y, int z) {
+        switch (ID) {
+            case 0:
+                return new GuiDocument(player.inventory, world, x, y, z);
+            default:
+                return null;
+        }
     }
 
     public int addArmor(String armor) {

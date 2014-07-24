@@ -4,15 +4,16 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import securecraftprotect.common.CommonProxy;
+import securecraftprotect.common.creativetab.SCPTab;
 import securecraftprotect.common.creativetab.SCPTileTab;
 import securecraftprotect.common.handlers.SCPEventHandler;
 import securecraftprotect.core.SCPEntity;
 import securecraftprotect.core.SCPItem;
 import securecraftprotect.core.SCPTile;
 
-//import cpw.mods.fml.common.network.NetworkRegistry;
 @SuppressWarnings("unused")
 @Mod(modid = "scp", name = "SecureCraftProtect", version = "@VERSION@")
 public class SCP {
@@ -25,11 +26,12 @@ public class SCP {
             clientSide = "securecraftprotect.client.ClientProxy",
             serverSide = "securecraftprotect.common.CommonProxy")
     public static CommonProxy proxy;
-    public static CreativeTabs scpTile;
+    public static CreativeTabs scpTab, scpTile;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        //NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
+        scpTab  = new SCPTab(CreativeTabs.getNextID(), "scpTab");
         scpTile = new SCPTileTab(CreativeTabs.getNextID(), "scpTile");
         SCPEventHandler.init();
         SCPItem.init();

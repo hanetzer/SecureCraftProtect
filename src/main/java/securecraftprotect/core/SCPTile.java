@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import securecraftprotect.common.tile.TileBlood;
+import securecraftprotect.common.tile.TileDocument;
 import securecraftprotect.common.tile.TileLocker;
 
 import static securecraftprotect.init.SCPTiles.*;
@@ -16,6 +17,7 @@ public class SCPTile {
     private static void regBlocks() {
         blood = registerBlock(new TileBlood().setBlockName("scp:blood"));
         locker = registerBlock(new TileLocker().setBlockName("scp:locker"));
+        document_crafter = registerBlock(new TileDocument().setBlockName("scp:document_crafter"));
     }
     public static Block registerBlock(Block block) {
         GameRegistry.registerBlock(block, block.getUnlocalizedName().replace("tile.cpc:", ""));

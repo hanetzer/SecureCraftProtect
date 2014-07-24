@@ -5,7 +5,9 @@ import net.minecraft.item.Item;
 import net.minecraftforge.common.util.EnumHelper;
 import securecraftprotect.SCP;
 import securecraftprotect.common.item.ItemArmorClassD;
+import securecraftprotect.common.item.ItemSCPDocument;
 import securecraftprotect.common.item.ItemSCPKnife;
+import securecraftprotect.common.item.ItemSCPPearl;
 
 import static securecraftprotect.init.SCPItems.*;
 
@@ -26,6 +28,8 @@ public class SCPItem {
         classDShirt = registerItem(new ItemArmorClassD(armorMaterialClassD, SCP.proxy.addArmor("CLASSD"), 1).setUnlocalizedName("scp:classd_shirt"));
         classDPants = registerItem(new ItemArmorClassD(armorMaterialClassD, SCP.proxy.addArmor("CLASSD"), 2).setUnlocalizedName("scp:classd_pants"));
         classDBoots = registerItem(new ItemArmorClassD(armorMaterialClassD, SCP.proxy.addArmor("CLASSD"), 3).setUnlocalizedName("scp:classd_boots"));
+        document    = registerItem(new ItemSCPDocument().setUnlocalizedName("scp:document"));
+        pearl       = registerItem(new ItemSCPPearl().setUnlocalizedName("scp:pearl"));
     }
 
     public static Item registerItem(Item item) {

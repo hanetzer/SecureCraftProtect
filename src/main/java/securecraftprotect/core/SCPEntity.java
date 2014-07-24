@@ -7,26 +7,35 @@ import securecraftprotect.common.entity.monster.EntitySCP0023;
 import securecraftprotect.common.entity.monster.EntitySCP0173;
 import securecraftprotect.common.entity.passive.EntityClassDMale;
 import securecraftprotect.common.entity.passive.EntitySCP0131;
+import securecraftprotect.common.registry.DocumentRegistry;
 
 public class SCPEntity {
     public static void init() {
         registerSCP(EntitySCP0023.class, "scp:0023",
-                EntityRegistry.findGlobalUniqueEntityId(), 0x000000, 0x000000);
+                EntityRegistry.findGlobalUniqueEntityId(),
+                0x000000, 0x000000, 1);
         registerSCP(EntitySCP0131.class, "scp:0131",
-                EntityRegistry.findGlobalUniqueEntityId(), 0xFF0000, 0xFFFF00);
+                EntityRegistry.findGlobalUniqueEntityId(),
+                0xFF0000, 0xFFFF00, 0);
         registerSCP(EntitySCP0173.class, "scp:0173",
-                EntityRegistry.findGlobalUniqueEntityId(), 0xFEF2BF, 0x2BC600);
+                EntityRegistry.findGlobalUniqueEntityId(),
+                0xFEF2BF, 0x2BC600, 1);
         registerSCP(EntityClassDMale.class, "scp:classd_male",
-                EntityRegistry.findGlobalUniqueEntityId(), 0xFF6600, 0x000000);
+                EntityRegistry.findGlobalUniqueEntityId(),
+                0xFF6600, 0x000000, -1);
     }
 
-    public static void registerSCP(Class<? extends Entity> klazz, String name,
-                                   int ID, int back, int fore) {
+    public static void registerSCP(Class<? extends Entity> scp, String name,
+                                   int entityID, int back, int fore,
+                                    int level) {
         if (back != -1 && fore != -1) {
-            EntityRegistry.registerGlobalEntityID(klazz, name, ID, back, fore);
+            EntityRegistry.registerGlobalEntityID(scp, name, entityID, back, fore);
         } else {
-            EntityRegistry.registerGlobalEntityID(klazz, name, ID);
+            EntityRegistry.registerGlobalEntityID(scp, name, entityID);
         }
-        EntityRegistry.registerModEntity(klazz, name, ID+300, SCP.instance(), 80, 3, true);
+        if (level >= 0) {
+            DocumentRegistry.registerDocument(scp, name, level);
+        }
+        EntityRegistry.registerModEntity(scp, name, entityID+300, SCP.instance(), 80, 3, true);
     }
 }
