@@ -5,11 +5,9 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import securecraftprotect.client.gui.GuiDocument;
+import securecraftprotect.client.gui.inventory.GuiDocument;
 import securecraftprotect.common.handlers.SCPBlinkHandler;
 import securecraftprotect.common.inventory.ContainerDocument;
-
-import java.awt.*;
 
 public class CommonProxy implements IGuiHandler{
     public void init() {

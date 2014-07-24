@@ -1,4 +1,4 @@
-package securecraftprotect.client.gui;
+package securecraftprotect.client.gui.inventory;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;

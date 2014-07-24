@@ -24,9 +24,9 @@ public class TileDocument extends Block {
 
     @Override
     public void registerBlockIcons(IIconRegister iconRegister) {
-        this.icon_side = iconRegister.registerIcon("scp:document_block_side");
-        this.icon_top = iconRegister.registerIcon("scp:document_block_top");
-        this.icon_front = iconRegister.registerIcon("scp:document_block_front");
+        this.icon_side = iconRegister.registerIcon("scp:document_side");
+        this.icon_top = iconRegister.registerIcon("scp:document_top");
+        this.icon_front = iconRegister.registerIcon("scp:document_front");
         this.icon_bottom = iconRegister.registerIcon("minecraft:iron_block");
     }
 
