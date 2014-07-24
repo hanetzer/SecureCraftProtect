@@ -26,7 +26,7 @@ public class TileBlood extends Block {
                 (double) y + minY,
                 (double) z + minZ,
                 (double) x + maxX,
-                (double) ((float) y + ((float) b0 * f)),
+                (double) ( y + ( b0 * f)),
                 (double) z + maxZ);
     }
 
@@ -42,8 +42,8 @@ public class TileBlood extends Block {
         func_150089_b(0);
     }
 
-    public void setBlockBoundsBasedOnState(IBlockAccess p_149719_1_, int x, int y, int z) {
-        func_150089_b(p_149719_1_.getBlockMetadata(x, y, z));
+    public void setBlockBoundsBasedOnState(IBlockAccess access, int x, int y, int z) {
+        func_150089_b(access.getBlockMetadata(x, y, z));
     }
 
     protected void func_150089_b(int p_150089_1_) {
