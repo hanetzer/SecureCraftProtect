@@ -17,7 +17,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 @SuppressWarnings("unused")
 public class SCPGuiBlink extends Gui {
-    private static final ResourceLocation icons = new ResourceLocation("scp:textures/guis/icons.png");
+    private static final ResourceLocation icons = new ResourceLocation("scp:textures/gui/icons.png");
     private static Minecraft mc = Minecraft.getMinecraft();
     protected static final ResourceLocation blink = new ResourceLocation("scp:textures/misc/blink.png");
     protected static final ResourceLocation gasMask = new ResourceLocation("scp:textures/misc/gasmask.png");
