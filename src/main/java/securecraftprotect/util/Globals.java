@@ -8,4 +8,5 @@ public class Globals {
     public static int MAX_BLINK = 400;
     public static int BLINK = 30;
     public static int BLINKING = 31;
+    public static int RENDER_PIPE = -1;
 }

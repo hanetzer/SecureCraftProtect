@@ -6,4 +6,7 @@ public class SCPTiles {
     public static Block blood;
     public static Block reinforced_steel;
     public static Block document_crafter;
+    public static Block scp_0015;
+    public static Block machinery;
+    public static Block toilet;
 }

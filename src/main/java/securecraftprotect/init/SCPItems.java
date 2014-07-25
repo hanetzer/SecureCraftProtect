@@ -19,5 +19,7 @@ public class SCPItems {
     public static Item document;
     public static Item pearl;
     public static Item circuit;
-
+    public static Item scp0143_sword;
+    public static Item scp0143_pickaxe;
+    public static Item wrench;
 }
