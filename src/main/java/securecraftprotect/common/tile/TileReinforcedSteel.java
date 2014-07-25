@@ -5,8 +5,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import securecraftprotect.SCP;
 
-public class TileLocker extends Block {
-    public TileLocker() {
+public class TileReinforcedSteel extends Block {
+    public TileReinforcedSteel() {
         super(Material.rock);
         setCreativeTab(SCP.scpTile);
     }

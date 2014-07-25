@@ -11,13 +11,13 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import securecraftprotect.SCP;
 
-public class TileDocument extends Block {
+public class TileDocumentCrafter extends Block {
     private IIcon icon_top;
     private IIcon icon_front;
     private IIcon icon_side;
     private IIcon icon_bottom;
 
-    public TileDocument() {
+    public TileDocumentCrafter() {
         super(Material.iron);
         this.setCreativeTab(SCP.scpTile);
     }
