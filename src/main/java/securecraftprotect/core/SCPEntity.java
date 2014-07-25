@@ -42,7 +42,7 @@ public class SCPEntity {
             EntityRegistry.registerGlobalEntityID(scp, name, entityID);
         }
         if (level >= 0) {
-            DocumentRegistry.registerDocument(scp, name, level);
+            DocumentRegistry.registerDocument(name, level);
         }
         EntityRegistry.registerModEntity(scp, name, entityID+300, SCP.instance(), 80, 3, true);
     }

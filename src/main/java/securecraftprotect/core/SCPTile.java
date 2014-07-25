@@ -3,18 +3,22 @@ package securecraftprotect.core;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import securecraftprotect.common.tile.TileBlood;
 import securecraftprotect.common.tile.TileDocumentCrafter;
 import securecraftprotect.common.tile.TileReinforcedSteel;
 import securecraftprotect.common.tile.TileSCP0015;
 import securecraftprotect.common.tileentity.TileEntitySCP0015;
 
+import static net.minecraft.init.Blocks.*;
+import static net.minecraft.init.Items.*;
 import static securecraftprotect.init.SCPTiles.*;
 
 public class SCPTile {
     public static void init() {
         registerTiles();
         registerTileEntities();
+        registerCraft();
     }
 
     private static void registerTiles() {
@@ -26,6 +30,15 @@ public class SCPTile {
 
     private static void registerTileEntities() {
         GameRegistry.registerTileEntity(TileEntitySCP0015.class, "scp:0015");
+    }
+
+    private static void registerCraft() {
+        GameRegistry.addShapedRecipe(new ItemStack(reinforced_steel, 1),
+                " A ", "ABA", " A ",
+                'A', new ItemStack(iron_ingot), 'B', new ItemStack(iron_block));
+        GameRegistry.addShapedRecipe(new ItemStack(document_crafter, 1),
+                " A ", "ABA", " A ",
+                'A', new ItemStack(reinforced_steel), 'B', new ItemStack(crafting_table));
     }
 
     public static Block registerTile(Block tile) {

@@ -41,6 +41,11 @@ public class TileSCP0015 extends BlockContainer {
                 world.isSideSolid(x, y, z, dir.getOpposite(), false);
     }
 
+    public void breakBlock(World world, int x, int y, int z, Block block, int par6) {
+        world.func_147453_f(x, y, z, block);
+        super.breakBlock(world, x, y, z, block, par6);
+    }
+
     public TileEntity createNewTileEntity(World world, int par2) {
         return new TileEntitySCP0015();
     }
@@ -68,14 +73,14 @@ public class TileSCP0015 extends BlockContainer {
     public int getRenderBlockPass() {
         return 0;
     }
-
-    public AxisAlignedBB getSelectedBoundingBoxFromPool_do(World world, int i, int j, int k) {
-        boolean flag = this.canPaneConnectToBlock(world.getBlock(i, j, k - 1));
-        boolean flag1 = this.canPaneConnectToBlock(world.getBlock(i - 1, j, k));
-        boolean flag2 = this.canPaneConnectToBlock(world.getBlock(i + 1, j, k));
-        boolean flag3 = this.canPaneConnectToBlock(world.getBlock(i, j, k + 1));
-        boolean flag4 = this.canPaneConnectToBlock(world.getBlock(i, j + 1, k));
-        boolean flag5 = this.canPaneConnectToBlock(world.getBlock(i, j - 1, k));
+/*
+    public AxisAlignedBB getSelectedBoundingBoxFromPool_do(World world, int x, int y, int z) {
+        boolean flag = this.canPaneConnectToBlock(world.getBlock(x, y, z - 1));
+        boolean flag1 = this.canPaneConnectToBlock(world.getBlock(x - 1, y, z));
+        boolean flag2 = this.canPaneConnectToBlock(world.getBlock(x + 1, y, z));
+        boolean flag3 = this.canPaneConnectToBlock(world.getBlock(x, y, z + 1));
+        boolean flag4 = this.canPaneConnectToBlock(world.getBlock(x, y + 1, z));
+        boolean flag5 = this.canPaneConnectToBlock(world.getBlock(x, y - 1, z));
         setBlockBounds(0.33F, 0.33F, 0.33F, 0.66F, 0.66F, 0.66F);
         if (flag1) setBlockBounds(0.0F, 0.33F, 0.33F, 0.66F, 0.66F, 0.66F);
         if (flag) setBlockBounds(0.33F, 0.33F, 0.0F, 0.66F, 0.66F, 0.66F);
@@ -83,8 +88,8 @@ public class TileSCP0015 extends BlockContainer {
         if (flag2) setBlockBounds(0.33F, 0.33F, 0.33F, 1F, 0.66F, 0.66F);
         if (flag4) setBlockBounds(0.33F, 0.33F, 0.33F, 0.66F, 1F, 0.66F);
         if (flag5) setBlockBounds(0.33F, 0.0F, 0.33F, 0.66F, 0.66F, 0.66F);
-        return super.getSelectedBoundingBoxFromPool(world, i, j, k);
-    }
+        return super.getSelectedBoundingBoxFromPool(world, x, y, z);
+    }*/
 
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {

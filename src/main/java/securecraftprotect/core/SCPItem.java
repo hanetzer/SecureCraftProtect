@@ -1,7 +1,9 @@
 package securecraftprotect.core;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 import securecraftprotect.SCP;
 import securecraftprotect.common.item.*;
@@ -37,8 +39,10 @@ public class SCPItem {
     }
 
     private static void registerCraft() {
-
+        GameRegistry.addShapedRecipe(new ItemStack(classd_shirt, 1),
+                "A A", "AAA", "AAA", 'A', new ItemStack(Blocks.wool, 1, 1));
     }
+
     public static Item registerItem(Item item) {
         GameRegistry.registerItem(item, item.getUnlocalizedName().replace("item.scp:", ""), "scp");
         return item;
