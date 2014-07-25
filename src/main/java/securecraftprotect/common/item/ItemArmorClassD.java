@@ -7,16 +7,14 @@ import net.minecraft.item.ItemStack;
 import securecraftprotect.SCP;
 
 public class ItemArmorClassD extends ItemArmor {
-    public int armorType;
-    public ItemArmorClassD(ArmorMaterial material, int type, int slot) {
-        super(material, type, slot);
-        armorType = slot;
+    public ItemArmorClassD(ArmorMaterial material, int renderIndex, int armorType) {
+        super(material, renderIndex, armorType);
         setCreativeTab(SCP.scpItem);
     }
 
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-        String textureLoc = "scp:textures/models/armor/classd_layer_";
+        String textureLoc = "scp:textures/models/armor/classd_";
         switch (armorType) {
             case 2:
                 return textureLoc + "2.png";

@@ -10,6 +10,6 @@ public class SCPTileTab extends CreativeTabs {
     }
     @Override
     public Item getTabIconItem() {
-        return Item.getItemFromBlock(SCPTiles.locker);
+        return Item.getItemFromBlock(SCPTiles.reinforced_steel);
     }
 }

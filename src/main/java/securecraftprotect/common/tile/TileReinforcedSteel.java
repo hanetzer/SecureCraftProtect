@@ -7,11 +7,11 @@ import securecraftprotect.SCP;
 
 public class TileReinforcedSteel extends Block {
     public TileReinforcedSteel() {
-        super(Material.rock);
+        super(Material.iron);
         setCreativeTab(SCP.scpTile);
     }
 
     public void registerBlockIcons(IIconRegister iconRegister) {
-        blockIcon = iconRegister.registerIcon("scp:reinforced_iron_block");
+        blockIcon = iconRegister.registerIcon("scp:reinforced_steel");
     }
 }
