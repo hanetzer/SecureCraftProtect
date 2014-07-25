@@ -11,11 +11,11 @@ public class SCPItems {
     public static Item classd_shirt;
     public static Item classd_pants;
     public static Item classd_boots;
-    public static ItemArmor.ArmorMaterial armor0912;
-    public static Item scp0912_helmet;
-    public static Item scp0912_shirt;
-    public static Item scp0912_pants;
-    public static Item scp0912_shoes;
+    public static ItemArmor.ArmorMaterial armorSwat;
+    public static Item swat_helmet;
+    public static Item swat_shirt;
+    public static Item swat_pants;
+    public static Item swat_shoes;
     public static Item document;
     public static Item pearl;
     public static Item circuit;

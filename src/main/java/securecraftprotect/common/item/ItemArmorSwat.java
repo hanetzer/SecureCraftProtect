@@ -7,16 +7,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import securecraftprotect.SCP;
 
-public class ItemArmorSCP0912 extends ItemArmor {
+public class ItemArmorSwat extends ItemArmor {
 
-    public ItemArmorSCP0912(ArmorMaterial material, int renderIndex, int armorType) {
+    public ItemArmorSwat(ArmorMaterial material, int renderIndex, int armorType) {
         super(material, renderIndex, armorType);
         setCreativeTab(SCP.scpItem);
     }
 
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-        String textureLoc = "scp:textures/models/armor/912_";
+        String textureLoc = "scp:textures/models/armor/swat_";
         switch (armorType) {
             case 2:
                 return textureLoc + "2.png";
@@ -29,16 +29,16 @@ public class ItemArmorSCP0912 extends ItemArmor {
     public void registerIcons(IIconRegister iconRegister) {
         switch (armorType) {
             case 0:
-                itemIcon = iconRegister.registerIcon("scp:0912_helmet");
+                itemIcon = iconRegister.registerIcon("scp:swat_helmet");
                 break;
             case 1:
-                itemIcon = iconRegister.registerIcon("scp:0912_shirt");
+                itemIcon = iconRegister.registerIcon("scp:swat_shirt");
                 break;
             case 2:
-                itemIcon = iconRegister.registerIcon("scp:0912_pants");
+                itemIcon = iconRegister.registerIcon("scp:swat_pants");
                 break;
             case 3:
-                itemIcon = iconRegister.registerIcon("scp:0912_shoes");
+                itemIcon = iconRegister.registerIcon("scp:swat_shoes");
 
         }
     }

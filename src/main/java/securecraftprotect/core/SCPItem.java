@@ -17,8 +17,8 @@ public class SCPItem {
 
     private static void initMaterials() {
         tool1023 = EnumHelper.addToolMaterial("1023", 0, -1, 0.0F, 9996.0F, 0);
-        armorClassD = EnumHelper.addArmorMaterial("CLASSD", 29, new int[] {2, 7, 5, 3}, 9);
-        armor0912 = EnumHelper.addArmorMaterial("0912", 500, new int[] {40, 90, 70, 50}, 100);
+        armorClassD = EnumHelper.addArmorMaterial("CLASSD", 29, new int[] {1, 3, 2, 1}, 0);
+        armorSwat = EnumHelper.addArmorMaterial("SWAT", 33, new int[] {2, 6, 5, 2}, 9);
     }
 
     private static void registerItems() {
@@ -27,10 +27,10 @@ public class SCPItem {
         classd_shirt = registerItem(new ItemArmorClassD(armorClassD, SCP.proxy.addArmor("CLASSD"), 1).setUnlocalizedName("scp:classd_shirt"));
         classd_pants = registerItem(new ItemArmorClassD(armorClassD, SCP.proxy.addArmor("CLASSD"), 2).setUnlocalizedName("scp:classd_pants"));
         classd_boots = registerItem(new ItemArmorClassD(armorClassD, SCP.proxy.addArmor("CLASSD"), 3).setUnlocalizedName("scp:classd_boots"));
-        scp0912_helmet = registerItem(new ItemArmorSCP0912(armor0912, SCP.proxy.addArmor("0912"), 0).setUnlocalizedName("scp:0912_helmet"));
-        scp0912_shirt = registerItem(new ItemArmorSCP0912(armor0912, SCP.proxy.addArmor("0912"), 1).setUnlocalizedName("scp:0912_shirt"));
-        scp0912_pants = registerItem(new ItemArmorSCP0912(armor0912, SCP.proxy.addArmor("0912"), 2).setUnlocalizedName("scp:0912_pants"));
-        scp0912_shoes = registerItem(new ItemArmorSCP0912(armor0912, SCP.proxy.addArmor("0912"), 3).setUnlocalizedName("scp:0912_shoes"));
+        swat_helmet = registerItem(new ItemArmorSwat(armorSwat, SCP.proxy.addArmor("SWAT"), 0).setUnlocalizedName("scp:swat_helmet"));
+        swat_shirt = registerItem(new ItemArmorSwat(armorSwat, SCP.proxy.addArmor("SWAT"), 1).setUnlocalizedName("scp:swat_shirt"));
+        swat_pants = registerItem(new ItemArmorSwat(armorSwat, SCP.proxy.addArmor("SWAT"), 2).setUnlocalizedName("scp:swat_pants"));
+        swat_shoes = registerItem(new ItemArmorSwat(armorSwat, SCP.proxy.addArmor("SWAT"), 3).setUnlocalizedName("scp:swat_shoes"));
         document    = registerItem(new ItemSCPDocument().setUnlocalizedName("scp:document"));
         pearl       = registerItem(new ItemSCPPearl().setUnlocalizedName("scp:pearl"));
         circuit     = registerItem(new Item().setUnlocalizedName("scp:circuit").setTextureName("scp:circuit"));
