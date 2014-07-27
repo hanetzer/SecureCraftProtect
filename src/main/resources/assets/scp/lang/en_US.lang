@@ -1,5 +1,12 @@
 item.scp:1023arc.name=SCP-1023-ARC
+item.scp:document.name=SCP Document
 
-entity.scp:0023.name=SCP-023
-entity.scp:0131.name=SCP-131
-entity.scp:0173.name=SCP-173
+item.scp:pearl.name=Pearl
+scp.0015.name=SCP-015
+scp.0015.desc=Pipe Nightmare
+scp.0023.name=SCP-023
+scp.0023.desc=Black Shuck
+scp.0131.name=SCP-131
+scp.0131.desc=Eyepods
+scp.0173.name=SCP-173
+scp.0173.desc=The Sculpture
