@@ -14,12 +14,13 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
-
-//sourceCompatibility = 1.7
-//targetCompatibility = 1.7
 apply plugin: 'curseforge'
 apply plugin: 'forge'
 
+compileJava {
+    targetCompatibility = 1.7
+    sourceCompatibility = 1.7
+}
 ext.revision = 'git rev-list  --count HEAD'.execute().text.trim()
 ext.hash     = 'git rev-parse --short HEAD'.execute().text.trim()
 
