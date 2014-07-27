@@ -4,10 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import securecraftprotect.common.tile.TileBlood;
-import securecraftprotect.common.tile.TileDocumentCrafter;
-import securecraftprotect.common.tile.TileReinforcedSteel;
-import securecraftprotect.common.tile.TileSCP0015;
+import securecraftprotect.common.tile.*;
 import securecraftprotect.common.tileentity.TileEntitySCP0015;
 
 import static net.minecraft.init.Blocks.*;
@@ -26,6 +23,7 @@ public class SCPTile {
         reinforced_steel = registerTile(new TileReinforcedSteel().setBlockName("scp:reinforced_steel"));
         document_crafter = registerTile(new TileDocumentCrafter().setBlockName("scp:document_crafter"));
         scp_0015 = registerTile(new TileSCP0015().setBlockName("scp:0015"));
+		machinery = registerTile(new TileMachine().setBlockName("scp:machine"));
     }
 
     private static void registerTileEntities() {

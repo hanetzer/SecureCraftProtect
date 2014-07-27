@@ -22,4 +22,6 @@ public class SCPItems {
     public static Item scp0143_sword;
     public static Item scp0143_pickaxe;
     public static Item wrench;
+	public static Item scp173;
+	public static Item scp15;
 }

@@ -8,6 +8,9 @@ import securecraftprotect.SCP;
 public class TileReinforcedSteel extends Block {
     public TileReinforcedSteel() {
         super(Material.iron);
+		setHardness(3.0F);
+		setStepSound(Block.soundTypeMetal);
+		setResistance(20.0F);
         setCreativeTab(SCP.scpTile);
     }
 

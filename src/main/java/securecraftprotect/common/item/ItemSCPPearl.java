@@ -10,8 +10,9 @@ import securecraftprotect.SCP;
 
 import java.util.List;
 
-import static securecraftprotect.common.registry.DocumentRegistry.documentList;
+import static securecraftprotect.common.registry.DocumentRegistry.scpList;
 
+@SuppressWarnings("unchecked")
 public class ItemSCPPearl extends Item {
     private IIcon[] icons;
 
@@ -27,21 +28,21 @@ public class ItemSCPPearl extends Item {
         return icons[damage];
     }
 
-    public void registerIcons(IIconRegister iconRegister) {
-        icons = new IIcon[documentList.size()];
-        for (int i = 0; i < documentList.size(); ++i) {
-            icons[i] = iconRegister.registerIcon(documentList.get(i).name);
+    public void registerIcons(IIconRegister register) {
+        icons = new IIcon[scpList.size()];
+        for (int i = 0; i < scpList.size(); ++i) {
+            icons[i] = register.registerIcon("scp:"+scpList.get(i).name);
         }
     }
 
     public String getItemStackDisplayName(ItemStack stack) {
-        String s1 = I18n.format("entity."+documentList.get(stack.getItemDamage()).name + ".name");
-        String s2 = I18n.format(getUnlocalizedName() + ".name").trim();
-        return s1 + " " + s2;
+        String s = "scp."+ scpList.get(stack.getItemDamage()).name + ".name";
+        String s1 = getUnlocalizedName() + ".name";
+        return I18n.format(s) + " " + I18n.format(s1);
     }
 
     public void getSubItems(Item item, CreativeTabs tabs, List list) {
-        for (int i = 0; i < documentList.size(); ++i) {
+        for (int i = 0; i < scpList.size(); ++i) {
             list.add(new ItemStack(item, 1, i));
         }
     }

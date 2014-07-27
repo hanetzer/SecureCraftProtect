@@ -6,15 +6,12 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.world.World;
 import securecraftprotect.common.registry.DocumentRegistry;
 import static securecraftprotect.init.SCPItems.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 public class DocumentManager {
@@ -23,7 +20,7 @@ public class DocumentManager {
 
 
     private DocumentManager() {
-        for(int i = 0; i < DocumentRegistry.documentList.size(); i++){
+        for(int i = 0; i < DocumentRegistry.scpList.size(); i++){
             this.addShapelessRecipe(new ItemStack(document, 1, i), new Object[]{new ItemStack(pearl, 1, i), Items.paper});
         }
 
