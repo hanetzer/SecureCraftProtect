@@ -1,5 +1,8 @@
 item.scp:1023arc.name=SCP-1023-ARC
 item.scp:document.name=SCP Document
+item.scp:bucketAcid.name=Bucket of Acid
+tile.scp:acid.name=Acid
+death.attack.acid=You got burned in acid.
 
 item.scp:pearl.name=Pearl
 scp.0015.name=SCP-015

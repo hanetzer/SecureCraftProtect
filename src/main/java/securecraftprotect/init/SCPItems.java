@@ -24,4 +24,5 @@ public class SCPItems {
     public static Item wrench;
 	public static Item scp173;
 	public static Item scp15;
+    public static Item bucket;
 }

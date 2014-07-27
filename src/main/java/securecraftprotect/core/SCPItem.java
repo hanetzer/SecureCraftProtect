@@ -36,6 +36,7 @@ public class SCPItem {
         document    = registerItem(new ItemSCPDocument().setUnlocalizedName("scp:document"));
         pearl       = registerItem(new ItemSCPPearl().setUnlocalizedName("scp:pearl"));
         circuit     = registerItem(new Item().setUnlocalizedName("scp:circuit").setTextureName("scp:circuit"));
+        bucket     = registerItem(new ItemBucket().setUnlocalizedName("scp:bucketAcid").setTextureName("scp:bucketAcid"));
     }
 
     private static void registerCraft() {
