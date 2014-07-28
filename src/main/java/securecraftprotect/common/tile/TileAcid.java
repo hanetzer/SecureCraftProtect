@@ -1,6 +1,7 @@
 package securecraftprotect.common.tile;
 
-import securecraftprotect.SCP;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -8,10 +9,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import securecraftprotect.util.SCPDamageSource;
 
-public class BlockAcid extends BlockFluidClassic
+public class TileAcid extends BlockFluidClassic
 {
     
     @SideOnly(Side.CLIENT)
@@ -19,7 +19,7 @@ public class BlockAcid extends BlockFluidClassic
     @SideOnly(Side.CLIENT)
     protected IIcon flowingIcon;
     
-    public BlockAcid(Fluid fluid, Material material)
+    public TileAcid(Fluid fluid, Material material)
     {
         super(fluid, material);
         setBlockName("scp:acid");
@@ -41,7 +41,7 @@ public class BlockAcid extends BlockFluidClassic
     
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) 
     {
-        if(entity != null) entity.attackEntityFrom(SCP.acid, 5f);
+        if(entity != null) entity.attackEntityFrom(SCPDamageSource.acid, 5f);
     }
     
 }
