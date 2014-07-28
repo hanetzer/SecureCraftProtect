@@ -10,11 +10,10 @@ package securecraftprotect.common.handlers;
 import java.util.HashMap;
 import java.util.Map;
 
-import securecraftprotect.common.tile.BlockAcid;
+import securecraftprotect.common.tile.TileAcid;
 import securecraftprotect.init.SCPItems;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -24,15 +23,17 @@ import net.minecraftforge.event.entity.player.FillBucketEvent;
 import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
+@SuppressWarnings("unused")
 public class BucketHandler
 {
     
-    public static BucketHandler INSTANCE = new BucketHandler();
+    private static BucketHandler INSTANCE = new BucketHandler();
+	public static BucketHandler get() {
+		return INSTANCE;
+	}
     public Map<Block, Item> buckets = new HashMap<Block, Item>();
     
-    private BucketHandler()
-    {
-    }
+    private BucketHandler(){}
     
     @SubscribeEvent
     public void onBucketFill(FillBucketEvent event)
@@ -49,13 +50,12 @@ public class BucketHandler
     {
 
         Block block = world.getBlock(pos.blockX, pos.blockY, pos.blockZ);
-        Item bucket = buckets.get(block);
+        //Item bucket = buckets.get(block);
         
-        if (world.getBlock(pos.blockX, pos.blockY, pos.blockZ) != Blocks.air && world.getBlock(pos.blockX, pos.blockY, pos.blockZ) instanceof BlockAcid)
+        if (block instanceof TileAcid)
         {
             world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
-            ItemStack item = new ItemStack(SCPItems.bucket);
-            return item;
+			return new ItemStack(SCPItems.bucket);
         }
         else return null;
     }

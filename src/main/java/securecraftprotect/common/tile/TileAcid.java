@@ -19,10 +19,9 @@ public class TileAcid extends BlockFluidClassic
     @SideOnly(Side.CLIENT)
     protected IIcon flowingIcon;
     
-    public TileAcid(Fluid fluid, Material material)
+    public TileAcid(Fluid fluid)
     {
-        super(fluid, material);
-        setBlockName("scp:acid");
+        super(fluid, Material.water);
         this.setQuantaPerBlock(8);
     }
     

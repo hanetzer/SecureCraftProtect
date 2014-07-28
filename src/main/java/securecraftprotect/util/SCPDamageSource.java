@@ -3,6 +3,7 @@ package securecraftprotect.util;
 import net.minecraft.util.DamageSource;
 
 public class SCPDamageSource {
+	public static DamageSource acid = new DamageSource("acid");
 	public static DamageSource crystalDamage = new DamageSource("crystal").setDamageBypassesArmor();
 	public static DamageSource electricDamage = new DamageSource("electricity").setDamageBypassesArmor();
 	public static DamageSource ghostButt = new DamageSource("ghost");

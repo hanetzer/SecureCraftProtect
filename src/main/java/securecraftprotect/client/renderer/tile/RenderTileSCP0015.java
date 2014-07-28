@@ -43,43 +43,43 @@ public class RenderTileSCP0015 implements ISimpleBlockRenderingHandler {
                                     Block block, int ID, RenderBlocks render) {
         if (block instanceof TileSCP0015) {
             TileSCP0015 pipe = (TileSCP0015)block;
-            boolean down  = pipe.canPaneConnectTo(world, x,     y - 1, z,     DOWN);
-            boolean up    = pipe.canPaneConnectTo(world, x,     y + 1, z,     UP);
-            boolean north = pipe.canPaneConnectTo(world, x,     y,     z - 1, NORTH);
-            boolean south = pipe.canPaneConnectTo(world, x,     y,     z + 1, SOUTH);
-            boolean west  = pipe.canPaneConnectTo(world, x - 1, y,     z,     WEST);
-            boolean east  = pipe.canPaneConnectTo(world, x + 1, y,     z,     EAST);
+            boolean D = pipe.canPaneConnectTo(world, x,     y - 1, z,     DOWN);
+            boolean U = pipe.canPaneConnectTo(world, x,     y + 1, z,     UP);
+            boolean N = pipe.canPaneConnectTo(world, x,     y,     z - 1, NORTH);
+            boolean S = pipe.canPaneConnectTo(world, x,     y,     z + 1, SOUTH);
+            boolean W = pipe.canPaneConnectTo(world, x - 1, y,     z,     WEST);
+            boolean E = pipe.canPaneConnectTo(world, x + 1, y,     z,     EAST);
 
-            render.setRenderBounds(0.33F, 0.33F, 0.33F, 0.66F, 0.66F, 0.66F);
+            render.setRenderBounds(0.33F, 0.0F, 0.33F, 0.66F, 1.0F, 0.66F);
             render.renderStandardBlock(pipe, x, y, z);
             //colorFix(pipe, renderblocks, x, y, z);
 
-            if (west) {
+            if (W) {
                 render.setRenderBounds(0.0F, 0.33F, 0.33F, 0.33F, 0.66F, 0.66F);
                 render.renderStandardBlock(pipe, x, y, z);
                 //colorFix(pipe, renderblocks, x, y, z);
             }
-            if (north) {
+            if (N) {
                 render.setRenderBounds(0.33F, 0.33F, 0.0F, 0.66F, 0.66F, 0.33F);
                 render.renderStandardBlock(pipe, x, y, z);
                 //colorFix(pipe, renderblocks, x, y, z);
             }
-            if (south) {
+            if (S) {
                 render.setRenderBounds(0.33F, 0.33F, 0.66F, 0.66F, 0.66F, 1F);
                 render.renderStandardBlock(pipe, x, y, z);
                 //colorFix(pipe, renderblocks, x, y, z);
             }
-            if (east) {
+            if (E) {
                 render.setRenderBounds(0.66F, 0.33F, 0.33F, 1F, 0.66F, 0.66F);
                 render.renderStandardBlock(pipe, x, y, z);
                 //colorFix(pipe, renderblocks, x, y, z);
             }
-            if (up) {
+            if (U) {
                 render.setRenderBounds(0.33F, 0.66F, 0.33F, 0.66F, 1F, 0.66F);
                 render.renderStandardBlock(pipe, x, y, z);
                 //colorFix(pipe, renderblocks, x, y, z);
             }
-            if (down) {
+            if (D) {
                 render.setRenderBounds(0.33F, 0.0F, 0.33F, 0.66F, 0.33F, 0.66F);
                 render.renderStandardBlock(pipe, x, y, z);
                 //colorFix(pipe, renderblocks, x, y, z);
