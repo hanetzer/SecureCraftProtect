@@ -17,12 +17,14 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 import static cpw.mods.fml.common.registry.GameRegistry.findUniqueIdentifierFor;
 
-public class CommandJson implements ICommand{
+public class CommandJson implements ICommand
+{
 	private List<String> aliases;
 	public CommandJson() {
 		this.aliases = new ArrayList<>();
@@ -65,6 +67,16 @@ public class CommandJson implements ICommand{
 		try {
 			reader =Files.newReader(file, Charsets.UTF_8);
 			SCPCell tmp = gson.fromJson(reader, SCPCell.class);
+			int xCoord = 0, yCoord = 0, zCoord = 0;
+			/*for (Array xarray : tmp.content) {
+				xCoord++;
+				for (Array yarray : xarray ) {
+					yCoord++;
+					for (int id : yarray) {
+						zCoord++;
+					}
+				}
+			}*/
 			for(int xstart = 0; xstart < tmp.content.length; ++xstart) {
 				for(int ystart = 0; ystart < tmp.content[xstart].length; ++ystart) {
 					for(int zstart = 0; zstart < tmp.content[xstart][ystart].length; ++zstart) {
@@ -90,9 +102,9 @@ public class CommandJson implements ICommand{
 		int[][][] content = new int[xsize][ysize][zsize];
 		System.out.printf("Array Size %sx%sx%s\n", xsize, ysize, zsize);
 		List blocks = new ArrayList<String>();
-		for(int x = start[0]; x < start[0] +xsize; ++x) {
+		for(int z = start[2]; z < start[2] +zsize; ++z) {
 			for(int y = start[1]; y < start[1]+ysize; ++y) {
-				for(int z = start[2]; z < start[2]+zsize; ++z) {
+				for(int x = start[0]; x < start[0]+xsize; ++x) {
 					String uuid = getBlockUUID(sender.getEntityWorld(), x, y, z);
 					int index = blocks.indexOf(uuid);
 					if (index < 0) {
