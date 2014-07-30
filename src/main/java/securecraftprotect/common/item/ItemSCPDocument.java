@@ -67,7 +67,7 @@ public class ItemSCPDocument extends Item {
 					String uuid = (String) cell.blocks.get(cell.content[h][w][d]);
 					String[] parts = uuid.split(":");
 					Block block = GameRegistry.findBlock(parts[0], parts[1]);
-					world.setBlock(x + w, y + h, z + d, block);
+					world.setBlock(x + h, y + w, z + d, block);
 				}
 			}
 		}
