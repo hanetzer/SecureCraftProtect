@@ -6,9 +6,9 @@ public class SCPDamageSource {
 	public static DamageSource acid = new DamageSource("acid");
 	public static DamageSource crystalDamage = new DamageSource("crystal").setDamageBypassesArmor();
 	public static DamageSource electricDamage = new DamageSource("electricity").setDamageBypassesArmor();
-	public static DamageSource ghostButt = new DamageSource("ghost");
+	public static DamageSource ghost = new DamageSource("ghost");
 	public static DamageSource bloodstone = new DamageSource("bloodstone").setDamageBypassesArmor();
-	public static DamageSource pipe = new DamageSource("pipeBoss");
+	public static DamageSource SCP0015 = new DamageSource("SCP0015");
     public static DamageSource SCP0002 = new DamageSource("0002").setDamageBypassesArmor();
 	public static DamageSource SCP0023 = new DamageSource("0023").setDamageBypassesArmor();
 	public static DamageSource SCP0073 = new DamageSource("0073");
