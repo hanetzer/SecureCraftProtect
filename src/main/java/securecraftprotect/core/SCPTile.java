@@ -6,9 +6,14 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import securecraftprotect.common.item.ItemTileFurnature;
 import securecraftprotect.common.tile.*;
+import securecraftprotect.common.tileentity.TileEntityChair;
+import securecraftprotect.common.tileentity.TileEntityFlesh;
 import securecraftprotect.common.tileentity.TileEntitySCP0015;
 
+import static net.minecraft.block.material.Material.rock;
+import static net.minecraft.block.material.Material.wood;
 import static net.minecraft.init.Blocks.crafting_table;
 import static net.minecraft.init.Blocks.iron_block;
 import static net.minecraft.init.Items.iron_ingot;
@@ -25,22 +30,34 @@ public class SCPTile
     
     private static void registerTiles()
     {
-        blood = registerTile(new TileBlood().setBlockName("scp:blood"));
-        reinforced_steel = registerTile(new TileReinforcedSteel().setBlockName("scp:reinforced_steel"));
-        document_crafter = registerTile(new TileDocumentCrafter().setBlockName("scp:document_crafter"));
-        scp_0015 = registerTile(new TileSCP0015().setBlockName("scp:0015"));
-        machinery = registerTile(new TileMachine().setBlockName("scp:machine"));
+        blood = registerTile(new TileBlood().setBlockName("scp.blood"));
+        reinforced_steel = registerTile(new TileReinforcedSteel().setBlockName("scp.reinforced_steel"));
+        document_crafter = registerTile(new TileDocumentCrafter().setBlockName("scp.document_crafter"));
+        scp_0015 = registerTile(new TileSCP0015().setBlockName("scp.0015"));
+        machinery = registerTile(new TileMachine().setBlockName("scp.machine"));
         
         acidFluid = new Fluid("acid").setLuminosity(15).setDensity(3000).setTemperature(2000).setViscosity(6000);
         if (!FluidRegistry.registerFluid(acidFluid)) {
 			acidFluid = FluidRegistry.getFluid("acid");
 		}
-        acid = registerTile(new TileAcid(acidFluid).setBlockName("scp:acid"));
+        acid = registerTile(new TileAcid(acidFluid).setBlockName("scp.acid"));
+		bone = registerTile(new TileBone().setBlockName("scp.bone"));
+		flesh = registerTile(new TileFlesh().setBlockName("scp.flesh"));
+		desk_wood = registerTile(new TileDesk(wood, 0).setBlockName("scp.desk_wood"),
+				ItemTileFurnature.class);
+		desk_stone = registerTile(new TileDesk(rock, 1).setBlockName("scp.desk_stone"),
+				ItemTileFurnature.class);
+		chair_wood = registerTile(new TileChair(wood, 0).setBlockName("scp.chair_wood"),
+				ItemTileFurnature.class);
+		chair_stone = registerTile(new TileChair(rock, 1).setBlockName("scp.chair_stone"),
+				ItemTileFurnature.class);
     }
     
     private static void registerTileEntities()
     {
-        GameRegistry.registerTileEntity(TileEntitySCP0015.class, "scp:0015");
+        GameRegistry.registerTileEntity(TileEntitySCP0015.class, "scp.0015");
+		GameRegistry.registerTileEntity(TileEntityFlesh.class, "scp.flesh");
+		GameRegistry.registerTileEntity(TileEntityChair.class, "scp.chair");
     }
     
     private static void registerCraft()
@@ -55,21 +72,21 @@ public class SCPTile
     
     public static Block registerTile(Block tile)
     {
-		String name = tile.getUnlocalizedName().replace("tile.scp:", "");
+		String name = tile.getUnlocalizedName().replace("tile.scp.", "");
         GameRegistry.registerBlock(tile, name);
         return tile;
     }
     
     public static Block registerTile(Block tile, Class<? extends ItemBlock> item)
     {
-		String name = tile.getUnlocalizedName().replace("tile.scp:", "");
+		String name = tile.getUnlocalizedName().replace("tile.scp.", "");
         GameRegistry.registerBlock(tile, item, name);
         return tile;
     }
     
     public static Block registerTile(Block tile, Class<? extends ItemBlock> item, Object... args)
     {
-		String name = tile.getUnlocalizedName().replace("tile.scp:", "");
+		String name = tile.getUnlocalizedName().replace("tile.scp.", "");
         GameRegistry.registerBlock(tile, item, name, args);
         return tile;
     }
