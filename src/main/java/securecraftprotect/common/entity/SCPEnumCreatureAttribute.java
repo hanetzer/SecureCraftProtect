@@ -8,5 +8,5 @@ public enum SCPEnumCreatureAttribute
     CLASSD,
     UNIDENTIFIED,
     SCPObject,
-    SCP0682;
+    SCP0682
 }
