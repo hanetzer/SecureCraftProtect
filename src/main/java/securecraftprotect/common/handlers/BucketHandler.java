@@ -7,21 +7,19 @@
  */
 package securecraftprotect.common.handlers;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import securecraftprotect.common.tile.TileAcid;
-import securecraftprotect.init.SCPItems;
-
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import securecraftprotect.common.tile.TileAcid;
+import securecraftprotect.init.SCPItems;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @SuppressWarnings("unused")
 public class BucketHandler
