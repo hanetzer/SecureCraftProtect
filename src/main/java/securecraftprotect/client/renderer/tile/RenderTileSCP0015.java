@@ -14,25 +14,19 @@ import static net.minecraftforge.common.util.ForgeDirection.*;
 public class RenderTileSCP0015 implements ISimpleBlockRenderingHandler {
 
     @Override
-    public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks render) {
+    public void renderInventoryBlock(Block block, int meta, int ID, RenderBlocks render) {
         TileSCP0015 pipe = (TileSCP0015) block;
         IIcon texture = pipe.getIcon();
         pipe.setBlockBoundsForItemRender();
         Tessellator tessellator = Tessellator.instance;
-        if (modelId == Globals.RENDER_PIPE) {
+        if (ID == Globals.RENDER_PIPE) {
             tessellator.startDrawingQuads();
             render.setRenderBounds(0.33F, 0.0F, 0.33F, 0.66F, 1.0F, 0.66F);
-            tessellator.setNormal(0.0F, 1.0F, 0.0F);
-            render.renderFaceYPos(pipe, 0.0D, 0.0D, 0.0D, texture);
-            tessellator.setNormal(0.0F, -1.0F, 0.0F);
-            render.renderFaceYNeg(pipe, 0.0D, 0.0D, 0.0D, texture);
-            tessellator.setNormal(1.0F, 0.0F, 0.0F);
-            render.renderFaceXPos(pipe, 0.0D, 0.0D, 0.0D, texture);
-            tessellator.setNormal(-1.0F, 0.0F, 0.0F);
             render.renderFaceXNeg(pipe, 0.0D, 0.0D, 0.0D, texture);
-            tessellator.setNormal(0.0F, 0.0F, 1.0F);
-            render.renderFaceZPos(pipe, 0.0D, 0.0D, 0.0D, texture);
-            tessellator.setNormal(0.0F, 0.0F, -1.0F);
+			render.renderFaceXPos(pipe, 0.0D, 0.0D, 0.0D, texture);
+			render.renderFaceYNeg(pipe, 0.0D, 0.0D, 0.0D, texture);
+			render.renderFaceYPos(pipe, 0.0D, 0.0D, 0.0D, texture);
+            render.renderFaceZNeg(pipe, 0.0D, 0.0D, 0.0D, texture);
             render.renderFaceZPos(pipe, 0.0D, 0.0D, 0.0D, texture);
             tessellator.draw();
         }
