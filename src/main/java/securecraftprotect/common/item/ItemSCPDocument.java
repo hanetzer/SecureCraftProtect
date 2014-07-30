@@ -23,8 +23,7 @@ import java.util.List;
 
 import static securecraftprotect.common.registry.DocumentRegistry.scpList;
 
-@SuppressWarnings(
-{ "unchecked", "unused" })
+@SuppressWarnings({ "unchecked"})
 public class ItemSCPDocument extends Item
 {
     private IIcon[] icons = new IIcon[3];
