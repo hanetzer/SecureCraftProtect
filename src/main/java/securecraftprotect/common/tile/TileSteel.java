@@ -5,8 +5,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import securecraftprotect.SCP;
 
-public class TileReinforcedSteel extends Block {
-    public TileReinforcedSteel() {
+public class TileSteel extends Block {
+    public TileSteel() {
         super(Material.iron);
 		setHardness(3.0F);
 		setStepSound(Block.soundTypeMetal);
