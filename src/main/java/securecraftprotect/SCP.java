@@ -7,7 +7,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.MinecraftForge;
 import securecraftprotect.common.CommonProxy;
 import securecraftprotect.common.command.CommandJson;

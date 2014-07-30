@@ -22,7 +22,10 @@ public class SCPItems {
     public static Item scp0143_sword;
     public static Item scp0143_pickaxe;
     public static Item wrench;
+	public static Item wrench_godly;
 	public static Item scp173;
 	public static Item scp15;
     public static Item bucket;
+	public static Item keycard;
+
 }

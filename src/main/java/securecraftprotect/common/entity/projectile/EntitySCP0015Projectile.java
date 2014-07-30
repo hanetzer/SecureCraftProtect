@@ -17,7 +17,8 @@ import securecraftprotect.common.item.ItemArmorSwat;
 import securecraftprotect.init.SCPItems;
 import securecraftprotect.util.SCPDamageSource;
 
-public class EntitySCP0015Projectile extends EntityFireball {
+public class EntitySCP0015Projectile extends EntityFireball
+{
     /**
      * The x coordinate of the tile entity.
      */
@@ -41,23 +42,27 @@ public class EntitySCP0015Projectile extends EntityFireball {
         setSize(0.2125F, 0.2125F);
     }
 
-    public EntitySCP0015Projectile(World world, EntityLiving living, double x, double y, double par7) {
-        super(world, living, x, y, par7);
+    public EntitySCP0015Projectile(World world, EntityLiving living,
+								   double x, double y, double z)
+	{
+        super(world, living, x, y, z);
         setSize(0.2125F, 0.2125F);
     }
 
-    public EntitySCP0015Projectile(World world, double par2, double par4, double par6, double par8, double par10, double par12) {
-        super(world, par2, par4, par6, par8, par10, par12);
+    public EntitySCP0015Projectile(World world, double x, double y, double z,
+								   double par8, double par10, double par12)
+	{
+        super(world, x, y, z, par8, par10, par12);
         setSize(0.2125F, 0.2125F);
     }
 
-    public void targetLivings() {
-    }
+    public void targetLivings() {}
 
     /**
      * Called when this EntityFireball hits a block or entity.
      */
-    protected void onImpact(MovingObjectPosition position) {
+    protected void onImpact(MovingObjectPosition pos)
+	{
         int potions[] = {
                 Potion.blindness.id, Potion.hunger.id, Potion.confusion.id,
                 Potion.digSlowdown.id, Potion.moveSlowdown.id, Potion.weakness.id,
@@ -71,52 +76,76 @@ public class EntitySCP0015Projectile extends EntityFireball {
                 SCPItems.scp0143_pickaxe, SCPItems.scp0143_sword, SCPItems.wrench
         };
 
-        if (!worldObj.isRemote && position.entityHit != null) {
-            if (position.entityHit instanceof EntityPlayer) {
+        if (!worldObj.isRemote && pos.entityHit != null) {
+            if (pos.entityHit instanceof EntityPlayer) {
 
-                EntityPlayer player = ((EntityPlayer) position.entityHit);
+                EntityPlayer player = ((EntityPlayer) pos.entityHit);
 
                 Item boots = player.inventory.armorInventory[0].getItem();
                 Item legs = player.inventory.armorInventory[1].getItem();
                 Item chest = player.inventory.armorInventory[2].getItem();
                 Item helm = player.inventory.armorInventory[3].getItem();
-                if (chest != null && legs != null && boots != null && helm != null) {
+                if (chest != null && legs != null && boots != null && helm != null)
+				{
                     if (chest instanceof ItemArmorSwat
                             || legs instanceof ItemArmorSwat
                             || boots instanceof ItemArmorSwat
-                            || helm instanceof ItemArmorSwat) {
-                        position.entityHit.attackEntityFrom(SCPDamageSource.pipe,
+                            || helm instanceof ItemArmorSwat)
+					{
+                        pos.entityHit.attackEntityFrom(SCPDamageSource.SCP0015,
                                 2 * worldObj.difficultySetting.getDifficultyId());
                         worldObj.newExplosion(null, posX, posY, posZ,
                                 2.0F, true, true);
-                    } else if (chest instanceof ItemArmorClassD
+                    }
+					else if (chest instanceof ItemArmorClassD
                             || legs instanceof ItemArmorClassD
                             || boots instanceof ItemArmorClassD
-                            || helm instanceof ItemArmorClassD) {
-                        position.entityHit.attackEntityFrom(SCPDamageSource.pipe,
+                            || helm instanceof ItemArmorClassD)
+					{
+                        pos.entityHit.attackEntityFrom(SCPDamageSource.SCP0015,
                                 2 * worldObj.difficultySetting.getDifficultyId() + 2);
-                    } else {
-                        position.entityHit.attackEntityFrom(SCPDamageSource.pipe,
+                    }
+					else
+					{
+                        pos.entityHit.attackEntityFrom(SCPDamageSource.SCP0015,
                                 2 * worldObj.difficultySetting.getDifficultyId());
                     }
-                } else {
-                    position.entityHit.attackEntityFrom(SCPDamageSource.pipe,
+                }
+				else
+				{
+                    pos.entityHit.attackEntityFrom(SCPDamageSource.SCP0015,
                             2 * worldObj.difficultySetting.getDifficultyId() + 2);
                 }
-            }
+			}
 
-            for (int var3 = 0; var3 < 50; ++var3) {
-                worldObj.spawnParticle("smoke", (double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D, 4D, (double) xCoord + 0.5D, (double) yCoord + 0.5D);
-                worldObj.spawnParticle("splash", (double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D, 4D, (double) xCoord + 0.5D, (double) yCoord + 0.5D);
-                worldObj.spawnParticle("smoke", (double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D, 4D, (double) xCoord + 0.5D, (double) yCoord + 0.5D);
+            for (int i = 0; i < 50; ++i) {
+                worldObj.spawnParticle("smoke",
+						(double) xCoord + 0.5D,
+						(double) yCoord + 0.5D,
+						(double) zCoord + 0.5D, 4D,
+						(double) xCoord + 0.5D,
+						(double) yCoord + 0.5D);
+                worldObj.spawnParticle("splash",
+						(double) xCoord + 0.5D,
+						(double) yCoord + 0.5D,
+						(double) zCoord + 0.5D, 4D,
+						(double) xCoord + 0.5D,
+						(double) yCoord + 0.5D);
+                worldObj.spawnParticle("smoke",
+						(double) xCoord + 0.5D,
+						(double) yCoord + 0.5D,
+						(double) zCoord + 0.5D, 4D,
+						(double) xCoord + 0.5D,
+						(double) yCoord + 0.5D);
             }
-            for (int i = 0; i <= tools.length - 1; i++) {
-                if (mc.thePlayer.inventory.hasItem(tools[i]) && mc.playerController.isNotCreative()) {
+            for (int i = 0; i <= tools.length - 1; i++)
+			{
+                if (mc.thePlayer.inventory.hasItem(tools[i]) && mc.playerController.isNotCreative())
+				{
                     mc.thePlayer.addPotionEffect(new PotionEffect(potions[rand.nextInt(potions.length)], 200, 1));
                 }
             }
         }
-
         this.setDead();
     }
 
@@ -129,23 +158,28 @@ public class EntitySCP0015Projectile extends EntityFireball {
     /**
      * Returns true if other Entities should be prevented from moving through this Entity.
      */
-    public boolean canBeCollidedWith() {
+    public boolean canBeCollidedWith()
+	{
         return false;
     }
 
-    public boolean attackEntityFrom(DamageSource source, int par2) {
+    public boolean attackEntityFrom(DamageSource source, int par2)
+	{
         return false;
     }
 
-    public float getShadowSize() {
+    public float getShadowSize()
+	{
         return 0.0F;
     }
 
-    public float getBrightness(float par1) {
+    public float getBrightness(float par1)
+	{
         return 1.0F;
     }
 
-    public int getBrightnessForRender(float par1) {
+    public int getBrightnessForRender(float par1)
+	{
         return 14496512;
     }
 }

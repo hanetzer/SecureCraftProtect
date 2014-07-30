@@ -47,7 +47,7 @@ public class TileMachine extends Block {
 
 	public void onBlockPlacedBy(World world, int x, int y, int z,
 								EntityLivingBase entity, ItemStack stack) {
-		byte meta = 0;
+		byte meta;
 		int l = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
 		switch(l) {
