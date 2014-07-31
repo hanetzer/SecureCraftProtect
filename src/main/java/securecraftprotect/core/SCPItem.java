@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 import securecraftprotect.SCP;
 import securecraftprotect.common.item.*;
+import securecraftprotect.common.tile.ITileFurnature;
 
 import static securecraftprotect.init.SCPItems.*;
 

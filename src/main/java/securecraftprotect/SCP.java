@@ -3,6 +3,7 @@ package securecraftprotect;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -15,6 +16,7 @@ import securecraftprotect.common.creativetab.SCPTab;
 import securecraftprotect.common.creativetab.SCPTileTab;
 import securecraftprotect.common.handlers.BucketHandler;
 import securecraftprotect.common.handlers.SCPEventHandler;
+import securecraftprotect.common.handlers.packet.PacketPipeline;
 import securecraftprotect.core.SCPEntity;
 import securecraftprotect.core.SCPItem;
 import securecraftprotect.core.SCPTile;
@@ -29,6 +31,7 @@ public class SCP
 			serverSide = "securecraftprotect.common.CommonProxy")
 	public static CommonProxy proxy;
 	public static CreativeTabs scpTab, scpTile, scpItem;
+	public static final PacketPipeline pipe = new PacketPipeline();
 	@Mod.Instance("scp")
 	private static SCP instance;
 
@@ -56,6 +59,13 @@ public class SCP
 	public void init(FMLInitializationEvent event)
 	{
 		proxy.init();
+		pipe.initialise();
+	}
+
+	@Mod.EventHandler
+	public void postInit(FMLPostInitializationEvent event)
+	{
+		pipe.postInitialise();
 	}
 
 	@Mod.EventHandler

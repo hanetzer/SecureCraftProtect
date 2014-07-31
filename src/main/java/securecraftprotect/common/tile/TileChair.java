@@ -17,18 +17,16 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import securecraftprotect.SCP;
-import securecraftprotect.common.entity.EntityMountableBlock;
+import securecraftprotect.common.entity.EntityMountable;
 import securecraftprotect.common.tileentity.TileEntityChair;
 import securecraftprotect.util.Globals;
 
 import java.util.List;
 
-public class TileChair extends BlockContainer
+import static net.minecraft.util.AxisAlignedBB.getBoundingBox;
+
+public class TileChair extends BlockContainer implements ITileFurnature
 {
-	public String[][] types = {
-			{"oak", "spruce", "birch", "acacia", "big_oak"},
-			{"stone", "scp:granite", "scp:marble"}
-	};
 	public int dir;
 	private IIcon[] icons;
 	private int type;
@@ -40,35 +38,35 @@ public class TileChair extends BlockContainer
 		this.setCreativeTab(SCP.scpTile);
 	}
 
-	//Use this method for a custom mounting ysize.
-	public static boolean onBlockActivated(World world, int x, int y, int z,
-										   EntityPlayer player, float f)
+	//Use this method for a custom mounting height.
+	public static boolean onBlockActivated(World world, int i, int j, int k,
+										   EntityPlayer entityplayer, float y)
 	{
-		return onBlockActivated(world, x, y, z, player, 0.5F, f, 0.5F, 0, 0,
-				0, 0);
+		return onBlockActivated(world, i, j, k, entityplayer, 0.5F, y, 0.5F,
+				0, 0, 0, 0);
 	}
 
 	//This is the main onBlockActivated method. Use it for fully custom
 	// mounting positions.
-	public static boolean onBlockActivated(World w, int i, int j, int k,
-										   EntityPlayer player, float x,
+	public static boolean onBlockActivated(World world, int i, int j, int k,
+										   EntityPlayer entityplayer, float x,
 										   float y, float z, int north,
 										   int south, int east, int west)
 	{
-		if (!w.isRemote) {
+		if (!world.isRemote) {
 			//Looks for EMBs up to 1 block away from the activated block.
 			// Hopefully you didn't set the mounting position further away
 			// than this.
-			List<EntityMountableBlock> listEMB = w.getEntitiesWithinAABB
-					(EntityMountableBlock.class, AxisAlignedBB.getBoundingBox
+			List<EntityMountable> listEMB = world.getEntitiesWithinAABB
+					(EntityMountable.class, getBoundingBox
 							(i, j, k, i + 1.0D, j + 1.0D, k + 1.0D).expand(1D,
 							1D, 1D));
-			for (EntityMountableBlock entitytocheck : listEMB) {
+			for (EntityMountable entitytocheck : listEMB) {
 				//Looks for an EMB created by this block.
-				if (entitytocheck.getOrgBlockPosX() == i && entitytocheck
-						.getOrgBlockPosY() == j && entitytocheck
-						.getOrgBlockPosZ() == k) {
-					entitytocheck.interact(player);
+				if (entitytocheck.getPosX() == i
+						&& entitytocheck.getPosY() == j
+						&& entitytocheck.getPosZ() == k) {
+					entitytocheck.interact(entityplayer);
 					return true;
 				}
 			}
@@ -79,7 +77,9 @@ public class TileChair extends BlockContainer
 			//Changes coordinates for mounting to compensate for none-north
 			// block orientation.
 			if (north != south) {
-				int md = w.getBlockMetadata(i, j, k);
+				TileEntityChair chair = (TileEntityChair)world.getTileEntity(i, j, k);
+				//int md = world.getBlockMetadata(i, j, k);
+				int md = chair.getDir();//SWNE
 				if (md == east) {
 					mountingX = i + 1 - z;
 					mountingZ = k + x;
@@ -93,13 +93,27 @@ public class TileChair extends BlockContainer
 			}
 			//Creates a new EMB if none had been created already or if the old
 			// one was bugged.
-			EntityMountableBlock nemb = new EntityMountableBlock(w, player, i,
-					j, k, mountingX, mountingY, mountingZ);
-			w.spawnEntityInWorld(nemb);
-			nemb.interact(player);
+			EntityMountable nemb = new EntityMountable(world,
+					entityplayer, i, j, k, mountingX, mountingY, mountingZ);
+			world.spawnEntityInWorld(nemb);
+			nemb.interact(entityplayer);
 			return true;
 		}
 		return true;
+	}
+
+	public int getType()
+	{
+		return type;
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, int i, int j, int k,
+									EntityPlayer entityplayer, int par6,
+									float par7, float par8, float par9)
+	{
+		return onBlockActivated(world, i, j, k, entityplayer, 0.5F, 1.0F,
+				0.5F, 0, 0, 0, 0);
 	}
 
 	@Override
@@ -172,13 +186,14 @@ public class TileChair extends BlockContainer
 		}
 	}
 
-	@Override
-	public boolean onBlockActivated(World w, int x, int y, int z,
+/*	@Override
+//	public boolean onBlockActivated(World w, int x, int y, int z,
 									EntityPlayer player, int dir,
 									float par7, float par8, float par9)
 	{
-		return onBlockActivated(w, x, y, z, player, 0.5F, 0.5F, 0.5F, 0, 0, 0, 0);
-	}
+		return onBlockActivated(w, x, y, z, player, 0.5F, 0.5F, 0.5F, 0, 0, 0,
+		 0);
+	}*/
 
 	@Override
 	public IIcon getIcon(int side, int meta)
@@ -207,6 +222,21 @@ public class TileChair extends BlockContainer
 	public int getRenderBlockPass()
 	{
 		return 0;
+	}
+
+	public String getUnlocalizedName(ItemStack stack)
+	{
+		String s = super.getUnlocalizedName();
+		String s1 = getTextureName();
+		switch (type) {
+			case 0:
+				s1 = types[0][stack.getItemDamage()];
+				break;
+			case 1:
+				s1 = types[1][stack.getItemDamage()];
+				break;
+		}
+		return s + "." + s1;
 	}
 
 	public boolean renderAsNormalBlock()
