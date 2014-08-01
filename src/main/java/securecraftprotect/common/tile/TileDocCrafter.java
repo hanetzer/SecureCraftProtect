@@ -11,13 +11,13 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import securecraftprotect.SCP;
 
-public class TileDocumentCrafter extends Block {
+public class TileDocCrafter extends Block {
 	private IIcon icon_top;
 	private IIcon icon_front;
 	private IIcon icon_side;
 	private IIcon icon_bottom;
 
-	public TileDocumentCrafter() {
+	public TileDocCrafter() {
 		super(Material.iron);
 		setHardness(2.5F);
 		setResistance(1.0F);

@@ -1,6 +1,5 @@
 package securecraftprotect.common.entity;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,16 +12,16 @@ import net.minecraft.world.World;
  *and is killed when it's no longer used.
 */
 
-public class EntityMountableBlock extends Entity
+public class EntityMountable extends Entity
 {
 	
 	//These variables keep track of the block that created the entity.
-	private int orgBlockPosX;
-	private int orgBlockPosY;
-	private int orgBlockPosZ;
-	protected Block orgBlock;
+	public int orgBlockPosX;
+	public int orgBlockPosY;
+	public int orgBlockPosZ;
+	protected int orgBlockID;
 	
-	public EntityMountableBlock(World world)
+	public EntityMountable(World world)
 	{
 		super(world);
         noClip = true;
@@ -31,7 +30,7 @@ public class EntityMountableBlock extends Entity
         height = 0F;
 	}
 	
-	public EntityMountableBlock(World world, double d, double d1, double d2)
+	public EntityMountable(World world, double d, double d1, double d2)
 	{
         super(world);
         noClip = true;
@@ -42,9 +41,9 @@ public class EntityMountableBlock extends Entity
 	}
 
 	//This constructor is called by the mountable block.
-	public EntityMountableBlock(World world, EntityPlayer entityplayer, int i,
-								int j, int k, float mountingX,
-								float mountingY, float mountingZ)
+	public EntityMountable(World world, EntityPlayer entityplayer, int i,
+						   int j, int k, float mountingX,
+						   float mountingY, float mountingZ)
 	{
 		super(world);
         noClip = true;
@@ -55,16 +54,18 @@ public class EntityMountableBlock extends Entity
     	setOrgBlockPosX(i);
     	setOrgBlockPosY(j);
     	setOrgBlockPosZ(k);
-    	orgBlock = world.getBlock(i, j, k);
-    	
+
         setPosition(mountingX, mountingY, mountingZ);
 	}
 	
 	//This method handles mounting and dismounting.
 	//@Override
-    public boolean interact(EntityPlayer entityplayer)
+    public boolean interact(Entity entity)
     {
-        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != entityplayer)
+        if (
+				this.riddenByEntity != null
+				&& this.riddenByEntity instanceof EntityPlayer
+				&& this.riddenByEntity != entity)
         {
         	return true;
         }
@@ -72,7 +73,7 @@ public class EntityMountableBlock extends Entity
         {
         	if (!this.worldObj.isRemote)
         	{
-        		entityplayer.mountEntity(this);
+        		entity.mountEntity(this);
         	}
         	return true;
         }
@@ -87,9 +88,9 @@ public class EntityMountableBlock extends Entity
         {
 			this.setDead();
         }
-        else if(worldObj.getBlock(getOrgBlockPosX(), getOrgBlockPosY(), getOrgBlockPosZ()) != orgBlock)
+        else
 		{
-        	this.interact((EntityPlayer) riddenByEntity);
+        	this.interact(riddenByEntity);
 		}
         ticksExisted++;
         this.worldObj.theProfiler.endSection();
@@ -103,7 +104,7 @@ public class EntityMountableBlock extends Entity
     @Override
     public void writeEntityToNBT(NBTTagCompound nbttagcompound) {}
 
-	public int getOrgBlockPosX() {
+	public int getPosX() {
 		return orgBlockPosX;
 	}
 
@@ -111,7 +112,7 @@ public class EntityMountableBlock extends Entity
 		this.orgBlockPosX = orgBlockPosX;
 	}
 
-	public int getOrgBlockPosY() {
+	public int getPosY() {
 		return orgBlockPosY;
 	}
 
@@ -119,7 +120,7 @@ public class EntityMountableBlock extends Entity
 		this.orgBlockPosY = orgBlockPosY;
 	}
 
-	public int getOrgBlockPosZ() {
+	public int getPosZ() {
 		return orgBlockPosZ;
 	}
 

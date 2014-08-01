@@ -61,6 +61,7 @@ public class CommandJson implements ICommand
 		BufferedReader reader;
 		File file = new File(json);
 		Gson gson = new Gson();
+		World w = sender.getEntityWorld();
 		int x = sender.getPlayerCoordinates().posX;
 		int y = sender.getPlayerCoordinates().posY;
 		int z = sender.getPlayerCoordinates().posZ;
@@ -82,8 +83,12 @@ public class CommandJson implements ICommand
 					for(int zstart = 0; zstart < tmp.content[xstart][ystart].length; ++zstart) {
 						String uuid = (String)tmp.blocks.get(tmp.content[xstart][ystart][zstart]);
 						String[] parts = uuid.split(":");
-						Block block = GameRegistry.findBlock(parts[0], parts[1]);
-						sender.getEntityWorld().setBlock(x + xstart, y + ystart, z + zstart, block);
+						String domain = parts[0];
+						String name = parts[1];
+						int meta = Integer.valueOf(parts[2]);
+						Block block = GameRegistry.findBlock(domain, name);
+						w.setBlock(x + xstart, y + ystart, z + zstart, block);
+						w.setBlockMetadataWithNotify(x + xstart, y + ystart, z+zstart, meta, 0x03);
 					}
 				}
 			}
@@ -106,6 +111,7 @@ public class CommandJson implements ICommand
 			for(int y = start[1]; y < start[1]+ysize; ++y) {
 				for(int x = start[0]; x < start[0]+xsize; ++x) {
 					String uuid = getBlockUUID(sender.getEntityWorld(), x, y, z);
+
 					int index = blocks.indexOf(uuid);
 					if (index < 0) {
 						blocks.add(uuid);
@@ -134,7 +140,9 @@ public class CommandJson implements ICommand
 	}
 
 	private String getBlockUUID(World world, int x, int y, int z) {
-		return findUniqueIdentifierFor(world.getBlock(x, y, z)).toString();
+		String name = findUniqueIdentifierFor(world.getBlock(x, y, z)).toString();
+		int meta = world.getBlockMetadata(x,y,z);
+		return name + ":" + meta;
 	}
 
 	@Override

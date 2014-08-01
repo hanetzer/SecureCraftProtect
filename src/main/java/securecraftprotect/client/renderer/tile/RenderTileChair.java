@@ -62,7 +62,7 @@ public class RenderTileChair implements ISimpleBlockRenderingHandler
 		render.renderFaceZNeg(chair, 0.0F, 0.0F, 0.0F, icon);
 		render.renderFaceZPos(chair, 0.0F, 0.0F, 0.0F, icon);
 
-		render.setRenderBounds(0.1F, 0.6F, 0.1F, 0.2F, 1.5F, 0.9F);
+		render.setRenderBounds(0.1F, 0.6F, 0.1F, 0.2F, 1.5F, 0.9F);//Back
 		render.renderFaceXNeg(chair, 0.0F, 0.0F, 0.0F, icon);
 		render.renderFaceXPos(chair, 0.0F, 0.0F, 0.0F, icon);
 		render.renderFaceYNeg(chair, 0.0F, 0.0F, 0.0F, icon);

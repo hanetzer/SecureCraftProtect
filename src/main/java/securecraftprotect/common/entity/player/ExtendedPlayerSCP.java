@@ -2,9 +2,13 @@ package securecraftprotect.common.entity.player;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
+import securecraftprotect.SCP;
+import securecraftprotect.common.CommonProxy;
+import securecraftprotect.common.handlers.packet.SyncPlayerPropertiesPacket;
 
 import static securecraftprotect.util.Globals.*;
 
@@ -30,6 +34,28 @@ public class ExtendedPlayerSCP implements IExtendedEntityProperties
 	{
 		player.registerExtendedProperties(EXT_PROP_NAME,
 				new ExtendedPlayerSCP(player));
+	}
+
+	private static String getSaveKey(EntityPlayer player) {
+		return player.getCommandSenderName() + ":" + EXT_PROP_NAME;
+	}
+
+	public static void loadProxyData(EntityPlayer player)
+	{
+		ExtendedPlayerSCP playerData = ExtendedPlayerSCP.get(player);
+		NBTTagCompound savedData = CommonProxy.getEntityData(getSaveKey(player));
+		if (savedData != null) {
+			playerData.loadNBTData(savedData);
+		}
+		SCP.pipe.sendTo(new SyncPlayerPropertiesPacket(player),
+				(EntityPlayerMP) player);
+	}
+
+	public static final void saveProxyData(EntityPlayer player)
+	{
+		NBTTagCompound saveData = new NBTTagCompound();
+		ExtendedPlayerSCP.get(player).saveNBTData(saveData);
+		CommonProxy.storeEntityData(getSaveKey(player), saveData);
 	}
 
 	public static ExtendedPlayerSCP get(EntityPlayer player)

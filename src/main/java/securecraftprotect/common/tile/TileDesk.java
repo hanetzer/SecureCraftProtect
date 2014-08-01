@@ -34,6 +34,10 @@ public class TileDesk extends Block
 		this.setCreativeTab(SCP.scpTile);
 	}
 
+	public int getType() {
+		return type;
+	}
+
 	@Override
 	public void registerBlockIcons(IIconRegister register)
 	{

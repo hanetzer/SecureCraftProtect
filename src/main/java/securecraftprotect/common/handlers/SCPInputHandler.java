@@ -11,6 +11,8 @@ import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import org.lwjgl.input.Keyboard;
+import securecraftprotect.SCP;
+import securecraftprotect.common.handlers.packet.SyncPlayerPropertiesPacket;
 
 import static securecraftprotect.util.Globals.*;
 
@@ -43,6 +45,7 @@ public class SCPInputHandler
 			if (keys[KEY_BLINK].isPressed())
 			{
 				data.updateObject(BLINK, 5);
+				//SCP.pipe.sendTo(new SyncPlayerPropertiesPacket(player), player);
 			}
 			if (keys[KEY_BLINKING].isPressed())
 			{
