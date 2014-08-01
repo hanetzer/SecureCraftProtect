@@ -22,7 +22,7 @@ public class ItemBucket extends Item
     public ItemBucket()
     {
         this.maxStackSize = 1;
-        this.setCreativeTab(SCP.scpTile);
+        this.setCreativeTab(SCP.scpItem);
     }
     
     /**
