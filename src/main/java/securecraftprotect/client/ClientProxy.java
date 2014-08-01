@@ -34,8 +34,8 @@ public class ClientProxy extends CommonProxy
 	{
 		super.init();
 		render();
-		MinecraftForge.EVENT_BUS.register(new SCPGuiBlink());
-		FMLCommonHandler.instance().bus().register(new SCPInputHandler());
+		//MinecraftForge.EVENT_BUS.register(new SCPGuiBlink());
+		//FMLCommonHandler.instance().bus().register(new SCPInputHandler());
 	}
 
 

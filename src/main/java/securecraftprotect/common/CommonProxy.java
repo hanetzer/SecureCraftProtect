@@ -16,7 +16,7 @@ import java.util.Map;
 public class CommonProxy implements IGuiHandler{
 	private static final Map<String, NBTTagCompound> extendedEntityData = new HashMap<>();
     public void init() {
-        FMLCommonHandler.instance().bus().register(new SCPBlinkHandler());
+        //FMLCommonHandler.instance().bus().register(new SCPBlinkHandler());
     }
 
     @Override
