@@ -42,61 +42,70 @@ public class TileChair extends BlockContainer implements ITileFurnature
 	public static boolean onBlockActivated(World world, int i, int j, int k,
 										   EntityPlayer entityplayer, float y)
 	{
-		return onBlockActivated(world, i, j, k, entityplayer, 0.5F, y, 0.5F,
-				0, 0, 0, 0);
+		return onBlockActivated(world, i, j, k, entityplayer, 0.5F, y, 0.5F);
 	}
 
 	//This is the main onBlockActivated method. Use it for fully custom
 	// mounting positions.
-	public static boolean onBlockActivated(World world, int i, int j, int k,
-										   EntityPlayer entityplayer, float x,
-										   float y, float z, int north,
-										   int south, int east, int west)
+	public static boolean onBlockActivated(World w, int x, int y, int z,
+										   EntityPlayer player, float x2,
+										   float y2, float z2)
 	{
-		if (!world.isRemote) {
+		if (!w.isRemote)
+		{
 			//Looks for EMBs up to 1 block away from the activated block.
 			// Hopefully you didn't set the mounting position further away
 			// than this.
-			List<EntityMountable> listEMB = world.getEntitiesWithinAABB
+			List<EntityMountable> list = w.getEntitiesWithinAABB
 					(EntityMountable.class, getBoundingBox
-							(i, j, k, i + 1.0D, j + 1.0D, k + 1.0D).expand(1D,
+							(x, y, z, x + 1.0D, y + 1.0D, z + 1.0D).expand(1D,
 							1D, 1D));
-			for (EntityMountable entitytocheck : listEMB) {
+			for (EntityMountable entity : list)
+			{
 				//Looks for an EMB created by this block.
-				if (entitytocheck.getPosX() == i
-						&& entitytocheck.getPosY() == j
-						&& entitytocheck.getPosZ() == k) {
-					entitytocheck.interact(entityplayer);
+				if (entity.orgBlockPosX == x
+						&& entity.orgBlockPosY == y
+						&& entity.orgBlockPosZ == z)
+				{
+					entity.interact(player);
 					return true;
 				}
 			}
 			//Sets coordinates for mounting a north oriented block.
-			float mountingX = i + x;
-			float mountingY = j + y;
-			float mountingZ = k + z;
 			//Changes coordinates for mounting to compensate for none-north
+			float mountingX = 0.0F;
+			float mountingY = y + y2;
+			float mountingZ = 0.0F;
 			// block orientation.
-			if (north != south) {
-				TileEntityChair chair = (TileEntityChair)world.getTileEntity(i, j, k);
-				//int md = world.getBlockMetadata(i, j, k);
-				int md = chair.getDir();//SWNE
-				if (md == east) {
-					mountingX = i + 1 - z;
-					mountingZ = k + x;
-				} else if (md == south) {
-					mountingX = i + 1 - x;
-					mountingZ = k + 1 - z;
-				} else if (md == west) {
-					mountingX = i + z;
-					mountingZ = k + 1 - x;
-				}
+			TileEntityChair chair = (TileEntityChair) w.getTileEntity(x, y, z);
+			//int md = world.getBlockMetadata(i, j, k);
+			int md = chair.getDir();//SWNE
+			if (md == 2)
+			{
+				mountingX = x + x2;
+				mountingZ = z + z2;
+			}
+			else if (md == 3)
+			{
+				mountingX = x + 1 - z2;
+				mountingZ = z + x2;
+			}
+			else if (md == 0)
+			{
+				mountingX = x + 1 - x2;
+				mountingZ = z + 1 - z2;
+			}
+			else if (md == 1)
+			{
+				mountingX = x + z2;
+				mountingZ = z + 1 - x2;
 			}
 			//Creates a new EMB if none had been created already or if the old
 			// one was bugged.
-			EntityMountable nemb = new EntityMountable(world,
-					entityplayer, i, j, k, mountingX, mountingY, mountingZ);
-			world.spawnEntityInWorld(nemb);
-			nemb.interact(entityplayer);
+			EntityMountable nemb = new EntityMountable(w,
+					player, x, y, z, mountingX, mountingY, mountingZ);
+			w.spawnEntityInWorld(nemb);
+			nemb.interact(player);
 			return true;
 		}
 		return true;
@@ -108,27 +117,21 @@ public class TileChair extends BlockContainer implements ITileFurnature
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int i, int j, int k,
-									EntityPlayer entityplayer, int par6,
-									float par7, float par8, float par9)
-	{
-		return onBlockActivated(world, i, j, k, entityplayer, 0.5F, 1.0F,
-				0.5F, 0, 0, 0, 0);
-	}
-
-	@Override
 	public void registerBlockIcons(IIconRegister register)
 	{
-		switch (type) {
+		switch (type)
+		{
 			case 0:
 				this.icons = new IIcon[types[0].length];
-				for (int i = 0; i < icons.length; ++i) {
+				for (int i = 0; i < icons.length; ++i)
+				{
 					icons[i] = register.registerIcon("planks_" + types[0][i]);
 				}
 				break;
 			case 1:
 				this.icons = new IIcon[types[1].length];
-				for (int i = 0; i < icons.length; ++i) {
+				for (int i = 0; i < icons.length; ++i)
+				{
 					icons[i] = register.registerIcon(types[1][i]);
 				}
 				break;
@@ -166,7 +169,8 @@ public class TileChair extends BlockContainer implements ITileFurnature
 
 		setBlockBounds(0.1F, 0.5F, 0.1F, 0.9F, 0.6F, 0.9F);
 		super.addCollisionBoxesToList(w, x, y, z, axis, list, entity);
-		switch (dir) {
+		switch (dir)
+		{
 			case 0: //S
 				setBlockBounds(0.1F, 0.6F, 0.7F, 0.9F, 1.5F, 0.9F);
 				super.addCollisionBoxesToList(w, x, y, z, axis, list, entity);
@@ -186,14 +190,13 @@ public class TileChair extends BlockContainer implements ITileFurnature
 		}
 	}
 
-/*	@Override
-//	public boolean onBlockActivated(World w, int x, int y, int z,
+	@Override
+	public boolean onBlockActivated(World w, int x, int y, int z,
 									EntityPlayer player, int dir,
 									float par7, float par8, float par9)
 	{
-		return onBlockActivated(w, x, y, z, player, 0.5F, 0.5F, 0.5F, 0, 0, 0,
-		 0);
-	}*/
+		return onBlockActivated(w, x, y, z, player, 0.5F, 0.5F, 0.5F);
+	}
 
 	@Override
 	public IIcon getIcon(int side, int meta)
@@ -209,7 +212,8 @@ public class TileChair extends BlockContainer implements ITileFurnature
 
 	public void getSubBlocks(Item item, CreativeTabs tabs, List list)
 	{
-		for (int meta = 0; meta < icons.length; ++meta) {
+		for (int meta = 0; meta < icons.length; ++meta)
+		{
 			list.add(new ItemStack(item, 1, meta));
 		}
 	}
@@ -228,7 +232,8 @@ public class TileChair extends BlockContainer implements ITileFurnature
 	{
 		String s = super.getUnlocalizedName();
 		String s1 = getTextureName();
-		switch (type) {
+		switch (type)
+		{
 			case 0:
 				s1 = types[0][stack.getItemDamage()];
 				break;
@@ -253,5 +258,12 @@ public class TileChair extends BlockContainer implements ITileFurnature
 	public TileEntity createNewTileEntity(World world, int p_149915_2_)
 	{
 		return new TileEntityChair();
+	}
+
+	@Override
+	public void breakBlock(World w, int x, int y, int z, Block block, int i)
+	{
+		super.breakBlock(w, x, y, z, block, i);
+		w.removeTileEntity(x, y, z);
 	}
 }
