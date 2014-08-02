@@ -153,7 +153,7 @@ public class TileChair extends BlockContainer implements ITileFurnature
 								EntityLivingBase entity, ItemStack stack)
 	{
 		int i = MathHelper.floor_double((double) ((entity.rotationYaw * 4F) /
-				360F) + 0.5D) & 3;
+				360F) + 0.5D) & 0b0011; //half byte of metadata, lsh
 		TileEntityChair chair = (TileEntityChair) w.getTileEntity(x, y, z);
 
 		chair.setDir(i);
@@ -171,19 +171,19 @@ public class TileChair extends BlockContainer implements ITileFurnature
 		super.addCollisionBoxesToList(w, x, y, z, axis, list, entity);
 		switch (dir)
 		{
-			case 0: //S
+			case 0b00: //S
 				setBlockBounds(0.1F, 0.6F, 0.7F, 0.9F, 1.5F, 0.9F);
 				super.addCollisionBoxesToList(w, x, y, z, axis, list, entity);
 				break;
-			case 1: //W
+			case 0b01: //W
 				setBlockBounds(0.1F, 0.6F, 0.1F, 0.2F, 1.5F, 0.9F);
 				super.addCollisionBoxesToList(w, x, y, z, axis, list, entity);
 				break;
-			case 2: //N
+			case 0b10: //N
 				setBlockBounds(0.1F, 0.6F, 0.1F, 0.9F, 1.5F, 0.2F);
 				super.addCollisionBoxesToList(w, x, y, z, axis, list, entity);
 				break;
-			case 3: //E
+			case 0b11: //E
 				setBlockBounds(0.7F, 0.6F, 0.1F, 0.9F, 1.5F, 0.9F);
 				super.addCollisionBoxesToList(w, x, y, z, axis, list, entity);
 				break;
