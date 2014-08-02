@@ -33,10 +33,13 @@ public class RenderTileChair implements ISimpleBlockRenderingHandler
 		render.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, icon);
 		tess.draw();
 
-		tess.startDrawingQuads();
-		tess.setNormal(0.0F, 1.0F, 0.0F);
-		render.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, icon);
-		tess.draw();
+		/**
+		 * Top face not rendered due to always being hidden by the chair seat
+		 */
+		//tess.startDrawingQuads();
+		//tess.setNormal(0.0F, 1.0F, 0.0F);
+		//render.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, icon);
+		//tess.draw();
 
 		tess.startDrawingQuads();
 		tess.setNormal(0.0F, 0.0F, -1F);
@@ -70,10 +73,13 @@ public class RenderTileChair implements ISimpleBlockRenderingHandler
 		render.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, icon);
 		tess.draw();
 
-		tess.startDrawingQuads();
-		tess.setNormal(0.0F, 1.0F, 0.0F);
-		render.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, icon);
-		tess.draw();
+		/**
+		 * Top face not rendered due to always being hidden by the chair seat
+		 */
+		//tess.startDrawingQuads();
+		//tess.setNormal(0.0F, 1.0F, 0.0F);
+		//render.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, icon);
+		//tess.draw();
 
 		tess.startDrawingQuads();
 		tess.setNormal(0.0F, 0.0F, -1F);
@@ -107,10 +113,13 @@ public class RenderTileChair implements ISimpleBlockRenderingHandler
 		render.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, icon);
 		tess.draw();
 
-		tess.startDrawingQuads();
-		tess.setNormal(0.0F, 1.0F, 0.0F);
-		render.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, icon);
-		tess.draw();
+		/**
+		 * Top face not rendered due to always being hidden by the chair seat
+		 */
+		//tess.startDrawingQuads();
+		//tess.setNormal(0.0F, 1.0F, 0.0F);
+		//render.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, icon);
+		//tess.draw();
 
 		tess.startDrawingQuads();
 		tess.setNormal(0.0F, 0.0F, -1F);
@@ -144,10 +153,13 @@ public class RenderTileChair implements ISimpleBlockRenderingHandler
 		render.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, icon);
 		tess.draw();
 
-		tess.startDrawingQuads();
-		tess.setNormal(0.0F, 1.0F, 0.0F);
-		render.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, icon);
-		tess.draw();
+		/**
+		 * Top face not rendered due to always being hidden by the chair seat
+		 */
+		//tess.startDrawingQuads();
+		//tess.setNormal(0.0F, 1.0F, 0.0F);
+		//render.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, icon);
+		//tess.draw();
 
 		tess.startDrawingQuads();
 		tess.setNormal(0.0F, 0.0F, -1F);
@@ -213,10 +225,13 @@ public class RenderTileChair implements ISimpleBlockRenderingHandler
 
 		glTranslatef(-0.5F, -0.5F, -0.5F);
 
-		tess.startDrawingQuads();
-		tess.setNormal(0.0F, -1F, 0.0F);
-		render.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, icon);
-		tess.draw();
+		/**
+		 * Bottom face not rendered due to always being hidden by the chair seat
+		 */
+		//tess.startDrawingQuads();
+		//tess.setNormal(0.0F, -1F, 0.0F);
+		//render.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, icon);
+		//tess.draw();
 
 		tess.startDrawingQuads();
 		tess.setNormal(0.0F, 1.0F, 0.0F);
