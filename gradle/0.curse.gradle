@@ -1,0 +1,9 @@
+apply plugin: 'curseforge'
+curse {
+    apiKey      = project.curseforge_key
+    projectId   = "222653"
+    releaseType = "beta"
+    changelog   = ""
+    //addGameVersion "1.7.2"
+}
+

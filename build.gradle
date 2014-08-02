@@ -14,30 +14,18 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
-apply plugin: 'curseforge'
 apply plugin: 'forge'
 
-compileJava {
-    targetCompatibility = 1.7
-    sourceCompatibility = 1.7
-}
-ext.revision = 'git rev-list  --count HEAD'.execute().text.trim()
-ext.hash     = 'git rev-parse --short HEAD'.execute().text.trim()
+fileTree('gradle').include('*.gradle').collect().sort().each { apply from: it }
 
-version = "1.7.10-r${revision}.${hash}"
 group= "securecraftprotect"
 
-minecraft {
-    mcpVersion = "9.05"
-    version    = "1.7.10-10.13.0.1191"
-    runDir     = "run"
-    replaceIn    "securecraftprotect/SCP.java"
-    replace      "@VERSION@", project.version
-}
-
-
-//jar {
-//    classifier = 'universal'
+//minecraft {
+//    mcpVersion = "9.05"
+//    version    = "1.7.10-10.13.0.1191"
+//    runDir     = "run"
+//    replaceIn    "securecraftprotect/SCP.java"
+//    replace      "@VERSION@", project.version
 //}
 
 processResources
@@ -55,10 +43,3 @@ processResources
             }
         }
 
-curse {
-    apiKey      = project.curseforge_key
-    projectId   = "222653"
-    releaseType = "beta"
-    changelog   = ""
-    //addGameVersion "1.7.2"
-}
