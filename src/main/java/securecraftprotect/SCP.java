@@ -15,6 +15,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import securecraftprotect.common.CommonProxy;
 import securecraftprotect.common.command.CommandJson;
+import securecraftprotect.common.config.SCPConfig;
+import securecraftprotect.common.config.SCPConfigHandler;
 import securecraftprotect.common.creativetab.SCPItemTab;
 import securecraftprotect.common.creativetab.SCPTab;
 import securecraftprotect.common.creativetab.SCPTileTab;
@@ -26,7 +28,7 @@ import securecraftprotect.core.SCPItem;
 import securecraftprotect.core.SCPTile;
 import securecraftprotect.init.SCPItems;
 import securecraftprotect.init.SCPTiles;
-import securecraftprotect.util.SCPConfig;
+import securecraftprotect.common.config.SCPConfigBlink;
 
 import java.io.File;
 
@@ -36,7 +38,6 @@ import java.io.File;
 		guiFactory = "securecraftprotect.client.gui.SCPGuiFactory")
 public class SCP
 {
-	public static SCPConfig config;
 	@SidedProxy(
 			clientSide = "securecraftprotect.client.ClientProxy",
 			serverSide = "securecraftprotect.common.CommonProxy")
@@ -56,9 +57,7 @@ public class SCP
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		configPath = event.getModConfigurationDirectory() + "/securecraftprotect/";
-		config = new SCPConfig(new File(configPath + "blink.cfg"));
-		SCPConfig.syncConfig(config);
-		//config = new Configuration(event.getSuggestedConfigurationFile());
+		SCPConfig.init(configPath);
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
 		scpTab = new SCPTab(CreativeTabs.getNextID(), "scpTab");
 		scpTile = new SCPTileTab(CreativeTabs.getNextID(), "scpTile");
@@ -74,9 +73,9 @@ public class SCP
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		FMLCommonHandler.instance().bus().register(instance);
 		proxy.init();
 		pipe.initialise();
+		FMLCommonHandler.instance().bus().register(new SCPConfigHandler());
 	}
 
 	@Mod.EventHandler
@@ -91,12 +90,11 @@ public class SCP
 		event.registerServerCommand(new CommandJson());
 	}
 
-	@SubscribeEvent
-	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
+	public static void syncConfig(Configuration config)
 	{
-		if(event.modID.equals("scp"))
+		if (config.hasChanged())
 		{
-			SCPConfig.syncConfig(config);
+			config.save();
 		}
 	}
 }
