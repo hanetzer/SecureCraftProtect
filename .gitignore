@@ -5,8 +5,8 @@
 !/gradle/
 !/gradle/*
 !/gradle*
-!/src/
-!/src/*
+!/src/main/
+!/src/main/*
 !/*.gradle
 !/*.md
 .gradle
