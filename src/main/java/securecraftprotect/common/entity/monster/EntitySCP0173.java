@@ -4,9 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -15,12 +13,11 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class EntitySCP0173 extends EntityMob implements IMob
+import static net.minecraft.entity.SharedMonsterAttributes.*;
+
+public class EntitySCP0173 extends EntityMob
 {
 	public Minecraft mc = Minecraft.getMinecraft();
-	private int slowPeriod;
-	private int timeTillNextTeleport;
-	private boolean timeLocked;
 	private int transparentBlocks[] =
 			{
 					8, 9, 10, 11, 18, 27, 28, 30, 31,
@@ -42,10 +39,8 @@ public class EntitySCP0173 extends EntityMob implements IMob
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue
-				(9001.0D);
-		getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue
-				(20.0D);
+		getEntityAttribute(maxHealth).setBaseValue(9001.0D);
+		getEntityAttribute(attackDamage).setBaseValue(20.0D);
 
 	}
 
@@ -54,23 +49,9 @@ public class EntitySCP0173 extends EntityMob implements IMob
 		this.playSound("scp:mob.0173.step", 0.15F, 1.0F);
 	}
 
-//    public float getSpeedModifier() {
-//        return super.getSpeedModifier() * 3F;
-//    }
-
 	public boolean canBePushed()
 	{
 		return false;
-	}
-
-	public boolean isAIEnabled()
-	{
-		return false;
-	}
-
-	public void func_48150_h(boolean flag)
-	{
-		isJumping = flag;
 	}
 
 	protected boolean canDespawn()
@@ -121,7 +102,6 @@ public class EntitySCP0173 extends EntityMob implements IMob
 			}
 		}
 	}
-
 
 	protected void updateEntityActionState()
 	{
@@ -177,24 +157,7 @@ public class EntitySCP0173 extends EntityMob implements IMob
 
 		if (entityToAttack != null && (entityToAttack instanceof EntityPlayer))
 		{
-			if (!canBeSeen((EntityPlayer) entityToAttack))
-			{
-				if (getDistancetoEntityToAttack() > 15D &&
-						timeTillNextTeleport-- < 0)
-				{
-					timeTillNextTeleport = rand.nextInt(60) + 20;
-				}
-			}
-
-			if (slowPeriod > 0)
-			{
-				slowPeriod--;
-				entityToAttack.motionX *= 0.01D;
-				entityToAttack.motionZ *= 0.01D;
-			}
-
-			if ((entityToAttack instanceof EntityPlayer) && (canBeSeen(
-					(EntityPlayer) entityToAttack) || timeLocked))
+			if (canBeSeen((EntityPlayer) entityToAttack))
 			{
 				directLook((EntityPlayer) entityToAttack);
 				moveStrafing = moveForward = 0.0F;
@@ -203,6 +166,8 @@ public class EntitySCP0173 extends EntityMob implements IMob
 			else
 			{
 				faceEntity(entityToAttack, 100F, 100F);
+				moveStrafing = moveForward = 0.23F;
+				getNavigator().setSpeed(0.23D);
 			}
 		}
 
@@ -211,28 +176,6 @@ public class EntitySCP0173 extends EntityMob implements IMob
 
 	public boolean canBeSeen(EntityPlayer player)
 	{
-		//List<?> var5 = this.worldObj.getEntitiesWithinAABB(EntitySCP0131
-		// .class, this.boundingBox.expand((double) 4F, 2.0D, (double) 4F));
-		//Iterator<?> iterator = var5.iterator();
-		//ExtendedPlayerSCP props = (ExtendedPlayerSCP) player
-		// .getExtendedProperties(ExtendedPlayerSCP.EXT_PROP_NAME);
-		//while (iterator.hasNext()) return true;
-
-		//if (worldObj.getFullBlockLightValue(
-		//		MathHelper.floor_double(posX),
-		//		MathHelper.floor_double(posY),
-		//		MathHelper.floor_double(posZ)) < 1)
-		//{
-		//	return false;
-		//}
-
-		//if (player.getDataWatcher().getWatchableObjectInt(Globals.BLINK) >=
-		// 0) {
-		//    if (player.getDataWatcher().getWatchableObjectInt(Globals.BLINK)
-		// <= 10) {
-		//        return false;
-		//    }
-		//}
 		if (player.canEntityBeSeen(this) || lineOfSightCheck(player))
 		{
 			return isInFieldOfVision(player, 100F, 100F);  //70 65
@@ -242,6 +185,7 @@ public class EntitySCP0173 extends EntityMob implements IMob
 			return false;
 		}
 	}
+
 	private boolean canBeSeen()
 	{
 		int i = 0;
@@ -425,31 +369,6 @@ public class EntitySCP0173 extends EntityMob implements IMob
 		return Math.sqrt(k1 * k1 + l1 * l1 + i2 * i2);
 	}
 
-	public double getDistancetoEntityToAttack()
-	{
-		if (entityToAttack instanceof EntityPlayer)
-		{
-			double d = entityToAttack.posX - posX;
-			double d2 = entityToAttack.posY - posY;
-			double d4 = entityToAttack.posZ - posZ;
-			return (double) MathHelper.sqrt_double(d * d + d2 * d2 + d4 * d4);
-		}
-
-		EntityPlayer player = worldObj.getClosestVulnerablePlayerToEntity(this, 64D);
-
-		if (player != null)
-		{
-			double d1 = player.posX - posX;
-			double d3 = player.posY - posY;
-			double d5 = player.posZ - posZ;
-			return (double) MathHelper.sqrt_double(d1 * d1 + d3 * d3 + d5 *
-					d5);
-		}
-		else
-		{
-			return 40000D;
-		}
-	}
 	private float[] getFacing(EntityLivingBase entity, float par2, float par3)
 	{
 		double d0 = this.posX - entity.posX;
@@ -482,6 +401,7 @@ public class EntitySCP0173 extends EntityMob implements IMob
 
 		return p_70663_1_ + f3;
 	}
+
 	private boolean isInFieldOfVision(EntityLivingBase entity, float f4i, float f5i)
 	{
 		float[] facing = getFacing(entity, 360.0F, 360.0F);
