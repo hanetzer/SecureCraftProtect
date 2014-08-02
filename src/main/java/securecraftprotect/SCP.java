@@ -1,14 +1,18 @@
 package securecraftprotect;
 
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 import securecraftprotect.common.CommonProxy;
 import securecraftprotect.common.command.CommandJson;
 import securecraftprotect.common.creativetab.SCPItemTab;
@@ -22,15 +26,23 @@ import securecraftprotect.core.SCPItem;
 import securecraftprotect.core.SCPTile;
 import securecraftprotect.init.SCPItems;
 import securecraftprotect.init.SCPTiles;
+import securecraftprotect.util.SCPConfig;
+
+import java.io.File;
 
 @SuppressWarnings("unused")
-@Mod(modid = "scp", name = "SecureCraftProtect", version = "@VERSION@")
+@Mod(
+		modid = "scp", name = "SecureCraftProtect", version = "@VERSION@",
+		guiFactory = "securecraftprotect.client.gui.SCPGuiFactory")
 public class SCP
 {
-	@SidedProxy(clientSide = "securecraftprotect.client.ClientProxy",
+	public static SCPConfig config;
+	@SidedProxy(
+			clientSide = "securecraftprotect.client.ClientProxy",
 			serverSide = "securecraftprotect.common.CommonProxy")
 	public static CommonProxy proxy;
 	public static CreativeTabs scpTab, scpTile, scpItem;
+	public static String configPath;
 	public static final PacketPipeline pipe = new PacketPipeline();
 	@Mod.Instance("scp")
 	private static SCP instance;
@@ -43,6 +55,10 @@ public class SCP
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
+		configPath = event.getModConfigurationDirectory() + "/securecraftprotect/";
+		config = new SCPConfig(new File(configPath + "blink.cfg"));
+		SCPConfig.syncConfig(config);
+		//config = new Configuration(event.getSuggestedConfigurationFile());
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
 		scpTab = new SCPTab(CreativeTabs.getNextID(), "scpTab");
 		scpTile = new SCPTileTab(CreativeTabs.getNextID(), "scpTile");
@@ -58,6 +74,7 @@ public class SCP
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event)
 	{
+		FMLCommonHandler.instance().bus().register(instance);
 		proxy.init();
 		pipe.initialise();
 	}
@@ -72,5 +89,14 @@ public class SCP
 	public void serverStart(FMLServerStartingEvent event)
 	{
 		event.registerServerCommand(new CommandJson());
+	}
+
+	@SubscribeEvent
+	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
+	{
+		if(event.modID.equals("scp"))
+		{
+			SCPConfig.syncConfig(config);
+		}
 	}
 }
