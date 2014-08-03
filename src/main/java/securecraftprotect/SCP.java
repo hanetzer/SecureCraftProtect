@@ -32,7 +32,6 @@ import securecraftprotect.common.config.SCPConfigBlink;
 
 import java.io.File;
 
-@SuppressWarnings("unused")
 @Mod(
 		modid = "scp", name = "SecureCraftProtect", version = "@VERSION@",
 		guiFactory = "securecraftprotect.client.gui.SCPGuiFactory")
