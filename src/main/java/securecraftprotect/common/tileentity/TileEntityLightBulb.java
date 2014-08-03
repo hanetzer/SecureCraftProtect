@@ -1,28 +1,29 @@
 package securecraftprotect.common.tileentity;
 
+import java.util.Random;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.EnumSkyBlock;
 
 public class TileEntityLightBulb extends TileEntity
 {
-
+    int test = 0;
+    
     public TileEntityLightBulb()
     {
     }
     
     public void updateEntity()
     {
-        this.worldObj.setLightValue(EnumSkyBlock.Block, this.xCoord, this.yCoord, this.zCoord, 12);
-        this.updateContainingBlockInfo();
-//        this.worldObj.updateLightByType(EnumSkyBlock.Block, this.xCoord, this.yCoord, this.zCoord);
-        //this.worldObj.markTileEntityChunkModified(this.xCoord, this.yCoord, this.zCoord, this);
+        if (test % 7 == 0) this.worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 4, 2);
+        if (test % 18 == 0) this.worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 8, 2);
+        test += new Random().nextInt(19);
     }
-
+    
     public void readFromNBT(NBTTagCompound tag)
     {
     }
-
+    
     public void writeToNBT(NBTTagCompound tag)
     {
     }
