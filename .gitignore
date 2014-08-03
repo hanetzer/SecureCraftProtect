@@ -5,6 +5,7 @@
 !/gradle/
 !/gradle/*
 !/gradle*
+!/old/
 !/old/SCPCraft/
 !/old/SCPCraft/*
 !/*.gradle
