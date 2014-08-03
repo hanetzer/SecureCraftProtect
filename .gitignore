@@ -5,8 +5,8 @@
 !/gradle/
 !/gradle/*
 !/gradle*
-!/src/
-!/src/*
+!/old/SCPCraft/
+!/old/SCPCraft/*
 !/*.gradle
 !/*.md
 .gradle
