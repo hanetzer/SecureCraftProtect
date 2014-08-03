@@ -1,6 +1,6 @@
 minecraft {
     mcpVersion = "9.05"
-    version    = "1.7.10-10.13.0.1191"
+    version    = "1.7.10-10.13.0.1194"
     runDir     = "run"
     replaceIn    "securecraftprotect/SCP.java"
     replace      "@VERSION@", project.version
