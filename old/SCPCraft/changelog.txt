@@ -1,0 +1,9 @@
+-Fixed SCP-629's GUI screen texture.
+-Fixed SCP-629 crash. (I think)
+-Fixed SCP-131 from crashing once tamed.
+-Added Ring, Bracelet, Earrings and Necklaces.
+-Nerfed Granite recipe.
+-Nerfed Circuitry recipe.
+-Nerfed SCP-914 pearl recipe.
+-Nerfed SCP-000-J's recipe.
+-Removed SCP-000-J's item description.

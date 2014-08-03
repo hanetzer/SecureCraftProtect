@@ -1,0 +1,251 @@
+package SCPCraft.models;
+
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
+
+public class SCPModel217Zombie extends ModelBase
+{
+  //fields
+    ModelRenderer head;
+    ModelRenderer body;
+    ModelRenderer rightarm;
+    ModelRenderer leftarm;
+    ModelRenderer rightleg;
+    ModelRenderer leftleg;
+    ModelRenderer head2;
+    ModelRenderer head3;
+    ModelRenderer pegleg;
+    ModelRenderer headmini;
+    ModelRenderer Clockwork1;
+    ModelRenderer Clockworkmini1;
+    ModelRenderer Clockworkmini2;
+    ModelRenderer Clockworkmini3;
+    ModelRenderer Clockworkmini4;
+    ModelRenderer Clockworkmini5;
+    ModelRenderer Clockworkbig1;
+    ModelRenderer Clockworklil1;
+    ModelRenderer Clockworklil2;
+    ModelRenderer Clockworklil3;
+    ModelRenderer Clockworklil4;
+    ModelRenderer Clockworklil6;
+    ModelRenderer Clockworklil5;
+    ModelRenderer Clockworklil7;
+    ModelRenderer Clockworklil8;
+  
+  public SCPModel217Zombie()
+  {
+    textureWidth = 64;
+    textureHeight = 64;
+    
+      head = new ModelRenderer(this, 1, 10);
+      head.addBox(-4F, -8F, -4F, 4, 8, 8);
+      head.setRotationPoint(0F, 0F, 0F);
+      head.setTextureSize(64, 64);
+      head.mirror = true;
+      setRotation(head, 0F, 0F, 0F);
+      body = new ModelRenderer(this, 1, 27);
+      body.addBox(-4F, 0F, -2F, 8, 12, 4);
+      body.setRotationPoint(0F, 0F, 0F);
+      body.setTextureSize(64, 64);
+      body.mirror = true;
+      setRotation(body, 0F, 0F, 0F);
+      rightarm = new ModelRenderer(this, 47, 30);
+      rightarm.addBox(-3F, -2F, -2F, 4, 12, 4);
+      rightarm.setRotationPoint(-5F, 2F, 0F);
+      rightarm.setTextureSize(64, 64);
+      rightarm.mirror = true;
+      setRotation(rightarm, -1.570796F, 0F, 0F);
+      leftarm = new ModelRenderer(this, 47, 30);
+      leftarm.addBox(-1F, -2F, -2F, 4, 12, 4);
+      leftarm.setRotationPoint(5F, 2F, 0F);
+      leftarm.setTextureSize(64, 64);
+      leftarm.mirror = true;
+      setRotation(leftarm, -1.570796F, 0F, 0F);
+      rightleg = new ModelRenderer(this, 0, 44);
+      rightleg.addBox(-2F, 0F, -2F, 4, 9, 4);
+      rightleg.setRotationPoint(-2F, 12F, 0F);
+      rightleg.setTextureSize(64, 64);
+      rightleg.mirror = true;
+      setRotation(rightleg, 0F, 0F, 0F);
+      leftleg = new ModelRenderer(this, 17, 47);
+      leftleg.addBox(-2F, 0F, -2F, 4, 12, 4);
+      leftleg.setRotationPoint(2F, 12F, 0F);
+      leftleg.setTextureSize(64, 64);
+      leftleg.mirror = true;
+      setRotation(leftleg, 0F, 0F, 0F);
+      head2 = new ModelRenderer(this, 39, 6);
+      head2.addBox(0F, -8F, 0F, 4, 8, 4);
+      head2.setRotationPoint(0F, 0F, 0F);
+      head2.setTextureSize(64, 64);
+      head2.mirror = true;
+      setRotation(head2, 0F, 0F, 0F);
+      head3 = new ModelRenderer(this, 26, 19);
+      head3.addBox(0F, -3F, -4F, 4, 3, 4);
+      head3.setRotationPoint(0F, 0F, 0F);
+      head3.setTextureSize(64, 64);
+      head3.mirror = true;
+      setRotation(head3, 0F, 0F, 0F);
+      pegleg = new ModelRenderer(this, 1, 58);
+      pegleg.addBox(-1F, 9F, -1F, 2, 3, 2);
+      pegleg.setRotationPoint(-2F, 12F, 0F);
+      pegleg.setTextureSize(64, 64);
+      pegleg.mirror = true;
+      setRotation(pegleg, 0F, 0F, 0F);
+      headmini = new ModelRenderer(this, 26, 11);
+      headmini.addBox(0F, -7F, -3F, 3, 4, 3);
+      headmini.setRotationPoint(0F, 0F, 0F);
+      headmini.setTextureSize(64, 64);
+      headmini.mirror = true;
+      setRotation(headmini, 0F, 0F, 0F);
+      Clockwork1 = new ModelRenderer(this, 55, 25);
+      Clockwork1.addBox(-9F, -1F, -4F, 3, 3, 1);
+      Clockwork1.setRotationPoint(0F, 0F, 0F);
+      Clockwork1.setTextureSize(64, 64);
+      Clockwork1.mirror = true;
+      setRotation(Clockwork1, 0F, 0F, 0F);
+      Clockworkmini1 = new ModelRenderer(this, 0, 0);
+      Clockworkmini1.addBox(-7F, -2F, -4F, 1, 1, 1);
+      Clockworkmini1.setRotationPoint(0F, 0F, 0F);
+      Clockworkmini1.setTextureSize(64, 64);
+      Clockworkmini1.mirror = true;
+      setRotation(Clockworkmini1, 0F, 0F, 0F);
+      Clockworkmini2 = new ModelRenderer(this, 0, 0);
+      Clockworkmini2.addBox(-9F, -2F, -4F, 1, 1, 1);
+      Clockworkmini2.setRotationPoint(0F, 0F, 0F);
+      Clockworkmini2.setTextureSize(64, 64);
+      Clockworkmini2.mirror = true;
+      setRotation(Clockworkmini2, 0F, 0F, 0F);
+      Clockworkmini3 = new ModelRenderer(this, 0, 0);
+      Clockworkmini3.addBox(-10F, -1F, -4F, 1, 1, 1);
+      Clockworkmini3.setRotationPoint(0F, 0F, 0F);
+      Clockworkmini3.setTextureSize(64, 64);
+      Clockworkmini3.mirror = true;
+      setRotation(Clockworkmini3, 0F, 0F, 0F);
+      Clockworkmini4 = new ModelRenderer(this, 0, 0);
+      Clockworkmini4.addBox(-10F, 1F, -4F, 1, 1, 1);
+      Clockworkmini4.setRotationPoint(0F, 0F, 0F);
+      Clockworkmini4.setTextureSize(64, 64);
+      Clockworkmini4.mirror = true;
+      setRotation(Clockworkmini4, 0F, 0F, 0F);
+      Clockworkmini5 = new ModelRenderer(this, 0, 0);
+      Clockworkmini5.addBox(-9F, 2F, -4F, 1, 1, 1);
+      Clockworkmini5.setRotationPoint(0F, 0F, 0F);
+      Clockworkmini5.setTextureSize(64, 64);
+      Clockworkmini5.mirror = true;
+      setRotation(Clockworkmini5, 0F, 0F, 0F);
+      Clockworkbig1 = new ModelRenderer(this, 45, 47);
+      Clockworkbig1.addBox(4F, 4F, -6F, 1, 8, 8);
+      Clockworkbig1.setRotationPoint(0F, 0F, 0F);
+      Clockworkbig1.setTextureSize(64, 64);
+      Clockworkbig1.mirror = true;
+      setRotation(Clockworkbig1, 0F, 0F, 0F);
+      Clockworklil1 = new ModelRenderer(this, 0, 0);
+      Clockworklil1.addBox(4F, 4F, -7F, 1, 1, 1);
+      Clockworklil1.setRotationPoint(0F, 0F, 0F);
+      Clockworklil1.setTextureSize(64, 64);
+      Clockworklil1.mirror = true;
+      setRotation(Clockworklil1, 0F, 0F, 0F);
+      Clockworklil2 = new ModelRenderer(this, 0, 0);
+      Clockworklil2.addBox(4F, 6F, -7F, 1, 1, 1);
+      Clockworklil2.setRotationPoint(0F, 0F, 0F);
+      Clockworklil2.setTextureSize(64, 64);
+      Clockworklil2.mirror = true;
+      setRotation(Clockworklil2, 0F, 0F, 0F);
+      Clockworklil3 = new ModelRenderer(this, 0, 0);
+      Clockworklil3.addBox(4F, 8F, -7F, 1, 1, 1);
+      Clockworklil3.setRotationPoint(0F, 0F, 0F);
+      Clockworklil3.setTextureSize(64, 64);
+      Clockworklil3.mirror = true;
+      setRotation(Clockworklil3, 0F, 0F, 0F);
+      Clockworklil4 = new ModelRenderer(this, 0, 0);
+      Clockworklil4.addBox(4F, 10F, -7F, 1, 1, 1);
+      Clockworklil4.setRotationPoint(0F, 0F, 0F);
+      Clockworklil4.setTextureSize(64, 64);
+      Clockworklil4.mirror = true;
+      setRotation(Clockworklil4, 0F, 0F, 0F);
+      Clockworklil6 = new ModelRenderer(this, 0, 0);
+      Clockworklil6.addBox(4F, 12F, -3F, 1, 1, 1);
+      Clockworklil6.setRotationPoint(0F, 0F, 0F);
+      Clockworklil6.setTextureSize(64, 64);
+      Clockworklil6.mirror = true;
+      setRotation(Clockworklil6, 0F, 0F, 0F);
+      Clockworklil5 = new ModelRenderer(this, 0, 0);
+      Clockworklil5.addBox(4F, 12F, -5F, 1, 1, 1);
+      Clockworklil5.setRotationPoint(0F, 0F, 0F);
+      Clockworklil5.setTextureSize(64, 64);
+      Clockworklil5.mirror = true;
+      setRotation(Clockworklil5, 0F, 0F, 0F);
+      Clockworklil7 = new ModelRenderer(this, 0, 0);
+      Clockworklil7.addBox(4F, 12F, -1F, 1, 1, 1);
+      Clockworklil7.setRotationPoint(0F, 0F, 0F);
+      Clockworklil7.setTextureSize(64, 64);
+      Clockworklil7.mirror = true;
+      setRotation(Clockworklil7, 0F, 0F, 0F);
+      Clockworklil8 = new ModelRenderer(this, 0, 0);
+      Clockworklil8.addBox(4F, 12F, 1F, 1, 1, 1);
+      Clockworklil8.setRotationPoint(0F, 0F, 0F);
+      Clockworklil8.setTextureSize(64, 64);
+      Clockworklil8.mirror = true;
+      setRotation(Clockworklil8, 0F, 0F, 0F);
+  }
+  
+  public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+  {
+    super.render(entity, f, f1, f2, f3, f4, f5);
+    setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+    head.render(f5);
+    body.render(f5);
+    rightarm.render(f5);
+    leftarm.render(f5);
+    rightleg.render(f5);
+    leftleg.render(f5);
+    head2.render(f5);
+    head3.render(f5);
+    pegleg.render(f5);
+    headmini.render(f5);
+    Clockwork1.render(f5);
+    Clockworkmini1.render(f5);
+    Clockworkmini2.render(f5);
+    Clockworkmini3.render(f5);
+    Clockworkmini4.render(f5);
+    Clockworkmini5.render(f5);
+    Clockworkbig1.render(f5);
+    Clockworklil1.render(f5);
+    Clockworklil2.render(f5);
+    Clockworklil3.render(f5);
+    Clockworklil4.render(f5);
+    Clockworklil6.render(f5);
+    Clockworklil5.render(f5);
+    Clockworklil7.render(f5);
+    Clockworklil8.render(f5);
+  }
+  
+  private void setRotation(ModelRenderer model, float x, float y, float z)
+  {
+    model.rotateAngleX = x;
+    model.rotateAngleY = y;
+    model.rotateAngleZ = z;
+  }
+  
+  public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
+  {
+    super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+    head.rotateAngleY = f3 / (180F / (float)Math.PI);
+    head.rotateAngleX = f4 / (180F / (float)Math.PI);
+    head2.rotateAngleY = f3 / (180F / (float)Math.PI);
+    head2.rotateAngleX = f4 / (180F / (float)Math.PI);
+    head3.rotateAngleY = f3 / (180F / (float)Math.PI);
+    head3.rotateAngleX = f4 / (180F / (float)Math.PI);
+    headmini.rotateAngleY = f3 / (180F / (float)Math.PI);
+    headmini.rotateAngleX = f4 / (180F / (float)Math.PI);
+    rightleg.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
+	leftleg.rotateAngleX = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f1;
+	rightleg.rotateAngleY = 0.0F;
+	leftleg.rotateAngleY = 0.0F;
+	pegleg.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
+	pegleg.rotateAngleY = 0.0F;
+  }
+
+}
