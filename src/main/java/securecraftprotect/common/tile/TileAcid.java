@@ -23,6 +23,7 @@ public class TileAcid extends BlockFluidClassic
     {
         super(fluid, Material.water);
         this.setQuantaPerBlock(8);
+        this.setTickRate(5);
     }
     
     @Override
