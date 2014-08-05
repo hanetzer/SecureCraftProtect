@@ -13,6 +13,9 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import static net.minecraft.entity.SharedMonsterAttributes.*;
 
 public class EntitySCP0173 extends EntityMob
@@ -40,7 +43,8 @@ public class EntitySCP0173 extends EntityMob
 	{
 		super.applyEntityAttributes();
 		getEntityAttribute(maxHealth).setBaseValue(9001.0D);
-		getEntityAttribute(attackDamage).setBaseValue(20.0D);
+		getEntityAttribute(attackDamage).setBaseValue(9000.0D);
+		getEntityAttribute(movementSpeed).setBaseValue(200D);
 
 	}
 
@@ -63,6 +67,11 @@ public class EntitySCP0173 extends EntityMob
 	{
 		return 220;
 	}
+	
+    public float getAIMoveSpeed()
+    {
+        return super.getAIMoveSpeed() * 3F;
+    }
 
 	/**
 	 * Finds the closest player within 16 blocks to attack,
@@ -105,7 +114,7 @@ public class EntitySCP0173 extends EntityMob
 
 	protected void updateEntityActionState()
 	{
-		if (entityToAttack != null)
+		if (entityToAttack != null && entityToAttack instanceof EntityPlayer)
 		{
 			if (!canBeSeen((EntityPlayer) entityToAttack))
 			{
@@ -121,11 +130,17 @@ public class EntitySCP0173 extends EntityMob
 	public void onCollideWithPlayer(EntityPlayer player)
 	{
 	}
-
-	public boolean attackEntityFrom(DamageSource source, int par2)
+	
+	@Override
+	public boolean attackEntityFrom(DamageSource dmgSource, float value)
 	{
 		return false;
 	}
+	
+    @Override
+    public void performHurtAnimation()
+    {
+    }
 
 	@Override
 	protected void updateAITick()
