@@ -21,5 +21,6 @@ public class SCPTiles {
 	public static Block desk_stone;
 	public static Block chair_wood;
 	public static Block chair_stone;
+    public static Block light_bulb;
     public static Fluid acidFluid;
 }
