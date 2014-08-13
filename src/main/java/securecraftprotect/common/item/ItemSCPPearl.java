@@ -19,7 +19,7 @@ public class ItemSCPPearl extends Item {
     public ItemSCPPearl() {
         super();
         setMaxStackSize(1);
-        setMaxDamage(0);
+        setMaxDurability(0);
         setHasSubtypes(true);
         setCreativeTab(SCP.scpTab);
     }
@@ -36,7 +36,7 @@ public class ItemSCPPearl extends Item {
     }
 
     public String getItemStackDisplayName(ItemStack stack) {
-        String s = "scp."+ scpList.get(stack.getItemDamage()).name + ".name";
+        String s = "scp."+ scpList.get(stack.getCurrentDurability()).name + ".name";
         String s1 = getUnlocalizedName() + ".name";
         return I18n.format(s) + " " + I18n.format(s1);
     }

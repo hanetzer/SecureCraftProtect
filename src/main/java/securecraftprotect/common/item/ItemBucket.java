@@ -165,7 +165,7 @@ public class ItemBucket extends Item
             if (!world.isAirBlock(x, y, z) && !flag) return false;
             else
             {
-                if (!world.isRemote && flag && !material.isLiquid()) world.func_147480_a(x, y, z, true);
+                if (!world.isRemote && flag && !material.isLiquid()) world.breakBlock(x, y, z, true);
                 world.setBlock(x, y, z, SCPTiles.acid, 0, 3);
                 return true;
             }

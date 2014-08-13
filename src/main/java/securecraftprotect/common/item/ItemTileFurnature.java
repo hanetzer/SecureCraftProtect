@@ -21,7 +21,7 @@ public class ItemTileFurnature extends ItemBlock
 		super(block);
 		this.block = block;
 		setHasSubtypes(true);
-		setMaxDamage(0);
+		setMaxDurability(0);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class ItemTileFurnature extends ItemBlock
 			TileDesk tile = (TileDesk) block;
 			type = tile.getType();
 		}
-		String s1 = types[type][stack.getItemDamage()].replace("scp:", "");
+		String s1 = types[type][stack.getCurrentDurability()].replace("scp:", "");
 		return s + "." + s1;
 	}
 

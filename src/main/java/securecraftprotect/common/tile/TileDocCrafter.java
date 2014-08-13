@@ -26,7 +26,7 @@ public class TileDocCrafter extends Block {
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
+	public void registerIcons(IIconRegister iconRegister) {
 		this.icon_side = iconRegister.registerIcon("scp:document_side");
 		this.icon_top = iconRegister.registerIcon("scp:document_top");
 		this.icon_front = iconRegister.registerIcon("scp:document_front");

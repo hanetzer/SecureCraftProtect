@@ -40,7 +40,7 @@ public class TileDesk extends Block
     }
     
     @Override
-    public void registerBlockIcons(IIconRegister register)
+    public void registerIcons(IIconRegister register)
     {
         switch (type)
         {

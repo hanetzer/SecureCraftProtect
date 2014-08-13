@@ -31,25 +31,25 @@ public class SCPTile
     
     private static void registerTiles()
     {
-        blood = registerTile(new TileBlood().setBlockName("scp.blood"), "blood");
-        reinforced_steel = registerTile(new TileSteel().setBlockName("scp.reinforced_steel"), "steel");
-        document_crafter = registerTile(new TileDocCrafter().setBlockName("scp.doc_crafter"), "doc_crafter");
-        scp_0015 = registerTile(new TileSCP0015().setBlockName("scp.0015"), "0015");
-        machinery = registerTile(new TileMachine().setBlockName("scp.machine"), "machine");
+        blood = registerTile(new TileBlood().setUnlocalizedName("scp.blood"), "blood");
+        reinforced_steel = registerTile(new TileSteel().setUnlocalizedName("scp.reinforced_steel"), "steel");
+        document_crafter = registerTile(new TileDocCrafter().setUnlocalizedName("scp.doc_crafter"), "doc_crafter");
+        scp_0015 = registerTile(new TileSCP0015().setUnlocalizedName("scp.0015"), "0015");
+        machinery = registerTile(new TileMachine().setUnlocalizedName("scp.machine"), "machine");
         
         acidFluid = new Fluid("acid").setLuminosity(15).setDensity(3000).setTemperature(2000).setViscosity(6000);
         if (!FluidRegistry.registerFluid(acidFluid))
         {
             acidFluid = FluidRegistry.getFluid("acid");
         }
-        acid = registerTile(new TileAcid(acidFluid).setBlockName("scp.acid"), "acid");
-        bone = registerTile(new TileBone().setBlockName("scp.bone"), "bone");
-        flesh = registerTile(new TileFlesh().setBlockName("scp.flesh"), "flesh");
-        desk_wood = registerTile(new TileDesk(wood, 0).setBlockName("scp.desk_wood"), ItemTileFurnature.class, "desk_wood");
-        desk_stone = registerTile(new TileDesk(rock, 1).setBlockName("scp.desk_stone"), ItemTileFurnature.class, "desk_stone");
-        chair_wood = registerTile(new TileChair(wood, 0).setBlockName("scp.chair_wood"), ItemTileFurnature.class, "chair_wood");
-        chair_stone = registerTile(new TileChair(rock, 1).setBlockName("scp.chair_stone"), ItemTileFurnature.class, "chair_stone");
-        light_bulb = registerTile(new TileLightBulb().setBlockName("scp.light_bulb"), "lighBulb");
+        acid = registerTile(new TileAcid(acidFluid).setUnlocalizedName("scp.acid"), "acid");
+        bone = registerTile(new TileBone().setUnlocalizedName("scp.bone"), "bone");
+        flesh = registerTile(new TileFlesh().setUnlocalizedName("scp.flesh"), "flesh");
+        desk_wood = registerTile(new TileDesk(wood, 0).setUnlocalizedName("scp.desk_wood"), ItemTileFurnature.class, "desk_wood");
+        desk_stone = registerTile(new TileDesk(rock, 1).setUnlocalizedName("scp.desk_stone"), ItemTileFurnature.class, "desk_stone");
+        chair_wood = registerTile(new TileChair(wood, 0).setUnlocalizedName("scp.chair_wood"), ItemTileFurnature.class, "chair_wood");
+        chair_stone = registerTile(new TileChair(rock, 1).setUnlocalizedName("scp.chair_stone"), ItemTileFurnature.class, "chair_stone");
+        light_bulb = registerTile(new TileLightBulb().setUnlocalizedName("scp.light_bulb"), "lighBulb");
     }
     
     private static void registerTileEntities()

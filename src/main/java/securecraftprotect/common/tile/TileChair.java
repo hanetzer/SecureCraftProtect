@@ -117,7 +117,7 @@ public class TileChair extends BlockContainer implements ITileFurnature
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister register)
+	public void registerIcons(IIconRegister register)
 	{
 		switch (type)
 		{
@@ -235,10 +235,10 @@ public class TileChair extends BlockContainer implements ITileFurnature
 		switch (type)
 		{
 			case 0:
-				s1 = types[0][stack.getItemDamage()];
+				s1 = types[0][stack.getCurrentDurability()];
 				break;
 			case 1:
-				s1 = types[1][stack.getItemDamage()];
+				s1 = types[1][stack.getCurrentDurability()];
 				break;
 		}
 		return s + "." + s1;

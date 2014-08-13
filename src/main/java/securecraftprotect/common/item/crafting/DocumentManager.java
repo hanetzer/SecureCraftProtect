@@ -96,10 +96,10 @@ public class DocumentManager {
         if (i == 2 && itemstack.getItem() == itemstack1.getItem() && itemstack.stackSize == 1 && itemstack1.stackSize == 1 && itemstack.getItem().isRepairable())
         {
             Item item = itemstack.getItem();
-            int j1 = item.getMaxDamage() - itemstack.getItemDamageForDisplay();
-            int k = item.getMaxDamage() - itemstack1.getItemDamageForDisplay();
-            int l = j1 + k + item.getMaxDamage() * 5 / 100;
-            int i1 = item.getMaxDamage() - l;
+            int j1 = item.getMaxDurability() - itemstack.getCurrentDurability();
+            int k = item.getMaxDurability() - itemstack1.getCurrentDurability();
+            int l = j1 + k + item.getMaxDurability() * 5 / 100;
+            int i1 = item.getMaxDurability() - l;
 
             if (i1 < 0)
             {

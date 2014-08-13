@@ -47,7 +47,7 @@ public class TileSCP0015 extends BlockContainer
     
     public void breakBlock(World world, int x, int y, int z, Block block, int i)
     {
-        world.func_147453_f(x, y, z, block);
+		world.removeTileEntity(x,y,z);
         super.breakBlock(world, x, y, z, block, i);
     }
     
@@ -195,7 +195,7 @@ public class TileSCP0015 extends BlockContainer
         return Globals.RENDER_PIPE;
     }
     
-    public void registerBlockIcons(IIconRegister iconRegister)
+    public void registerIcons(IIconRegister iconRegister)
     {
         blockIcon = iconRegister.registerIcon("scp:0015");
     }

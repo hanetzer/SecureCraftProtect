@@ -23,7 +23,8 @@ public class TileFlesh extends BlockContainer
     	tile.setStep(true);
 	}
 
-	public void registerBlockIcons(IIconRegister register)
+	@Override
+	public void registerIcons(IIconRegister register)
     {
     	blockIcon = register.registerIcon("scp:flesh");
     }

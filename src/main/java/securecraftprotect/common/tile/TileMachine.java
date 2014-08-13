@@ -18,7 +18,8 @@ public class TileMachine extends Block {
 		this.setCreativeTab(SCP.scpTile);
 	}
 
-	public void registerBlockIcons(IIconRegister register) {
+	@Override
+	public void registerIcons(IIconRegister register) {
 		icons = new IIcon[2];
 
 		for(int i = 0; i < icons.length; i++) {

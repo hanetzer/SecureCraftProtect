@@ -14,7 +14,7 @@ public class TileSteel extends Block {
         setCreativeTab(SCP.scpTile);
     }
 
-    public void registerBlockIcons(IIconRegister iconRegister) {
+    public void registerIcons(IIconRegister iconRegister) {
         blockIcon = iconRegister.registerIcon("scp:reinforced_steel");
     }
 }

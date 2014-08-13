@@ -32,7 +32,7 @@ public class ItemSCPDocument extends Item
     public ItemSCPDocument()
     {
         setMaxStackSize(1);
-        setMaxDamage(0);
+        setMaxDurability(0);
         setHasSubtypes(true);
         this.setCreativeTab(SCP.scpTab);
     }
@@ -50,17 +50,17 @@ public class ItemSCPDocument extends Item
     
     private String getJson(ItemStack stack)
     {
-        return scpList.get(stack.getItemDamage()).json;
+        return scpList.get(stack.getCurrentDurability()).json;
     }
     
     private String getColor(ItemStack stack)
     {
-        return levels[scpList.get(stack.getItemDamage()).level];
+        return levels[scpList.get(stack.getCurrentDurability()).level];
     }
     
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
     {
-        String scp = scpList.get(stack.getItemDamage()).name;
+        String scp = scpList.get(stack.getCurrentDurability()).name;
         String level = getColor(stack);
         list.add("\u00a7e" + I18n.format("scp." + scp + ".name"));
         list.add("\u00a7" + level + I18n.format("scp." + scp + ".desc"));

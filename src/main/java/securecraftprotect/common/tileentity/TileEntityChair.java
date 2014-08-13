@@ -38,6 +38,6 @@ public class TileEntityChair extends TileEntity
 
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pack)
 	{
-		readFromNBT(pack.func_148857_g());
+		readFromNBT(pack.getNbtCompound());
 	}
 }

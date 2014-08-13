@@ -2,6 +2,7 @@ package securecraftprotect.common.item;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemDoor;
 import net.minecraft.item.ItemStack;
@@ -19,7 +20,7 @@ public class SCPItem002 extends Item
 	{
 		super();
 		setMaxStackSize(1);
-		setMaxDamage(1);
+		setMaxDurability(1);
 	}
 
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List list, boolean par4)
@@ -55,7 +56,7 @@ public class SCPItem002 extends Item
 				var12 = 0.5D;
 			}
 
-			if (spawnCreature(world, stack.getItemDamage(), (double)x + 0.5D, (double)y + var12, (double)z + 0.5D) && !player.capabilities.isCreativeMode)
+			if (spawnCreature(world, stack.getCurrentDurability(), (double)x + 0.5D, (double)y + var12, (double)z + 0.5D) && !player.capabilities.isCreativeMode)
 			{
 				--stack.stackSize;
 			}
@@ -100,7 +101,7 @@ public class SCPItem002 extends Item
 			world.setBlock(x + 5, y + 6, z + 1, desk_wood); //
 			world.setBlock(x + 5, y + 6, z + 2, desk_wood); //
 			world.setBlock(x + 5, y + 7, z + 2, redstone_torch); //
-			world.setBlock(x + 5, y + 7, z, flower_pot);
+			world.setBlock(x + 5, y + 7, z, flower_pot_block);
 			//world.setBlock(x + 4, y + 6, z + 1, mod_SCP.woodenChair.blockID); //
 			world.setBlock(x + 2, y + 6, z + 5, chest); //
 			world.setBlock(x + 1, y + 6, z + 5, chest); //

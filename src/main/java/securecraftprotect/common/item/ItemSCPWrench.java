@@ -16,10 +16,10 @@ public class ItemSCPWrench extends Item
 		this.setCreativeTab(SCP.scpItem);
 		this.type = type;
 		if(type == 0) {
-			setMaxDamage(100);
+			setMaxDurability(100);
 		}
 		else {
-			setMaxDamage(0);
+			setMaxDurability(0);
 		}
 		setHasSubtypes(true);
 	}
@@ -43,9 +43,9 @@ public class ItemSCPWrench extends Item
 	{
 		switch (type) {
 			case 1:
-				return stack.getItemDamage() == 0 ? EnumRarity.rare : EnumRarity.epic;
+				return stack.getCurrentDurability() == 0 ? EnumRarity.rare : EnumRarity.epic;
 			default:
-				return stack.getItemDamage() == 0 ? EnumRarity.uncommon : EnumRarity.common;
+				return stack.getCurrentDurability() == 0 ? EnumRarity.uncommon : EnumRarity.common;
 		}
 	}
 

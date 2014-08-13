@@ -17,7 +17,7 @@ public class ItemSCPKeyCard extends Item
 	{
 		super();
 		setMaxStackSize(1);
-		setMaxDamage(0);
+		setMaxDurability(0);
 		setHasSubtypes(true);
         this.setCreativeTab(SCP.scpItem);
 	}

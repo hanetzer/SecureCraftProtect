@@ -13,7 +13,7 @@ public class TileBone extends Block
 		this.setCreativeTab(SCP.scpTile);
 	}
 	
-	public void registerBlockIcons(IIconRegister register)
+	public void registerIcons(IIconRegister register)
     {
     	blockIcon = register.registerIcon("scp:bone");
     }
