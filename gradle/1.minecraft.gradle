@@ -1,7 +1,9 @@
 minecraft {
     mcpVersion = "9.05"
-    version    = "1.7.10-10.13.0.1194"
+    version    = "1.7.10-10.13.0.1197"
     runDir     = "run"
+	methodsCsv = "gradle/methods.csv"
+	fieldsCsv  = "gradle/fields.csv"
     replaceIn    "securecraftprotect/SCP.java"
     replace      "@VERSION@", project.version
 }
