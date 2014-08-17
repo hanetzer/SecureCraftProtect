@@ -1,5 +1,6 @@
 package securecraftprotect.common.tile;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -40,16 +41,30 @@ public class TileLightBulb extends BlockContainer
         }
     }
     
+    public boolean canPlaceBlockOnSide(World world, int x, int y, int z, int side)
+    {
+        return side == 0 || world.doesBlockHaveSolidTopSurface(world, x, y + 1, z);
+    }
+    
+    public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
+    {
+        if (!World.doesBlockHaveSolidTopSurface(world, x, y + 1, z))
+        {
+            world.setBlockToAir(x, y, z);
+            this.dropBlockAsItem(world, x, y, z, 0, 0);
+        }
+    }
+    
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack)
     {
         world.setBlockMetadataWithNotify(x, y, z, 0, 0b11);
     }
     
-     public TileEntity createNewTileEntity(World world, int par2)
-     {
-     return new TileEntityLightBulb();
-     }
+    public TileEntity createNewTileEntity(World world, int par2)
+    {
+        return new TileEntityLightBulb();
+    }
     
     @Override
     public int getLightValue(IBlockAccess world, int x, int y, int z)

@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import securecraftprotect.client.gui.inventory.GuiDocument;
+import securecraftprotect.client.gui.inventory.GuiEventBlock;
 import securecraftprotect.common.inventory.ContainerDocument;
 import cpw.mods.fml.common.network.IGuiHandler;
 
@@ -38,6 +39,8 @@ public class CommonProxy implements IGuiHandler
         {
             case 0:
                 return new GuiDocument(player.inventory, world, x, y, z);
+            case 1:
+                return new GuiEventBlock(player, world, x, y, z);
             default:
                 return null;
         }
