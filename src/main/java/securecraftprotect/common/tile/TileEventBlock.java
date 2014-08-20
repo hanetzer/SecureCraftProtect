@@ -6,6 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -18,6 +19,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TileEventBlock extends BlockContainer
 {
     public TileEntityEventBlock tile;
+    
     
     public TileEventBlock()
     {
@@ -78,7 +80,7 @@ public class TileEventBlock extends BlockContainer
     {
         return 1;
     }
-    
+        
     public boolean hasTileEntity(int metadata)
     {
         return true;
@@ -86,8 +88,11 @@ public class TileEventBlock extends BlockContainer
     
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int var6, float var7, float var8, float var9)
     {
+//        boolean isPlayerOp = false;
         Block block = world.getBlock(x, y, z);
-        if (block == this)
+//        String[] OpPlayers = MinecraftServer.getServer().getConfigurationManager().func_152603_m().func_152685_a();
+//        for(int i = 0; i < OpPlayers.length; i++) if(OpPlayers[i].equalsIgnoreCase(player.getDisplayName())) isPlayerOp = true;
+        if (block == this && player.capabilities.isCreativeMode)
         {
             player.openGui(SCP.instance(), 1, world, x, y, z);
             return true;

@@ -43,7 +43,7 @@ public class TileEntityEventBlock extends TileEntity
         super.updateEntity();
     }
     
-    public void setSideName(String side)
+    public void setTexture(String side)
     {
         this.texture = side;
     }
@@ -56,7 +56,7 @@ public class TileEntityEventBlock extends TileEntity
     public void readFromNBT(NBTTagCompound nbt)
     {
         super.readFromNBT(nbt);
-        this.texture = nbt.getString("Txtr");
+        this.setTexture(nbt.getString("Txtr"));
     }
     
     public void writeToNBT(NBTTagCompound nbt)

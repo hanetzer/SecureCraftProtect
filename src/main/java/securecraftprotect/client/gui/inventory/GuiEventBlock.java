@@ -7,6 +7,8 @@ import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
 
+import securecraftprotect.SCP;
+import securecraftprotect.common.handlers.packet.EventBlockPacket;
 import securecraftprotect.common.tileentity.TileEntityEventBlock;
 
 public class GuiEventBlock extends GuiScreen
@@ -55,13 +57,12 @@ public class GuiEventBlock extends GuiScreen
                 else if(textureName.equals("West")) textureName = "Up";
                 else if(textureName.equals("Up")) textureName = "Down";
                 else if(textureName.equals("Down")) textureName = "North";
-                block.isDirty = true;
-                block.markDirty();
                 break;
             case 3: 
-                block.setSideName(textureName); 
-                block.isDirty = true;
-                block.markDirty();
+//                block.setTexture(textureName); 
+                SCP.netWrapper.sendToServer(new EventBlockPacket(textureName, block));
+//                block.isDirty = true;
+//                block.markDirty();
                 this.mc.thePlayer.closeScreen();
                 break;
             default:;

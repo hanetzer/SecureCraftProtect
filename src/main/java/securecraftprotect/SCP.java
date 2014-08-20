@@ -3,7 +3,6 @@ package securecraftprotect;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-import securecraftprotect.client.renderer.tile.RenderTileLightBulb;
 import securecraftprotect.common.CommonProxy;
 import securecraftprotect.common.command.CommandJson;
 import securecraftprotect.common.config.SCPConfig;
@@ -13,14 +12,13 @@ import securecraftprotect.common.creativetab.SCPTab;
 import securecraftprotect.common.creativetab.SCPTileTab;
 import securecraftprotect.common.handlers.BucketHandler;
 import securecraftprotect.common.handlers.SCPEventHandler;
+import securecraftprotect.common.handlers.packet.EventBlockPacket;
 import securecraftprotect.common.handlers.packet.PacketPipeline;
-import securecraftprotect.common.tileentity.TileEntityLightBulb;
 import securecraftprotect.core.SCPEntity;
 import securecraftprotect.core.SCPItem;
 import securecraftprotect.core.SCPTile;
 import securecraftprotect.init.SCPItems;
 import securecraftprotect.init.SCPTiles;
-import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -29,6 +27,8 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = "scp", name = "SecureCraftProtect", version = "@VERSION@", guiFactory = "securecraftprotect.client.gui.SCPGuiFactory")
 public class SCP
@@ -40,6 +40,7 @@ public class SCP
     public static final PacketPipeline pipe = new PacketPipeline();
     @Mod.Instance("scp")
     private static SCP instance;
+    public static SimpleNetworkWrapper netWrapper;
     
     public static SCP instance()
     {
@@ -61,6 +62,9 @@ public class SCP
         SCPEntity.init();
         MinecraftForge.EVENT_BUS.register(BucketHandler.get());
         BucketHandler.get().buckets.put(SCPTiles.acid, SCPItems.bucket);
+        
+        netWrapper = NetworkRegistry.INSTANCE.newSimpleChannel("scp");        
+        netWrapper.registerMessage(EventBlockPacket.class, EventBlockPacket.class, 0, Side.SERVER);
     }
     
     @Mod.EventHandler

@@ -75,7 +75,7 @@ public class SCPTile
         chair_wood = registerTile(new TileChair(wood, 0).setUnlocalizedName("scp.chair_wood"), ItemTileFurnature.class, "chair_wood");
         chair_stone = registerTile(new TileChair(rock, 1).setUnlocalizedName("scp.chair_stone"), ItemTileFurnature.class, "chair_stone");
         light_bulb = registerTile(new TileLightBulb().setUnlocalizedName("scp.light_bulb"), "lighBulb");
-        event_block = registerTile(new TileEventBlock().setUnlocalizedName("scp.event_Block"), "eventBlock");
+        event_block = registerTile(new TileEventBlock().setBlockUnbreakable().setUnlocalizedName("scp.event_Block"), "eventBlock");
     }
     
     private static void registerTileEntities()
