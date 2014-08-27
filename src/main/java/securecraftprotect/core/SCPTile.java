@@ -38,15 +38,18 @@ import securecraftprotect.common.tile.TileFlesh;
 import securecraftprotect.common.tile.TileLightBulb;
 import securecraftprotect.common.tile.TileMachine;
 import securecraftprotect.common.tile.TileSCP0015;
+import securecraftprotect.common.tile.TileSlidingDoor;
 import securecraftprotect.common.tile.TileSteel;
 import securecraftprotect.common.tileentity.TileEntityChair;
 import securecraftprotect.common.tileentity.TileEntityEventBlock;
 import securecraftprotect.common.tileentity.TileEntityFlesh;
 import securecraftprotect.common.tileentity.TileEntitySCP0015;
+import securecraftprotect.common.tileentity.TileEntitySlidingDoor;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class SCPTile
 {
+    public static Block sliding_door;
     public static void init()
     {
         registerTiles();
@@ -76,6 +79,7 @@ public class SCPTile
         chair_stone = registerTile(new TileChair(rock, 1).setUnlocalizedName("scp.chair_stone"), ItemTileFurnature.class, "chair_stone");
         light_bulb = registerTile(new TileLightBulb().setUnlocalizedName("scp.light_bulb"), "lighBulb");
         event_block = registerTile(new TileEventBlock().setBlockUnbreakable().setUnlocalizedName("scp.event_Block"), "eventBlock");
+        sliding_door = registerTile(new TileSlidingDoor().setUnlocalizedName("scp.sliding_Door"), "slidingDoor");
     }
     
     private static void registerTileEntities()
@@ -84,6 +88,7 @@ public class SCPTile
         GameRegistry.registerTileEntity(TileEntityFlesh.class, "scp.flesh");
         GameRegistry.registerTileEntity(TileEntityChair.class, "scp.chair");
         GameRegistry.registerTileEntity(TileEntityEventBlock.class, "scp.eventBlock");
+        GameRegistry.registerTileEntity(TileEntitySlidingDoor.class, "scp.slidingDoor");
     }
     
     private static void registerCraft()

@@ -12,15 +12,16 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 public class EventBlockPacket implements IMessage, IMessageHandler<EventBlockPacket, IMessage>
 {
     String direction;
-    int dimID, x, y, z;
+    int dimID, x, y, z, entityID;
     
     public EventBlockPacket()
     {
     }
     
-    public EventBlockPacket(String direction, TileEntity tile)
+    public EventBlockPacket(TileEntity tile, String direction, int entityID)
     {
         this.direction = direction;
+        this.entityID = entityID;
         dimID = tile.getWorld().provider.dimensionId;
         x = tile.xCoord;
         y = tile.yCoord;
@@ -35,6 +36,7 @@ public class EventBlockPacket implements IMessage, IMessageHandler<EventBlockPac
         x = buf.readInt();
         y = buf.readInt();
         z = buf.readInt();
+        entityID = buf.readInt();
     }
     
     @Override
@@ -45,6 +47,7 @@ public class EventBlockPacket implements IMessage, IMessageHandler<EventBlockPac
         buf.writeInt(x);
         buf.writeInt(y);
         buf.writeInt(z);
+        buf.writeInt(entityID);
     }
     
     @Override
@@ -52,7 +55,8 @@ public class EventBlockPacket implements IMessage, IMessageHandler<EventBlockPac
     {
         TileEntityEventBlock tile = (TileEntityEventBlock) MinecraftServer.getServer().worldServers[message.dimID].getTileEntity(message.x, message.y, message.z);
         
-        tile.setTexture(message.direction);
+        tile.setDirection(message.direction);
+        tile.setEntityID(message.entityID);
         
         tile.isDirty = true;
         tile.markDirty();

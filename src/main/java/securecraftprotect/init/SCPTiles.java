@@ -22,6 +22,7 @@ public class SCPTiles {
 	public static Block chair_wood;
 	public static Block chair_stone;
     public static Block light_bulb;
+    public static Block sliding_door;
     public static Block event_block;
     public static Fluid acidFluid;
 }

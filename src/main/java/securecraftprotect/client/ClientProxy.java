@@ -1,32 +1,33 @@
 package securecraftprotect.client;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
+import static securecraftprotect.util.Globals.RENDER_CHAIR;
+import static securecraftprotect.util.Globals.RENDER_DESK;
+import static securecraftprotect.util.Globals.RENDER_PIPE;
 import net.minecraft.client.model.ModelBlaze;
-import net.minecraftforge.common.MinecraftForge;
-import securecraftprotect.client.gui.SCPGuiBlink;
 import securecraftprotect.client.model.ModelClassDMale;
 import securecraftprotect.client.model.ModelSCP0023;
 import securecraftprotect.client.model.ModelSCP0131;
 import securecraftprotect.client.model.ModelSCP0173;
-import securecraftprotect.client.renderer.entity.*;
+import securecraftprotect.client.renderer.entity.RenderClassDMale;
+import securecraftprotect.client.renderer.entity.RenderSCP0015;
+import securecraftprotect.client.renderer.entity.RenderSCP0023;
+import securecraftprotect.client.renderer.entity.RenderSCP0131;
+import securecraftprotect.client.renderer.entity.RenderSCP0173;
 import securecraftprotect.client.renderer.tile.RenderTileChair;
 import securecraftprotect.client.renderer.tile.RenderTileDesk;
 import securecraftprotect.client.renderer.tile.RenderTileLightBulb;
 import securecraftprotect.client.renderer.tile.RenderTileSCP0015;
+import securecraftprotect.client.renderer.tile.RenderTileSlidingDoor;
 import securecraftprotect.common.CommonProxy;
 import securecraftprotect.common.entity.boss.EntitySCP0015;
 import securecraftprotect.common.entity.monster.EntitySCP0023;
 import securecraftprotect.common.entity.monster.EntitySCP0173;
 import securecraftprotect.common.entity.passive.EntityClassDMale;
 import securecraftprotect.common.entity.passive.EntitySCP0131;
-import securecraftprotect.common.handlers.SCPInputHandler;
 import securecraftprotect.common.tileentity.TileEntityLightBulb;
-
-import static securecraftprotect.util.Globals.RENDER_CHAIR;
-import static securecraftprotect.util.Globals.RENDER_DESK;
-import static securecraftprotect.util.Globals.RENDER_PIPE;
+import securecraftprotect.common.tileentity.TileEntitySlidingDoor;
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy
 {
@@ -54,6 +55,7 @@ public class ClientProxy extends CommonProxy
         RENDER_CHAIR = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(RENDER_CHAIR, new RenderTileChair());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLightBulb.class, new RenderTileLightBulb());  
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySlidingDoor.class, new RenderTileSlidingDoor());  
     }
     
     public int addArmor(String armor)
