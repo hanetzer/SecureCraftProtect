@@ -23,6 +23,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import securecraftprotect.SCP;
 import securecraftprotect.common.tileentity.TileEntitySlidingDoor;
+import securecraftprotect.core.SCPTile;
 
 public class TileSlidingDoor extends BlockContainer
 {
@@ -32,6 +33,9 @@ public class TileSlidingDoor extends BlockContainer
     {
         super(Material.iron);
         this.setCreativeTab(SCP.scpTile);
+        setHardness(3.0F);
+        setStepSound(Block.soundTypeMetal);
+        setResistance(20.0F);
     }
     
     public boolean isOpaqueCube()
@@ -149,12 +153,12 @@ public class TileSlidingDoor extends BlockContainer
         {
             if (!door.open)
             {
-                world.playSoundEffect(x, (double) y + 0.5D, z, "scp:mob.0173.step", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+                world.playSoundEffect(x, (double) y + 0.5D, z, "scp:block.slidingDoor.open", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
                 door.open = true;
             }
             else
             {
-                world.playSoundEffect(x, (double) y + 0.5D, z, "scp:random.rustle1", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+                world.playSoundEffect(x, (double) y + 0.5D, z, "scp:block.slidingDoor.close", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
                 door.open = false;
             }
         }
@@ -164,6 +168,7 @@ public class TileSlidingDoor extends BlockContainer
     {
         int l = determineOrientation(world, x, y, z, entity);
         world.setBlockMetadataWithNotify(x, y, z, l, 2);
+        world.setBlock(x, y + 1, z, SCPTile.top_sliding_door, l, 2);
     }
     
     public static int determineOrientation(World world, int x, int y, int z, EntityLivingBase player)
@@ -184,5 +189,11 @@ public class TileSlidingDoor extends BlockContainer
     public int getMobilityFlag()
     {
         return 1;
+    }
+
+    public void breakBlock(World world, int x, int y, int z, Block block, int metadata)
+    {
+        super.breakBlock(world, x, y, z, block, metadata);
+        world.breakBlock(x, y + 1, z, false);
     }
 }

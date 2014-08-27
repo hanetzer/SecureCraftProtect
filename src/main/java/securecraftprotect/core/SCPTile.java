@@ -40,6 +40,7 @@ import securecraftprotect.common.tile.TileMachine;
 import securecraftprotect.common.tile.TileSCP0015;
 import securecraftprotect.common.tile.TileSlidingDoor;
 import securecraftprotect.common.tile.TileSteel;
+import securecraftprotect.common.tile.TileTopSlidingDoor;
 import securecraftprotect.common.tileentity.TileEntityChair;
 import securecraftprotect.common.tileentity.TileEntityEventBlock;
 import securecraftprotect.common.tileentity.TileEntityFlesh;
@@ -49,7 +50,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class SCPTile
 {
-    public static Block sliding_door;
+    public static Block sliding_door, top_sliding_door;
     public static void init()
     {
         registerTiles();
@@ -80,6 +81,7 @@ public class SCPTile
         light_bulb = registerTile(new TileLightBulb().setUnlocalizedName("scp.light_bulb"), "lighBulb");
         event_block = registerTile(new TileEventBlock().setBlockUnbreakable().setUnlocalizedName("scp.event_Block"), "eventBlock");
         sliding_door = registerTile(new TileSlidingDoor().setUnlocalizedName("scp.sliding_Door"), "slidingDoor");
+        top_sliding_door = registerTile(new TileTopSlidingDoor().setUnlocalizedName("scp.sliding_Door"), "topSlidingDoor");
     }
     
     private static void registerTileEntities()

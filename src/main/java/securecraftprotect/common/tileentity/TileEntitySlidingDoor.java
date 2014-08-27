@@ -23,8 +23,8 @@ public class TileEntitySlidingDoor extends TileEntity
     public void updateEntity()
     {
         super.updateEntity();
-        if(open && doorMovement <= 1.1f) doorMovement += 0.1f;
-        else if(!open && doorMovement >= 0f ) doorMovement -= 0.1f;
+        if(open && doorMovement <= 1.1f) doorMovement += 0.04f;
+        else if(!open && doorMovement >= 0f ) doorMovement -= 0.04f;
         if(doorMovement < 0f) doorMovement = 0f;
         if(doorMovement > 1.1f) doorMovement = 1.1f;
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);

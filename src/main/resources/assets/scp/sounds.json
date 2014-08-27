@@ -12,5 +12,17 @@
             "mob/0173/step2",
             "mob/0173/step3"
         ]
+    },
+    "block.slidingDoor.open": {
+        "category": "block",
+        "sounds": [
+            "random/doorOpen"
+        ]
+    },
+    "block.slidingDoor.close": {
+        "category": "block",
+        "sounds": [
+            "random/doorClose"
+        ]
     }
 }

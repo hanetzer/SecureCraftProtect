@@ -27,7 +27,8 @@ public class RenderTileSlidingDoor extends TileEntitySpecialRenderer
         
         GL11.glPushMatrix();
         GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-        if(tileDoor.open) GL11.glScalef(0.9F, 0.999F, 1F);
+        if(tileDoor.open && tileDoor.getBlockMetadata() == 0) GL11.glScalef(0.9F, 0.999F, 1F);
+        if(tileDoor.open && tileDoor.getBlockMetadata() == 1) GL11.glScalef(1F, 0.999F, 0.9F);
         if(tileDoor.getBlockMetadata() == 1) GL11.glRotatef(90F, 0.0F, 1.0F, 0.0F);
         door.render((Entity) null, tileDoor.doorMovement, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
         GL11.glPopMatrix();
