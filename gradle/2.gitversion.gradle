@@ -1,3 +1,0 @@
-ext.revision = 'git rev-list  --count HEAD'.execute().text.trim()
-ext.hash     = 'git rev-parse --short HEAD'.execute().text.trim()
-version = "${minecraft.version}-r${revision}.${hash}"

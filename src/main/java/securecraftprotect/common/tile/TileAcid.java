@@ -33,7 +33,7 @@ public class TileAcid extends BlockFluidClassic
     }
     
     @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister register)
+    public void registerIcons(IIconRegister register)
     {
         stillIcon = register.registerIcon("scp:acidStill");
         flowingIcon = register.registerIcon("scp:acidFlow");

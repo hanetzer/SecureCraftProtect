@@ -16,22 +16,9 @@ buildscript {
 }
 apply plugin: 'forge'
 
+group   = "com.teamfear"
+version = "1.0.0"
+
+ext.revision = 'git rev-list  --count HEAD'.execute().text.trim()
+
 fileTree('gradle').include('*.gradle').collect().sort().each { apply from: it }
-
-group= "securecraftprotect"
-
-processResources
-{
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-        expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
-
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
-}
-
