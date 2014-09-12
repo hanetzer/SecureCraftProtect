@@ -1,6 +1,5 @@
 /*
-!/lib/
-!/lib/*
+!/.travis.yml
 !/.gitignore
 !/gradle/
 !/gradle/*
@@ -10,3 +9,5 @@
 !/*.gradle
 !/*.md
 .gradle
+gitlog-to-changelog
+CHANGELOG

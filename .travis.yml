@@ -1,0 +1,15 @@
+language: java
+
+branches:
+  only:
+    - "master"
+jdk:
+  - oraclejdk7
+
+install:
+  - true
+# Run the Build
+script:
+  - TERM=dumb ./gradlew uploadArchives -Pusername=${MAVEN_USERNAME} -Ppassword=${MAVEN_PASSWORD} 
+
+
